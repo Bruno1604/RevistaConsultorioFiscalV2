@@ -65,6 +65,7 @@ function nav_a($id, $current, $label, $url, $external = false) {
           <a href="#" class="<?php echo ($page == 'historico') ? 'active' : ''; ?>">Histórico <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
           <div class="cfnav__drop">
             <a href="buscar.php">Buscador de revistas</a>
+            <a href="secciones.php">Secciones</a>
             <a href="tendencias.php">Artículos más leídos</a>
           </div>
         </li>
