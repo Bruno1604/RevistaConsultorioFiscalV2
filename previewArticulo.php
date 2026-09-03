@@ -5,8 +5,16 @@ if (!isset($_SESSION['usuario_id'])) {
     exit();
 }
 
+require_once 'data/favoritos.php';
+
+// Este artículo corresponde al id "1" del catálogo demo usado en articulo.php,
+// para que favoritearlo desde aquí o desde allá sea el mismo favorito.
+$articulo_id = '1';
+$puede_favoritos = isset($_SESSION['rol']) && in_array($_SESSION['rol'], ['suscriptor', 'usuario']);
+$es_fav = $puede_favoritos && es_favorito('articulo', $articulo_id);
+
 $page_title = "Declaración anual de personas físicas - Consultorio Fiscal";
-$page = "historico"; 
+$page = "historico";
 include 'template/header.php';
 ?>
 
@@ -45,6 +53,22 @@ include 'template/header.php';
                     </article>
 
                     <div class="article-footer-tools mt-5 pt-4" style="border-top: 1px solid #eee;">
+                        <?php if ($puede_favoritos): ?>
+                        <button type="button"
+                                class="fav-btn<?php echo $es_fav ? ' is-activo' : ''; ?>"
+                                data-tipo="articulo"
+                                data-articulo_id="<?php echo htmlspecialchars($articulo_id); ?>"
+                                data-titulo="Declaración anual de personas físicas"
+                                data-autor="Georgina Ivonne Ramírez Esquivel"
+                                data-descripcion="Requisitos, plazos y mejores prácticas para presentar la declaración anual de personas físicas sin contratiempos ante el SAT."
+                                data-label-on="En tus favoritos"
+                                data-label-off="Agregar a favoritos"
+                                aria-pressed="<?php echo $es_fav ? 'true' : 'false'; ?>">
+                            <i class="fa-<?php echo $es_fav ? 'solid' : 'regular'; ?> fa-star"></i>
+                            <span class="fav-btn__label"><?php echo $es_fav ? 'En tus favoritos' : 'Agregar a favoritos'; ?></span>
+                        </button>
+                        <?php endif; ?>
+
                         <a href="buscar.php" class="btn-ghost" style="border-color: var(--navy);">
                             <span>← Volver al Histórico</span>
                         </a>
@@ -97,5 +121,7 @@ include 'template/header.php';
     letter-spacing: 1px;
 }
 </style>
+
+<script src="<?php echo cf_asset('js/favoritos.js'); ?>"></script>
 
 <?php include 'template/footer.php'; ?>

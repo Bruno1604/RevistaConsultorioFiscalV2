@@ -766,7 +766,7 @@ section{padding:0}
 .rev-header__grid{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:center}
 .rev-poster img{width:100%;border-radius:var(--r);box-shadow:0 26px 60px rgba(0,0,0,.45)}
 .rev-title{font-family:var(--serif);font-size:clamp(1.9rem,3.8vw,2.7rem);line-height:1.15;
-  margin:14px 0;font-weight:300}
+  margin:14px 0;font-weight:300;color:#fff}
 .rev-meta{color:var(--gold-lt);font-size:1.02rem}
 .rev-summary{margin:28px 0;max-width:650px}
 .rev-summary h5{font-family:var(--sans);text-transform:uppercase;font-size:.68rem;
@@ -1077,3 +1077,31 @@ p,
 
 /* Tablas de tarifas dentro del include de cuadros */
 .tablas-datos{width:100%}
+
+/* ══════════════ MÓDULO DE FAVORITOS — botón de estrella ══════════════ */
+.fav-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:13px 26px;border-radius:100px;border:1px solid var(--line);background:#fff;
+  color:var(--navy);font-family:var(--sans);font-size:.72rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--e2)}
+.fav-btn i{color:var(--gold);font-size:.9rem;transition:transform .3s var(--e2)}
+.fav-btn:hover{border-color:var(--gold);color:var(--gold)}
+.fav-btn:hover i{transform:scale(1.15)}
+.fav-btn.is-activo{background:var(--gold);border-color:var(--gold);color:#fff}
+.fav-btn.is-activo i{color:#fff}
+.fav-btn:disabled{opacity:.6;cursor:progress}
+
+/* Variante para usar sobre fondos oscuros (héroes en navy) */
+.fav-btn--dark{background:transparent;border-color:rgba(255,255,255,.42);color:#fff}
+.fav-btn--dark i{color:var(--gold-lt)}
+.fav-btn--dark:hover{background:#fff;color:var(--navy);border-color:#fff}
+.fav-btn--dark:hover i{color:var(--gold)}
+.fav-btn--dark.is-activo{background:var(--gold);border-color:var(--gold);color:#fff}
+.fav-btn--dark.is-activo i{color:#fff}
+
+/* Mini-formulario para guardar una página específica en favoritos */
+.fav-pagina{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.fav-pagina input{width:78px;padding:9px 12px;border-radius:var(--r);border:1px solid var(--line);
+  font-family:var(--sans);font-size:.85rem;color:var(--navy);text-align:center}
+.fav-pagina input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow)}
+.fav-msg{font-family:var(--sans);font-size:.72rem;color:var(--gold);margin-top:8px;display:none}
+.fav-msg.is-show{display:block}
