@@ -4,7 +4,7 @@
 <div class="step-pane" id="stepPane3" style="display: none;">
     <div class="step-header">
         <div>
-            <h2 class="step-header__title">Cargar Credencial UNAM</h2>
+            <h2 class="step-header__title" id="credTituloPrincipal">Cargar Credencial UNAM</h2>
         </div>
         <div id="pane3Badge"></div>
     </div>
@@ -15,7 +15,7 @@
             <strong style="display: block; margin-bottom: 4px; font-size: 0.95rem; color: #075985;">
                 ¡Importante!
             </strong>
-            Tu credencial UNAM será revisada y validada. El proceso de suscripción continuará una vez haya sido aprobada.
+                <span id="credAvisoTexto">Tu credencial UNAM será revisada y validada. El proceso de suscripción continuará una vez haya sido aprobada.</span>
         </div>
     </div>
 
@@ -38,14 +38,14 @@
     <!-- ESTADO 3.A: SIN ENVIAR / RE-SUBIR -->
     <div id="credStateSinEnviar">
         <h4 style="font-family: var(--serif); color: var(--navy); font-size: 1.25rem; margin-bottom: 10px;">
-            Adjunta un PDF de tu Credencial UNAM Vigente
+          <span id="credTituloAdjuntar">Adjunta un PDF de tu Credencial UNAM Vigente</span>
         </h4>
 
         <!-- Dropzone de archivo -->
         <div class="file-upload-box" onclick="document.getElementById('fileCredInput').click()">
             <i class="fa fa-cloud-upload file-upload-icon"></i>
             <div class="file-upload-text">
-                <strong>Haz clic aquí</strong> o arrastra tu credencial UNAM
+                <strong>Haz clic aquí</strong> o arrastra tu <span id="credTituloDropzone">credencial UNAM</span>
             </div>
             <span style="font-size: 0.75rem; color: var(--text-soft);">Formatos permitidos: PDF (Máx. x MB)</span>
             <input type="file" id="fileCredInput" style="display: none;" accept=".pdf" onchange="previewCredFile(this)">
@@ -79,10 +79,10 @@
     <div id="credStateRevision" style="display: none;">
         <div class="notification-banner alert-warning" style="padding: 25px; text-align: center;">
             <h4 style="font-family: var(--serif); color: #075985; font-size: 1.5rem; margin-bottom: 8px;">
-                Credencial UNAM en Revisión
+                <span id="credTituloRevision">Credencial UNAM en Revisión</span>
             </h4>
             <p style="font-size: 0.92rem; max-width: 600px; margin: 0 auto; color: var(--text-md);">
-                Podrás continuar con el proceso una vez que se valide tu pertenencia a la Comunidad UNAM.
+                <span id="credTextoRevision">Podrás continuar con el proceso una vez que se valide tu pertenencia a la Comunidad UNAM.</span>
             </p>
         </div>
         <div class="detail-card" style="margin-top: 20px;">
@@ -103,7 +103,7 @@
             <div style="display: flex; gap: 15px; align-items: flex-start;">
                 <div>
                     <h4 style="font-family: var(--serif); color: #721c24; font-size: 1.4rem; margin-bottom: 6px;">
-                        Credencial UNAM Rechazada
+                        <span id="credTituloRechazada">Credencial UNAM Rechazada</span>
                     </h4>
                     <div style="background: rgba(255,255,255,0.7); border-left: 4px solid #721c24; padding: 12px 15px; font-weight: 500; color: #721c24; font-size: 0.9rem;" id="dispCredMotivoRechazo">
                         "La imagen de la credencial no permite verificar los datos ni la vigencia actual."
@@ -113,7 +113,7 @@
         </div>
         <div style="text-align: center; margin-top: 25px;">
             <button type="button" class="btn-navy-fill" onclick="reintentarCargaCredencial()">
-                <i class="fa fa-upload me-2"></i> Subir nueva credencial UNAM
+                <i class="fa fa-upload me-2"></i> <span id="credBotonReintentar">Subir nueva credencial UNAM</span>
             </button>
         </div>
     </div>
@@ -122,10 +122,10 @@
     <div id="credStateAprobada" style="display: none;">
         <div class="notification-banner alert-success" style="padding: 25px; text-align: center;">
             <h4 style="font-family: var(--serif); color: #155724; font-size: 1.6rem; margin-bottom: 8px;">
-                Credencial UNAM Validada
+                <span id="credTituloAprobada">Credencial UNAM Validada</span>
             </h4>
             <p style="font-size: 0.95rem; max-width: 600px; margin: 0 auto; color: #155724;">
-                Se validó tu pertenencia a la Comunidad UNAM. Ya puedes continuar con el proceso de pago.
+                <span id="credTextoAprobada">Se validó tu pertenencia a la Comunidad UNAM. Ya puedes continuar con el proceso de pago.</span>
             </p>
         </div>
         <div style="display: flex; justify-content: flex-end; margin-top: 25px;">

@@ -22,6 +22,7 @@ function proceso_estado_default($correo, $nombre) {
         // Estado del flujo
         'tarifa_seleccionada' => 'GENERAL', // 'UNAM' o 'GENERAL'
         'tarifa_confirmada'   => false,
+        'modalidad_fca'       => null, 
         'paso_actual'         => 1,
 
         // Credencial UNAM
@@ -140,12 +141,12 @@ function proceso_reiniciar($correo, $nombre = null) {
     return $todos[$correo];
 }
 
-/** Solicitudes UNAM con credencial pendiente de revisión (para el panel del admin). */
+/** Solicitudes UNAM/FCA con credencial pendiente de revisión (para el panel del admin). */
 function proceso_listar_credenciales() {
     $todos = proceso_cargar_todos();
     return array_filter($todos, function ($p) {
         return isset($p['tarifa_seleccionada'], $p['credencial_estado'])
-            && $p['tarifa_seleccionada'] === 'UNAM'
+            && in_array($p['tarifa_seleccionada'], ['UNAM', 'FCA'], true)
             && $p['credencial_estado'] === 'en_revision';
     });
 }
@@ -166,7 +167,7 @@ function proceso_calcular_paso_actual(array $p) {
     if (!empty($p['comprobante_subido']) || !empty($p['ficha_generada'])) {
         return 5;
     }
-    if (($p['tarifa_seleccionada'] ?? '') === 'UNAM') {
+    if (in_array($p['tarifa_seleccionada'] ?? '', ['UNAM', 'FCA'], true)) {
         if (($p['credencial_estado'] ?? '') === 'aprobada') {
             return 4;
         }
