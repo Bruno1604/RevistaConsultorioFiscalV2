@@ -65,6 +65,7 @@ function nav_a($id, $current, $label, $url, $external = false) {
           <a href="#" class="<?php echo ($page == 'historico') ? 'active' : ''; ?>">Histórico <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
           <div class="cfnav__drop">
             <a href="buscar.php">Buscador de revistas</a>
+            <a href="secciones.php">Secciones</a>
             <a href="tendencias.php">Artículos más leídos</a>
           </div>
         </li>
@@ -83,9 +84,10 @@ function nav_a($id, $current, $label, $url, $external = false) {
         <!-- Menú de usuario: solo suscriptores ven "Mi cuenta" con opciones -->
         <?php if ($is_suscriptor): ?>
         <li>
-          <a href="#" class="<?php echo ($page == 'perfil' || $page == 'perfiles_fiscales' || $page == 'solicitar_factura') ? 'active' : ''; ?>">Mi cuenta <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
+          <a href="#" class="<?php echo ($page == 'perfil' || $page == 'perfiles_fiscales' || $page == 'solicitar_factura' || $page == 'favoritos') ? 'active' : ''; ?>">Mi cuenta <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
           <div class="cfnav__drop">
             <a href="perfil.php">Perfil</a>
+            <a href="favoritos.php">Favoritos</a>
             <a href="perfilesFiscales.php">Perfiles fiscales</a>
             <a href="solicitarFactura.php">Solicitar factura</a>
           </div>
@@ -130,6 +132,7 @@ function nav_a($id, $current, $label, $url, $external = false) {
   <?php if ($is_suscriptor): ?>
   <span class="mobile-label">Mi cuenta</span>
   <a href="perfil.php">Perfil</a>
+  <a href="favoritos.php">Favoritos</a>
   <a href="perfilesFiscales.php">Perfiles fiscales</a>
   <a href="solicitarFactura.php">Solicitar factura</a>
   <?php endif; ?>
