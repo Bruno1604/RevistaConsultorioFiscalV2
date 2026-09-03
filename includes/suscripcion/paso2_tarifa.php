@@ -38,6 +38,31 @@
                 </p>
             </div>
         </div>
+
+        <!-- Opción 3: Alumnos FCA -->
+        <div class="tariff-card" id="tariffCardFCA" onclick="seleccionarTarifa('FCA')">
+            <div>
+                <div class="tariff-card__header">
+                    <input type="radio" name="tarifa" id="radioFCA" class="tariff-card__radio" value="FCA">
+                    <h4 class="tariff-card__title">Alumnos FCA</h4>
+                </div>
+                <span class="tariff-card__badge" style="background: rgba(40,167,69,0.15); color: #155724;">Gratis</span>
+                <div class="tariff-card__price">$0.00 <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-soft);">MXN / año</span></div>
+                <p class="tariff-card__desc">
+                    Para alumnos activos de la Facultad de Contaduría y Administración, en cualquier modalidad: SUAyED, escolarizado o posgrado. Requiere validar tu credencial de alumno FCA.
+                </p>
+
+                <div id="fcaModalidadWrap" style="display: none; margin-top: 12px;" onclick="event.stopPropagation()">
+                    <label class="form-label" style="font-size: 0.8rem; display: block; margin-bottom: 6px;">Modalidad</label>
+                    <select id="fcaModalidad" class="form-control-custom" onchange="seleccionarModalidadFCA(this.value)">
+                        <option value="" disabled selected>Selecciona tu modalidad</option>
+                        <option value="SUAYED">SUAyED</option>
+                        <option value="ESCOLARIZADO">Escolarizado</option>
+                        <option value="POSGRADO">Posgrado</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div style="display: flex; justify-content: space-between; margin-top: 30px;">

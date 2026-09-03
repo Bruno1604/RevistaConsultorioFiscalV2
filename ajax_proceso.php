@@ -74,10 +74,37 @@ switch ($accion) {
         if (!empty($actual['ficha_generada'])) {
             proceso_responder($actual); // ya no se puede cambiar
         }
-        $tarifa = ($_POST['tarifa'] ?? 'GENERAL') === 'UNAM' ? 'UNAM' : 'GENERAL';
+                $tarifaPost = $_POST['tarifa'] ?? 'GENERAL';
+        $tarifa = in_array($tarifaPost, ['UNAM', 'FCA'], true) ? $tarifaPost : 'GENERAL';
+
+        // Si es la MISMA tarifa que ya tenía seleccionada
+        if ($tarifa === ($actual['tarifa_seleccionada'] ?? '')) {
+            proceso_responder($actual);
+        }
+
+        // Solo si cambia de verdad de tipo de tarifa, se reinicia el avance
+        // relacionado (confirmación y validación de credencial), porque ya
+        // no corresponden al nuevo tipo elegido.
         proceso_responder(proceso_actualizar($correo, [
-            'tarifa_seleccionada' => $tarifa,
-            'tarifa_confirmada'   => false,
+            'tarifa_seleccionada'        => $tarifa,
+            'tarifa_confirmada'          => false,
+            'modalidad_fca'              => null,
+            'credencial_subida'          => false,
+            'credencial_nombre_archivo'  => null,
+            'credencial_ruta_archivo'    => null,
+            'credencial_fecha_envio'     => null,
+            'credencial_estado'          => 'sin_enviar',
+            'credencial_motivo_rechazo'  => '',
+        ], $nombre));
+        break;
+
+    case 'seleccionar_modalidad_fca':
+        $modalidad = $_POST['modalidad_fca'] ?? '';
+        if (!in_array($modalidad, ['SUAYED', 'ESCOLARIZADO', 'POSGRADO'], true)) {
+            proceso_error('Modalidad inválida.');
+        }
+        proceso_responder(proceso_actualizar($correo, [
+            'modalidad_fca' => $modalidad,
         ], $nombre));
         break;
 
