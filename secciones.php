@@ -68,47 +68,227 @@
               ]
           ]
       ],
-      ["nombre" => "Régimen Fiscal de Personas Físicas", "articulos" => []],
-      ["nombre" => "Régimen Fiscal de Personas Morales", "articulos" => []],
-      ["nombre" => "Impuestos Internacionales", "articulos" => []],
-      ["nombre" => "Seguridad Social", "articulos" => []],
-      ["nombre" => "Salarios", "articulos" => []],
-      ["nombre" => "Contribuciones Estatales", "articulos" => []],
-      ["nombre" => "Contribuciones Indirectas", "articulos" => []],
-      ["nombre" => "Resolución Miscelánea", "articulos" => []],
-      ["nombre" => "Contratos", "articulos" => []],
-      ["nombre" => "Comercio Exterior", "articulos" => []],
-      ["nombre" => "Registro Contable de Efectos Fiscales", "articulos" => []],
-      ["nombre" => "Auditoría y Dictamen Fiscal", "articulos" => []],
-      ["nombre" => "Código Fiscal y Jurisprudencia", "articulos" => []],
-      ["nombre" => "Defensa Fiscal", "articulos" => []],
-      ["nombre" => "Régimen Simplificado", "articulos" => []],
-      ["nombre" => "Asesoría Fiscal y Cartas al Editor", "articulos" => []],
-      ["nombre" => "Cuadros de Información Permanente", "articulos" => []],
-      ["nombre" => "Los especialistas opinan", "articulos" => []],
-      ["nombre" => "En la opinión de Prodecon", "articulos" => []],
-      ["nombre" => "Noticias Fiscales", "articulos" => []],
-      ["nombre" => "Presentación", "articulos" => []],
-      ["nombre" => "Precios de Transferencia y Pagos al Extranjero", "articulos" => []],
-      ["nombre" => "Cuentos Fiscales", "articulos" => []],
-      ["nombre" => "Asesoría Fiscal, Jurisprudencias, Tesis y Criterios", "articulos" => []],
-      ["nombre" => "Perspectiva Económica e Iniciativas Fiscales para 2017", "articulos" => []],
-      ["nombre" => "Prevención de Lavado de Dinero", "articulos" => []],
-      ["nombre" => "Fisco-rima", "articulos" => []],
-      ["nombre" => "Jurisprudencias, Tesis y Criterios", "articulos" => []],
-      ["nombre" => "Paquete Económico 2019", "articulos" => []],
-      ["nombre" => "Los Síndicos Opinan", "articulos" => []],
-      ["nombre" => "Iniciativa de Reforma Fiscal para 2020", "articulos" => []],
-      ["nombre" => "Qué tenemos durante la contingencia", "articulos" => []],
-      ["nombre" => "Iniciativa de Reformas Fiscales para 2021", "articulos" => []],
-      ["nombre" => "Paquete Económico 2023 y agenda en materia fiscal internacional", "articulos" => []],
-      ["nombre" => "Vinculación Fiscal con Normatividad Contable", "articulos" => []],
-      ["nombre" => "Regímenes Especiales", "articulos" => []],
-      ["nombre" => "Impuestos y Economía Digital", "articulos" => []],
-      ["nombre" => "Dudas Fiscales", "articulos" => []],
-      ["nombre" => "Panorama Fiscal 2024", "articulos" => []],
-      ["nombre" => "Noticias y Trámites Fiscales", "articulos" => []],
-      ["nombre" => "Reformas fiscales 2026", "articulos" => []]
+
+      ["nombre" => "Régimen Fiscal de Personas Físicas", "articulos" => [
+
+              [
+                  "titulo" => "Ajuste anual de ISR a salarios 2023. Casos prácticos",
+                  "autor" => "L.C., E.F. y PC.FI. Arturo Morales",
+                  "descripcion" => "El artículo 97 de la Ley del Impuesto sobre la Renta (LISR) establece que las personas obligadas a efectuar retenciones en los términos del artículo 96 de esta Ley, calcularán el impuesto anual de cada persona que les hubiere prestado servicios personales...",
+                  "link" => "previewArticulo.php"
+              ]
+          ]
+      ],
+
+      ["nombre" => "Régimen Fiscal de Personas Morales", "articulos" => [
+
+              [
+                  "titulo" => "Consideraciones para la declaración anual 2021 de personas morales del Título II de la LISR",
+                  "autor" => "L.C. y E.F. Susana Mireles",
+                  "descripcion" => "En términos generales, el 31 de marzo es la fecha límite para la presentación de las declaraciones anuales de personas morales, que se realizan a través de la página del Servicio de Administración Tributaria –SAT– (www.sat.gob.mx). Esta obligación encuent...",
+                  "link" => "previewArticulo.php"
+              ]
+          ]    
+      ],
+
+      ["nombre" => "Impuestos Internacionales", "articulos" => [
+
+              [
+                  "titulo" => "Acuerdos amplios de información",
+                  "autor" => "Ma. de la Luz Salgado",
+                  "descripcion" => "La globalización, la rapidez y la libertad de los movimientos del capital impulsados por las políticas de los países y los avances tecnológi...",
+                  "link" => "previewArticulo.php"
+              ]
+
+      ]],
+
+      ["nombre" => "Seguridad Social", "articulos" => [
+
+              [
+                  "titulo" => "Aspectos a considerar con relación al seguro de riesgos de trabajo y su próxima declaración",
+                  "autor" => "L.C.P. y P.C.FI. Rolando Silva",
+                  "descripcion" => "Cada año, los patrones en México deben presentar su declaración al seguro de riesgos de trabajo (revisión anual de la siniestralidad), esta decl...",
+                  "link" => "previewArticulo.php"
+              ]
+
+      ]],
+
+      ["nombre" => "Salarios", "articulos" => [
+
+              [
+                  "titulo" => "Ajuste anual de ISR a salarios 2022",
+                  "autor" => ".C., E.F. y PC.FI. Arturo Morales",
+                  "descripcion" => "El artículo 96 de la Ley del Impuesto sobre la Renta (LISR) establece que los contribuyentes que hagan pagos por los conceptos a que se refiere el Capítulo I “De los ingresos por salarios y en general por la prestación de un servicio personal subordinado”...",
+                  "link" => "previewArticulo.php"
+              ]
+      ]],
+
+      ["nombre" => "Contribuciones Estatales", "articulos" => [
+
+              [
+                  "titulo" => "Impuesto a la venta final de bebidas con contenido alcohólico",
+                  "autor" => " C.P.C, E.F., L.D. y M.A.C. Vicente Velázquez",
+                  "descripcion" => "Desde el año 2018, en las reformas al Código Financiero del Estado de México, se estableció un nuevo impuesto denominado “Del Impuesto a la Venta Final de Bebidas con Contenido Alcohólico”, y se puede observar que con su publicación los gobiernos buscan r...",
+                  "link" => "previewArticulo.php"
+              ]
+      ]],
+
+      ["nombre" => "Contribuciones Indirectas", "articulos" => [
+
+                    [
+                  "titulo" => "Reglamento de la Ley del IVA",
+                  "autor" => "L.C., C.P.A., E.F. y M.D.F. Sergio Santinelli",
+                  "descripcion" => "El pasado 25 de septiembre fue publicado en el Diario Oficial de la Federación (DOF) el ''Decreto por el que se Reforman, Adicionan y Deroga...",
+                  "link" => "previewArticulo.php"
+              ]
+      ]],
+
+      ["nombre" => "Resolución Miscelánea", "articulos" => [
+                      [
+                  "titulo" => "CFDI 4.0 de ingresos con complemento Carta Porte 2.0. Llenado correcto para evitar multas",
+                  "autor" => "L.C.C. Miguel Ángel Hernández",
+                  "descripcion" => "El presente artículo está dirigido a todos los contribuyentes que requieren utilizar el comprobante fiscal digital por internet (CFDI) versión 4.0 de tipo ingresos con complemento Carta Porte versión 2.0 del sector autotransporte...",
+                  "link" => "previewArticulo.php"
+              ]
+      ]],
+
+      ["nombre" => "Contratos", "articulos" => [
+                      [
+                  "titulo" => "El Reporto Financiero en México",
+                  "autor" => "L.D. Marino Aparicio",
+                  "descripcion" => "Sin duda alguna, hay varias figuras jurídicas en el sistema financiero mexicano que han venido a desencadenar la posibilidad de celebrar diversos actos jurídicos; no obstante, generalmente no todas esas figuras jurídicas se describen de forma completa, el...",
+                  "link" => "previewArticulo.php"
+              ]
+      ]],
+
+      ["nombre" => "Comercio Exterior", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Registro Contable de Efectos Fiscales", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Auditoría y Dictamen Fiscal", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Código Fiscal y Jurisprudencia", "articulos" => [
+   
+      ]],
+
+      ["nombre" => "Defensa Fiscal", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Régimen Simplificado", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Asesoría Fiscal y Cartas al Editor", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Cuadros de Información Permanente", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Los especialistas opinan", "articulos" => [
+
+      ]],
+
+      ["nombre" => "En la opinión de Prodecon", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Noticias Fiscales", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Presentación", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Precios de Transferencia y Pagos al Extranjero", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Cuentos Fiscales", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Asesoría Fiscal, Jurisprudencias, Tesis y Criterios", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Perspectiva Económica e Iniciativas Fiscales para 2017", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Prevención de Lavado de Dinero", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Fisco-rima", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Jurisprudencias, Tesis y Criterios", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Paquete Económico 2019", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Los Síndicos Opinan", "articulos" => [
+      ]],
+
+      ["nombre" => "Iniciativa de Reforma Fiscal para 2020", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Qué tenemos durante la contingencia", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Iniciativa de Reformas Fiscales para 2021", "articulos" => [
+      ]],
+
+      ["nombre" => "Paquete Económico 2023 y agenda en materia fiscal internacional", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Vinculación Fiscal con Normatividad Contable", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Regímenes Especiales", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Impuestos y Economía Digital", "articulos" => [
+
+
+      ]],
+
+      ["nombre" => "Dudas Fiscales", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Panorama Fiscal 2024", "articulos" => [
+
+      ]],
+
+      ["nombre" => "Noticias y Trámites Fiscales", "articulos" => [
+
+
+      ]],
+
+      ["nombre" => "Reformas fiscales 2026", "articulos" => [
+      ]
+    ]
+
   ];
 
   function cf_sec_id($str) {

@@ -87,6 +87,7 @@ function nav_a($id, $current, $label, $url, $external = false) {
           <a href="#" class="<?php echo ($page == 'perfil' || $page == 'perfiles_fiscales' || $page == 'solicitar_factura') ? 'active' : ''; ?>">Mi cuenta <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
           <div class="cfnav__drop">
             <a href="perfil.php">Perfil</a>
+            <a href="favoritos.php">Favoritos</a>
             <a href="perfilesFiscales.php">Perfiles fiscales</a>
             <a href="solicitarFactura.php">Solicitar factura</a>
           </div>
