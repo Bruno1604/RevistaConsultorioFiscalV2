@@ -1,34 +1,3 @@
 {
-    "proceso@fca.unam.mx": {
-        "usuario_nombre": "Proceso",
-        "usuario_correo": "proceso@fca.unam.mx",
-        "folio_preregistro": "PRE-2026-2276",
-        "fecha_preregistro": "01\/09\/2026",
-        "tarifa_seleccionada": "UNAM",
-        "tarifa_confirmada": false,
-        "paso_actual": 1,
-        "credencial_subida": false,
-        "credencial_nombre_archivo": null,
-        "credencial_ruta_archivo": null,
-        "credencial_fecha_envio": null,
-        "credencial_estado": "sin_enviar",
-        "credencial_motivo_rechazo": "",
-        "ficha_generada": false,
-        "folio_ficha": "FIC-2026-8625",
-        "numero_convenio_ficha": "6920662",
-        "fecha_creacion_ficha": null,
-        "fecha_vencimiento_ficha": "01\/10\/2026",
-        "comprobante_subido": false,
-        "comprobante_nombre_archivo": null,
-        "comprobante_ruta_archivo": null,
-        "comprobante_fecha_envio": null,
-        "comprobante_fecha_pago": null,
-        "comprobante_importe": null,
-        "comprobante_clave_rastreo": null,
-        "comprobante_num_operacion": null,
-        "comprobante_estado": "sin_enviar",
-        "comprobante_motivo_rechazo": "",
-        "numero_suscriptor": "SUB-2026-2635",
-        "vigencia_fin": "01\/09\/2027"
-    }
+    
 }

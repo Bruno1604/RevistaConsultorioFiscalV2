@@ -149,7 +149,8 @@ function seleccionarTarifa(tipo) {
     if (state.fichaGenerada) return; // Si ya se generó la ficha, está bloqueada la tarifa
 
     aplicarSeleccionVisualTarifa(tipo);
-    llamarProceso('seleccionar_tarifa', { tarifa: tipo }).then(resp => { if (resp) renderUI(); });
+    // No se llama a renderUI()
+    llamarProceso('seleccionar_tarifa', { tarifa: tipo });
 }
 
 function seleccionarModalidadFCA(valor) {
@@ -301,9 +302,13 @@ function renderUI() {
         } else if (i === 3 && state.tarifa === 'UNAM') {
             const sub = document.getElementById('stepSub3');
             if (sub) sub.textContent = 'Validar tarifa UNAM';
+            const tit = document.getElementById('stepTitle3');
+            if (tit) tit.textContent = 'Cargar Credencial UNAM';
         } else if (i === 3 && state.tarifa === 'FCA') {
             const sub = document.getElementById('stepSub3');
             if (sub) sub.textContent = 'Validar alumno FCA';
+            const tit = document.getElementById('stepTitle3');
+            if (tit) tit.textContent = 'Cargar Credencial de Alumno FCA';
         }
 
         const estaPermitido = esPasoPermitido(i);

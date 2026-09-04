@@ -42,8 +42,9 @@
         <li class="stepper-item locked" id="stepItem4">
             <button class="stepper-link" id="stepBtn4" onclick="irAPaso(4)">
                 <div class="stepper-icon" id="stepIcon4">4</div>
-                <div class="stepper-text">
+                 <div class="stepper-text">
                     <span class="stepper-title" id="stepTitle4">Generar Ficha de Pago</span>
+                    <span class="stepper-subtitle">Referencia de pago</span>
                 </div>
             </button>
         </li>
@@ -54,6 +55,7 @@
                 <div class="stepper-icon" id="stepIcon5">5</div>
                 <div class="stepper-text">
                     <span class="stepper-title">Cargar Comprobante de Pago</span>
+                    <span class="stepper-subtitle">Subir tu pago</span>
                 </div>
             </button>
         </li>
