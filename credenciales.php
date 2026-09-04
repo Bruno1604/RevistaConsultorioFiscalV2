@@ -17,10 +17,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion_credencial']))
 
     if ($correoObjetivo !== '') {
         if ($accion === 'aprobar') {
-            proceso_actualizar($correoObjetivo, [
+            $solicitudObjetivo = proceso_obtener($correoObjetivo, '');
+            $camposAprobar = [
                 'credencial_estado'         => 'aprobada',
                 'credencial_motivo_rechazo' => '',
-            ]);
+            ];
+
+            // Alumnos FCA es gratuito
+            if (($solicitudObjetivo['tarifa_seleccionada'] ?? '') === 'FCA') {
+                $camposAprobar['ficha_generada']      = true;
+                $camposAprobar['comprobante_estado']  = 'aprobado';
+                $camposAprobar['comprobante_importe'] = 0.00;
+                $camposAprobar['comprobante_fecha_pago'] = date('Y-m-d');
+            }
+
+            proceso_actualizar($correoObjetivo, $camposAprobar);
             $_SESSION['flash_credenciales'] = ['tipo' => 'success', 'texto' => 'Credencial aprobada correctamente.'];
         } elseif ($accion === 'rechazar') {
             $motivo = trim($_POST['motivo'] ?? '');
@@ -51,10 +62,14 @@ unset($_SESSION['flash_credenciales']);
 $solicitudesRaw = proceso_listar_credenciales();
 $solicitudes = [];
 foreach ($solicitudesRaw as $correo => $sol) {
+    $esFCA = ($sol['tarifa_seleccionada'] ?? '') === 'FCA';
+    $modalidadTexto = [
+        'SUAYED' => 'SUAyED', 'ESCOLARIZADO' => 'Escolarizado', 'POSGRADO' => 'Posgrado'
+    ][$sol['modalidad_fca'] ?? ''] ?? '';
     $solicitudes[] = [
         'correo'          => $correo,
         'nombre'          => $sol['usuario_nombre'],
-        'afiliacion'      => 'Comunidad UNAM',
+        'afiliacion'      => $esFCA ? ('Alumnos FCA' . ($modalidadTexto ? " ($modalidadTexto)" : '')) : 'Comunidad UNAM',
         'fechaCredencial' => $sol['credencial_fecha_envio'] ?? '-',
         'archivo'         => $sol['credencial_nombre_archivo'],
         'ruta'            => $sol['credencial_ruta_archivo'],
@@ -177,7 +192,7 @@ $estadoBadges = [
                                 <?php if (empty($solicitudesPagina)): ?>
                                     <tr>
                                         <td colspan="5" style="text-align: center; padding: 30px; color: var(--text-soft);">
-                                            Aún no hay credenciales UNAM enviadas para revisar.
+                                            Aún no hay credenciales UNAM o FCA enviadas para revisar.
                                         </td>
                                     </tr>
                                 <?php endif; ?>
