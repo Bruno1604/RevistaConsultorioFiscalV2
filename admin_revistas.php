@@ -172,13 +172,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
     // Editar no implementado en esta demo
 }
 
-// Configuración de paginación
+// 1. Obtener parámetros de búsqueda y filtrado
+$search_q = isset($_GET['q']) ? trim($_GET['q']) : '';
+$search_mes = isset($_GET['mes']) ? intval($_GET['mes']) : 0;
+$search_anio = isset($_GET['anio']) ? trim($_GET['anio']) : '';
+
+// 2. Extraer lista dinámica de años disponibles de la sesión
+$anios_disponibles = [];
+foreach ($_SESSION['revistas'] as $r) {
+    if (!empty($r['anio']) && !in_array((string)$r['anio'], $anios_disponibles, true)) {
+        $anios_disponibles[] = (string)$r['anio'];
+    }
+}
+rsort($anios_disponibles);
+
+// 3. Aplicar filtros a las revistas de la sesión
+$revistas_filtradas = array_filter($_SESSION['revistas'], function($r) use ($search_q, $search_mes, $search_anio) {
+    // Filtro por nombre (título) o número de revista
+    if ($search_q !== '') {
+        $q_lc = mb_strtolower($search_q, 'UTF-8');
+        $titulo_lc = mb_strtolower($r['titulo'] ?? '', 'UTF-8');
+        $numero_lc = mb_strtolower((string)($r['numero'] ?? ''), 'UTF-8');
+
+        if (strpos($titulo_lc, $q_lc) === false && strpos($numero_lc, $q_lc) === false) {
+            return false;
+        }
+    }
+
+    // Filtro por año
+    if ($search_anio !== '') {
+        $anio_r = (string)($r['anio'] ?? '');
+        $fecha_r = (string)($r['fecha'] ?? '');
+        if ($anio_r !== $search_anio && strpos($fecha_r, $search_anio) === false) {
+            return false;
+        }
+    }
+
+    // Filtro por mes
+    if ($search_mes >= 1 && $search_mes <= 12) {
+        $meses_patrones = [
+            1 => ['enero', '/01/', '-01-', '.01.'],
+            2 => ['febrero', '/02/', '-02-', '.02.'],
+            3 => ['marzo', '/03/', '-03-', '.03.'],
+            4 => ['abril', '/04/', '-04-', '.04.'],
+            5 => ['mayo', '/05/', '-05-', '.05.'],
+            6 => ['junio', '/06/', '-06-', '.06.'],
+            7 => ['julio', '/07/', '-07-', '.07.'],
+            8 => ['agosto', '/08/', '-08-', '.08.'],
+            9 => ['septiembre', '/09/', '-09-', '.09.'],
+            10 => ['octubre', '/10/', '-10-', '.10.'],
+            11 => ['noviembre', '/11/', '-11-', '.11.'],
+            12 => ['diciembre', '/12/', '-12-', '.12.']
+        ];
+
+        $fecha_lc = mb_strtolower($r['fecha'] ?? '', 'UTF-8');
+        $coincide = false;
+        if (isset($meses_patrones[$search_mes])) {
+            foreach ($meses_patrones[$search_mes] as $patron) {
+                if (strpos($fecha_lc, $patron) !== false) {
+                    $coincide = true;
+                    break;
+                }
+            }
+        }
+        if (!$coincide) {
+            return false;
+        }
+    }
+
+    return true;
+});
+
+// Reindexar array de resultados filtrados
+$revistas_filtradas = array_values($revistas_filtradas);
+
+// Configuración de paginación sobre las revistas filtradas
 $items_por_pagina = 6;
-$total_items = count($_SESSION['revistas']);
-$total_paginas = ceil($total_items / $items_por_pagina);
+$total_items = count($revistas_filtradas);
+$total_paginas = max(1, ceil($total_items / $items_por_pagina));
 $pagina_actual = isset($_GET['page']) ? max(1, min($total_paginas, intval($_GET['page']))) : 1;
 $offset = ($pagina_actual - 1) * $items_por_pagina;
-$revistas_pagina = array_slice($_SESSION['revistas'], $offset, $items_por_pagina);
+$revistas_pagina = array_slice($revistas_filtradas, $offset, $items_por_pagina);
+
+// Función auxiliar para construir URLs con parámetros de filtrado
+function buildPageUrl($p, $q, $mes, $anio) {
+    $params = ['page' => $p];
+    if ($q !== '') $params['q'] = $q;
+    if ($mes > 0) $params['mes'] = $mes;
+    if ($anio !== '') $params['anio'] = $anio;
+    return '?' . http_build_query($params);
+}
 
 $page_title = "Administrar Revistas - Consultorio Fiscal";
 $page = "admin_revistas";
@@ -217,21 +300,65 @@ include 'template/header.php';
   </div>
 </section>
 
-<section class="about" style="padding: 20px 0 60px;">
+<section class="about" style="padding: 42px 0 60px;">
   <div class="cs">
-    <!-- Botón para nueva revista -->
-    <div class="d-flex justify-content-end mb-4">
-      <button class="btn-ghost" id="btnNuevaRevista" style="border-color: var(--gold); color: var(--gold);">
-        <span>+ Nueva Revista</span>
-      </button>
+    <!-- Barra de búsqueda y filtros -->
+    <div style="display: flex; align-items: center; gap: 12px; margin: 0 0 28px;">
+      <div style="display: flex; align-items: center;">
+        <button class="btn-ghost" id="btnNuevaRevista" style="border-color: var(--navy); color: #fff; background: var(--navy); height: 42px; padding: 0 20px; white-space: nowrap;">
+          <span>+ Nueva Revista</span>
+        </button>
+      </div>
+
+      <div style="flex: 1 1 auto; min-width: 0;">
+        <form method="get" action="admin_revistas.php" style="display: flex; align-items: stretch; gap: 10px; width: 100%; min-width: 0; flex-wrap: nowrap;">
+          <input type="text" name="q" value="<?= htmlspecialchars($search_q) ?>" class="form-control-custom" placeholder="Nombre o número de revista..." style="flex: 1 1 260px; min-width: 180px; height: 42px; padding: 8px 14px;">
+
+          <select name="mes" class="form-control-custom" style="flex: 0 0 150px; min-width: 120px; height: 42px; padding: 8px 14px; cursor: pointer;">
+            <option value="">Meses</option>
+            <?php
+            $meses_list = [
+              1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+              5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+              9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
+            ];
+            foreach ($meses_list as $num => $nombre):
+            ?>
+              <option value="<?= $num ?>" <?= ($search_mes === $num) ? 'selected' : '' ?>><?= $nombre ?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <select name="anio" class="form-control-custom" style="flex: 0 0 130px; min-width: 110px; height: 42px; padding: 8px 14px; cursor: pointer;">
+            <option value="">Años</option>
+            <?php foreach ($anios_disponibles as $a): ?>
+              <option value="<?= htmlspecialchars($a) ?>" <?= ($search_anio === (string)$a) ? 'selected' : '' ?>><?= htmlspecialchars($a) ?></option>
+            <?php endforeach; ?>
+          </select>
+
+          <button type="submit" class="btn-ghost" style="border-color: var(--gold); color: var(--gold); height: 42px; padding: 0 18px; white-space: nowrap;">
+            <span>Buscar</span>
+          </button>
+
+          <?php if ($search_q !== '' || $search_mes > 0 || $search_anio !== ''): ?>
+            <a href="admin_revistas.php" class="btn-ghost" style="border-color: var(--text-soft); color: var(--text-soft); height: 42px; padding: 0 14px; text-decoration: none; display: inline-flex; align-items: center; white-space: nowrap;">
+              <span>Limpiar</span>
+            </a>
+          <?php endif; ?>
+        </form>
+      </div>
     </div>
 
     <!-- Listado de revistas (generado con PHP) -->
-    <div id="listaRevistas">
+    <div id="listaRevistas" style="margin-top: 8px;">
       <div class="row g-4">
         <?php if (empty($revistas_pagina)): ?>
           <div class="col-12 text-center" style="padding: 40px 0;">
-            <p style="color: #5a6a7a;">No hay revistas para mostrar en esta página.</p>
+            <p style="color: #5a6a7a;">No se encontraron revistas que coincidan con los criterios de búsqueda.</p>
+            <?php if ($search_q !== '' || $search_mes > 0 || $search_anio !== ''): ?>
+              <a href="admin_revistas.php" class="btn-ghost" style="border-color: var(--gold); color: var(--gold); margin-top: 10px; display: inline-block; text-decoration: none;">
+                <span>Ver todas las revistas</span>
+              </a>
+            <?php endif; ?>
           </div>
         <?php else: ?>
           <?php foreach ($revistas_pagina as $revista): ?>
@@ -266,7 +393,7 @@ include 'template/header.php';
         <ul class="pagination" style="justify-content: center; gap: 5px; flex-wrap: wrap;">
           <!-- Anterior -->
           <li class="page-item <?= ($pagina_actual <= 1) ? 'disabled' : '' ?>">
-            <a class="page-link" href="?page=<?= $pagina_actual - 1 ?>" style="border-radius: 4px; padding: 8px 16px; color: var(--gold); text-decoration: none; border: 1px solid #e0d6c8; background: #fff;">&laquo;</a>
+            <a class="page-link" href="<?= buildPageUrl($pagina_actual - 1, $search_q, $search_mes, $search_anio) ?>" style="border-radius: 4px; padding: 8px 16px; color: var(--gold); text-decoration: none; border: 1px solid #e0d6c8; background: #fff;">&laquo;</a>
           </li>
 
           <?php
@@ -276,25 +403,24 @@ include 'template/header.php';
           $fin = min($total_paginas, $pagina_actual + $rango);
 
           if ($inicio > 1) {
-            echo '<li class="page-item"><a class="page-link" href="?page=1" style="border-radius: 4px; padding: 8px 16px; color: var(--gold); text-decoration: none; border: 1px solid #e0d6c8; background: #fff;">1</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="' . buildPageUrl(1, $search_q, $search_mes, $search_anio) . '" style="border-radius: 4px; padding: 8px 16px; color: var(--gold); text-decoration: none; border: 1px solid #e0d6c8; background: #fff;">1</a></li>';
             if ($inicio > 2) echo '<li class="page-item disabled"><span class="page-link" style="border-radius: 4px; padding: 8px 16px; border: 1px solid #e0d6c8; background: #f8f5f0;">…</span></li>';
           }
 
           for ($i = $inicio; $i <= $fin; $i++) {
-            $active = ($i === $pagina_actual) ? 'active' : '';
             $active_style = ($i === $pagina_actual) ? 'background: var(--gold); color: #fff; border-color: var(--gold);' : 'color: var(--gold); background: #fff;';
-            echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '" style="border-radius: 4px; padding: 8px 16px; text-decoration: none; border: 1px solid #e0d6c8; ' . $active_style . '">' . $i . '</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="' . buildPageUrl($i, $search_q, $search_mes, $search_anio) . '" style="border-radius: 4px; padding: 8px 16px; text-decoration: none; border: 1px solid #e0d6c8; ' . $active_style . '">' . $i . '</a></li>';
           }
 
           if ($fin < $total_paginas) {
             if ($fin < $total_paginas - 1) echo '<li class="page-item disabled"><span class="page-link" style="border-radius: 4px; padding: 8px 16px; border: 1px solid #e0d6c8; background: #f8f5f0;">…</span></li>';
-            echo '<li class="page-item"><a class="page-link" href="?page=' . $total_paginas . '" style="border-radius: 4px; padding: 8px 16px; color: var(--gold); text-decoration: none; border: 1px solid #e0d6c8; background: #fff;">' . $total_paginas . '</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="' . buildPageUrl($total_paginas, $search_q, $search_mes, $search_anio) . '" style="border-radius: 4px; padding: 8px 16px; color: var(--gold); text-decoration: none; border: 1px solid #e0d6c8; background: #fff;">' . $total_paginas . '</a></li>';
           }
           ?>
 
           <!-- Siguiente -->
           <li class="page-item <?= ($pagina_actual >= $total_paginas) ? 'disabled' : '' ?>">
-            <a class="page-link" href="?page=<?= $pagina_actual + 1 ?>" style="border-radius: 4px; padding: 8px 16px; color: var(--gold); text-decoration: none; border: 1px solid #e0d6c8; background: #fff;">&raquo;</a>
+            <a class="page-link" href="<?= buildPageUrl($pagina_actual + 1, $search_q, $search_mes, $search_anio) ?>" style="border-radius: 4px; padding: 8px 16px; color: var(--gold); text-decoration: none; border: 1px solid #e0d6c8; background: #fff;">&raquo;</a>
           </li>
         </ul>
         <div style="text-align: center; margin-top: 12px; font-size: 0.9rem; color: #5a6a7a;">
