@@ -32,7 +32,7 @@ include 'template/header.php';
   </div>
 </section>
 
-<section class="about" style="padding: 20px 0 60px;">
+<section class="about" style="padding: 20px 0 36px;">
   <div class="cs">
     <div class="row g-4 justify-content-center">
       <!-- Opción 1: Gestionar Revista -->
@@ -100,6 +100,12 @@ include 'template/header.php';
       </div>
     </div>
   </div>
+</section>
+
+<section class="cs" style="padding: 0 0 80px;">
+  <a href="estadisticas.php" class="btn-navy" style="background: var(--navy-deep); border-radius: 2px; width: calc(100% - 37px); margin-left: 37px; padding: 16px 30px; text-align: center;">
+    Ver estadísticas <i class="fa fa-arrow-right" style="font-size: .7rem; margin-left: 10px;"></i>
+  </a>
 </section>
 
 <?php include 'template/footer.php'; ?>
