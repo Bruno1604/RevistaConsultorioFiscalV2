@@ -74,10 +74,6 @@ $current_uri = basename($_SERVER['PHP_SELF']);
                     Solicitudes con comprobante por revisar
                 </span>
 
-                <span class="badge bg-warning text-dark">
-                    <?php echo $cnt_revision; ?>
-                </span>
-
             </a>
         </li>
 
