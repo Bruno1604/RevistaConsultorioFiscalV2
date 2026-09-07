@@ -51,6 +51,10 @@ include 'template/header.php';
                             <span>Leer Edición Completa</span>
                         </a>
 
+                        <button type="button" id="btnDescargar" class="btn-ghost btn-ghost--white">
+                            <span><i class="fa fa-download"></i> Descargar</span>
+                        </button>
+
                         <?php if ($puede_favoritos): ?>
                         <button type="button"
                                 class="fav-btn fav-btn--dark<?php echo $es_fav_revista ? ' is-activo' : ''; ?>"
@@ -132,6 +136,16 @@ include 'template/header.php';
     </section>
 </main>
 
+<style>
+/* Descargar = imprimir a PDF (mismo patrón que cuadrosPermanentes.php) */
+@media print{
+    .cfnav,.cfnav__panel,.cfnav__burger,.footer-a,.footer-b,
+    .rev-actions,.fav-pagina-block{display:none!important}
+    html,body{background:#fff!important}
+    .rev-poster{box-shadow:none}
+}
+</style>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     setTimeout(() => {
@@ -139,6 +153,10 @@ document.addEventListener("DOMContentLoaded", function() {
             el.classList.add('in');
         });
     }, 100);
+});
+
+document.getElementById('btnDescargar')?.addEventListener('click', function () {
+    window.print();
 });
 
 document.getElementById('favPaginaBtn')?.addEventListener('click', function () {
