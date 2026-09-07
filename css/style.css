@@ -1105,3 +1105,16 @@ p,
 .fav-pagina input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow)}
 .fav-msg{font-family:var(--sans);font-size:.72rem;color:var(--gold);margin-top:8px;display:none}
 .fav-msg.is-show{display:block}
+
+/* Insignia de contador (notificaciones sin leer, etc.) dentro de menús */
+.nav-badge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;
+  padding:0 5px;border-radius:100px;background:var(--gold);color:#fff;font-family:var(--sans);
+  font-size:.66rem;font-weight:700;line-height:18px;vertical-align:middle}
+.cfnav__drop a .nav-badge{margin-left:4px}
+
+/* Estado vacío reutilizable (favoritos.php, notificaciones.php, ...) */
+.fav-empty{text-align:center;padding:60px 24px;background:var(--paper-2);border:1px dashed var(--line);
+  border-radius:var(--r)}
+.fav-empty i{font-size:2.2rem;color:var(--gold);margin-bottom:16px;display:block}
+.fav-empty h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--navy);margin-bottom:8px}
+.fav-empty p{color:var(--ink-2);font-size:.9rem;max-width:420px;margin:0 auto 22px}

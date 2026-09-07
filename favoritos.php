@@ -253,13 +253,6 @@ include 'template/header.php';
   .fav-row{flex-direction:column}
   .fav-row__actions{flex-direction:row;align-items:center;justify-content:space-between;width:100%}
 }
-
-/* Estado vacío */
-.fav-empty{text-align:center;padding:60px 24px;background:var(--paper-2);border:1px dashed var(--line);
-  border-radius:var(--r)}
-.fav-empty i{font-size:2.2rem;color:var(--gold);margin-bottom:16px;display:block}
-.fav-empty h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--navy);margin-bottom:8px}
-.fav-empty p{color:var(--ink-2);font-size:.9rem;max-width:420px;margin:0 auto 22px}
 </style>
 
 <script>
