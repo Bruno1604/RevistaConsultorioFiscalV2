@@ -138,6 +138,10 @@ include 'template/header.php';
                             <span>Ver Revista Completa →</span>
                         </a>
 
+                        <button type="button" id="btnDescargar" class="btn-ghost" style="border-color: var(--navy);">
+                            <span><i class="fa fa-download"></i> Descargar</span>
+                        </button>
+
                         <a href="favoritos.php" class="btn-ghost">
                             <span>← Mis Favoritos</span>
                         </a>
@@ -207,6 +211,15 @@ include 'template/header.php';
 .related-card:hover{ transform: translateY(-3px); }
 .related-card .article-card-mini__content h4{ transition: color .25s var(--e2); }
 .related-card:hover .article-card-mini__content h4{ color: var(--gold); }
+
+/* Descargar = imprimir a PDF (mismo patrón que cuadrosPermanentes.php) */
+@media print{
+    .cfnav,.cfnav__panel,.cfnav__burger,.footer-a,.footer-b,
+    .article-footer-tools,.related-section{display:none!important}
+    html,body{background:#fff!important}
+    .article-header{background:#fff!important}
+    .article-header h1,.article-header .lbl,.article-meta{color:var(--navy)!important}
+}
 </style>
 
 <script>
@@ -216,6 +229,10 @@ document.addEventListener("DOMContentLoaded", function() {
             el.classList.add('in');
         });
     }, 100);
+});
+
+document.getElementById('btnDescargar')?.addEventListener('click', function () {
+    window.print();
 });
 </script>
 
