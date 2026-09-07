@@ -75,7 +75,9 @@
 
         <div class="hero__cta rise rise--5">
           <a href="contenido.php" class="cfbtn cfbtn--gold">Leer la edición <i class="fa fa-arrow-right" style="font-size:.7rem"></i></a>
+          <?php if (!$is_logged_in): ?>
           <a href="login.php" class="cfbtn cfbtn--ghost">Suscribirse</a>
+          <?php endif; ?>
         </div>
       </div>
 
@@ -104,7 +106,7 @@
 
     <div class="folio__deck" id="folioDeck">
       <?php $i = 1; foreach ($articulos as $a): ?>
-      <a href="previewArticulo.php"
+      <a href="articulo.php?id=<?php echo $i; ?>"
          class="folio__panel<?php echo ($i === 1) ? ' on' : ''; ?>"
          data-panel="<?php echo $i; ?>">
 
