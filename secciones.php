@@ -10,61 +10,61 @@
                   "titulo" => "Alcance de la no deducibilidad de salarios en la disminución de la PTU pagada para la determinación de la base gravable del ISR",
                   "autor" => "Lucía Muñoz",
                   "descripcion" => "Cada año son aprobadas diferentes reformas en materia política, económica y administrativa; para el ejercicio 2014 una de las reformas más trascendentes fue en materia fiscal, ya que fueron derogadas, modificadas y emitidas nuevas leyes con el fin de ...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php?id=4"
               ],
               [
                   "titulo" => "Nuevo régimen aplicable a los pagos de previsión social y su impacto financiero en la base del impuesto sobre la renta para el año 2014",
                   "autor" => "Diana Valerio Pino",
                   "descripcion" => "El presente trabajo contiene una investigación sobre el tema de las prestaciones de previsión social que otorga el patrón a sus trabajadores con el fin de satisfacer contingencias o necesidades presentes y futuras; además, muestra cómo es que la reforma f...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php?id=5"
               ],
               [
                   "titulo" => "La reforma energética y la política fiscal",
                   "autor" => "Dr. Pedro Gaytán",
                   "descripcion" => "En México el petróleo juega un papel fundamental en la economía, ya que se logra una gran cantidad de beneficios, pues es un producto que ti...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ],
               [
                   "titulo" => "Pago por compensación no genera IVA acreditable",
                   "autor" => "C.P.C., L.D. y M.A.C. Jorge Santamaría",
                   "descripcion" => "La Suprema Corte de Justicia de la Nación (SCJN) resolvió a través de su Segunda Sala la Contradicción de Criterios 413/2022 que nació entre las resoluciones de Pleno en Materia Administrativa del Décimo Sexto Circuito...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ],
               [
                   "titulo" => "El salario mínimo debe subir, ¿puede subir?",
                   "autor" => "Dr. Eduardo Ramírez",
                   "descripcion" => "La condición económica del país a lo largo de las últimas tres décadas ha originado una serie de rezagos que juegan en contra del bienestar ...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ],
               [
                   "titulo" => "Cambios en el tratamiento fiscal de la enajenación de acciones en bolsas de valores",
                   "autor" => "Andreani San Miguel",
                   "descripcion" => "Vivimos un año, en México, de reformas estructurales, reformas que están impulsando el desarrollo que le hace falta al país. Dentro de estas reformas no podía quedar fuera la fiscal. El Partido Revolucionario Institucional (PRI) retomó las riendas del pod...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ],
               [
                   "titulo" => "Alcance e implicación fiscal de la Ley Antilavado de Dinero",
                   "autor" => "L.C. Diego Omar Figueroa",
                   "descripcion" => "La Ley Federal para la Prevención e Identificación de Operaciones con Recursos de Procedencia Ilícita (LFPIORPI), es una ley que está impulsada por el Grupo de Acción Financiera Internacional (GAFI) que es un ente intergubernamental establecido en 1989...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ],
               [
                   "titulo" => "Intereses pagados a partes relacionadas residentes en el extranjero",
                   "autor" => "L.C. Alfredo Avendaño",
                   "descripcion" => "La Organización para la Cooperación y el Desarrollo Económicos (OCDE) es un organismo internacional cuyos países miembros analizan e intercambian experiencias sobre temas de interés común y definen mejores prácticas en una amplia gama de áreas de política...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ],
               [
                   "titulo" => "Modalidad 40 como estrategia de inversión",
                   "autor" => "Grecia Analhit Morales",
                   "descripcion" => "En México, el problema de los pensionados ha sido visible desde la década de los ochenta debido entre otras causas a que ''no se generaron empleos formales suficientes y por tanto la incorporación a las instituciones de seguridad social fue muy lenta'' (R...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ],
               [
                   "titulo" => "Impacto de la limitación de la deducibilidad del fondo de previsión social",
                   "autor" => "Arturo Pérez",
                   "descripcion" => "Durante el año 2013, el H. Congreso de la Unión aprobó diversas reformas, entre las cuales se encontraban la educativa, la energética, en telecomunicaciones, la hacendaria, la política y la financiera. El objeto de este estudio es la reforma hacendaria, e…",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
           ]
       ],
@@ -75,7 +75,7 @@
                   "titulo" => "Ajuste anual de ISR a salarios 2023. Casos prácticos",
                   "autor" => "L.C., E.F. y PC.FI. Arturo Morales",
                   "descripcion" => "El artículo 97 de la Ley del Impuesto sobre la Renta (LISR) establece que las personas obligadas a efectuar retenciones en los términos del artículo 96 de esta Ley, calcularán el impuesto anual de cada persona que les hubiere prestado servicios personales...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php?id=6"
               ]
           ]
       ],
@@ -86,7 +86,7 @@
                   "titulo" => "Consideraciones para la declaración anual 2021 de personas morales del Título II de la LISR",
                   "autor" => "L.C. y E.F. Susana Mireles",
                   "descripcion" => "En términos generales, el 31 de marzo es la fecha límite para la presentación de las declaraciones anuales de personas morales, que se realizan a través de la página del Servicio de Administración Tributaria –SAT– (www.sat.gob.mx). Esta obligación encuent...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
           ]    
       ],
@@ -97,7 +97,7 @@
                   "titulo" => "Acuerdos amplios de información",
                   "autor" => "Ma. de la Luz Salgado",
                   "descripcion" => "La globalización, la rapidez y la libertad de los movimientos del capital impulsados por las políticas de los países y los avances tecnológi...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
 
       ]],
@@ -108,7 +108,7 @@
                   "titulo" => "Aspectos a considerar con relación al seguro de riesgos de trabajo y su próxima declaración",
                   "autor" => "L.C.P. y P.C.FI. Rolando Silva",
                   "descripcion" => "Cada año, los patrones en México deben presentar su declaración al seguro de riesgos de trabajo (revisión anual de la siniestralidad), esta decl...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
 
       ]],
@@ -119,7 +119,7 @@
                   "titulo" => "Ajuste anual de ISR a salarios 2022",
                   "autor" => ".C., E.F. y PC.FI. Arturo Morales",
                   "descripcion" => "El artículo 96 de la Ley del Impuesto sobre la Renta (LISR) establece que los contribuyentes que hagan pagos por los conceptos a que se refiere el Capítulo I “De los ingresos por salarios y en general por la prestación de un servicio personal subordinado”...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
       ]],
 
@@ -129,7 +129,7 @@
                   "titulo" => "Impuesto a la venta final de bebidas con contenido alcohólico",
                   "autor" => " C.P.C, E.F., L.D. y M.A.C. Vicente Velázquez",
                   "descripcion" => "Desde el año 2018, en las reformas al Código Financiero del Estado de México, se estableció un nuevo impuesto denominado “Del Impuesto a la Venta Final de Bebidas con Contenido Alcohólico”, y se puede observar que con su publicación los gobiernos buscan r...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
       ]],
 
@@ -139,7 +139,7 @@
                   "titulo" => "Reglamento de la Ley del IVA",
                   "autor" => "L.C., C.P.A., E.F. y M.D.F. Sergio Santinelli",
                   "descripcion" => "El pasado 25 de septiembre fue publicado en el Diario Oficial de la Federación (DOF) el ''Decreto por el que se Reforman, Adicionan y Deroga...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
       ]],
 
@@ -148,7 +148,7 @@
                   "titulo" => "CFDI 4.0 de ingresos con complemento Carta Porte 2.0. Llenado correcto para evitar multas",
                   "autor" => "L.C.C. Miguel Ángel Hernández",
                   "descripcion" => "El presente artículo está dirigido a todos los contribuyentes que requieren utilizar el comprobante fiscal digital por internet (CFDI) versión 4.0 de tipo ingresos con complemento Carta Porte versión 2.0 del sector autotransporte...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
       ]],
 
@@ -157,7 +157,7 @@
                   "titulo" => "El Reporto Financiero en México",
                   "autor" => "L.D. Marino Aparicio",
                   "descripcion" => "Sin duda alguna, hay varias figuras jurídicas en el sistema financiero mexicano que han venido a desencadenar la posibilidad de celebrar diversos actos jurídicos; no obstante, generalmente no todas esas figuras jurídicas se describen de forma completa, el...",
-                  "link" => "previewArticulo.php"
+                  "link" => "articulo.php"
               ]
       ]],
 
