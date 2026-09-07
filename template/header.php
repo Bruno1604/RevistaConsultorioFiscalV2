@@ -6,6 +6,13 @@ $is_logged_in = isset($_SESSION['usuario_id']);
 $is_admin = ($is_logged_in && isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin');
 $is_suscriptor = ($is_logged_in && isset($_SESSION['rol']) && in_array($_SESSION['rol'], ['suscriptor', 'usuario']));
 
+// Contador de notificaciones sin leer para el menú "Mi cuenta"
+$notif_no_leidas = 0;
+if ($is_suscriptor) {
+    require_once __DIR__ . '/../data/notificaciones.php';
+    $notif_no_leidas = contar_notificaciones_no_leidas();
+}
+
 // En la portada la barra flota sobre el héroe; en el resto arranca sólida.
 $nav_mode = (isset($page) && $page === 'inicio') ? '' : 'cfnav--static';
 
@@ -84,9 +91,10 @@ function nav_a($id, $current, $label, $url, $external = false) {
         <!-- Menú de usuario: solo suscriptores ven "Mi cuenta" con opciones -->
         <?php if ($is_suscriptor): ?>
         <li>
-          <a href="#" class="<?php echo ($page == 'perfil' || $page == 'perfiles_fiscales' || $page == 'solicitar_factura' || $page == 'favoritos') ? 'active' : ''; ?>">Mi cuenta <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
+          <a href="#" class="<?php echo ($page == 'perfil' || $page == 'perfiles_fiscales' || $page == 'solicitar_factura' || $page == 'favoritos' || $page == 'notificaciones') ? 'active' : ''; ?>">Mi cuenta <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
           <div class="cfnav__drop">
             <a href="perfil.php">Perfil</a>
+            <a href="notificaciones.php">Notificaciones<?php if ($notif_no_leidas > 0): ?> <span class="nav-badge"><?php echo $notif_no_leidas; ?></span><?php endif; ?></a>
             <a href="favoritos.php">Favoritos</a>
             <a href="perfilesFiscales.php">Perfiles fiscales</a>
             <a href="solicitarFactura.php">Solicitar factura</a>
@@ -132,6 +140,7 @@ function nav_a($id, $current, $label, $url, $external = false) {
   <?php if ($is_suscriptor): ?>
   <span class="mobile-label">Mi cuenta</span>
   <a href="perfil.php">Perfil</a>
+  <a href="notificaciones.php">Notificaciones<?php if ($notif_no_leidas > 0): ?> <span class="nav-badge"><?php echo $notif_no_leidas; ?></span><?php endif; ?></a>
   <a href="favoritos.php">Favoritos</a>
   <a href="perfilesFiscales.php">Perfiles fiscales</a>
   <a href="solicitarFactura.php">Solicitar factura</a>
