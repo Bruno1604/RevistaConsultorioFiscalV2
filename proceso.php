@@ -34,7 +34,7 @@ include 'template/header.php';
 <link rel="stylesheet" href="css/suscripciones.css">
 
 <!-- Contenido Principal -->
-<div class="cs sub-process-container">
+<div class="sub-process-container">
 
     <!-- Layout del Proceso: Sidebar Stepper + Contenido Contextual por Pasos -->
     <div class="sub-process-layout">

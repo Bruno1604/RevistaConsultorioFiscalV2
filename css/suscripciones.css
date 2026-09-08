@@ -810,6 +810,12 @@
    ══════════════════════════════════════════════ */
 
 .sub-process-container {
+  width: 1560px;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-top: 30px;
   padding-bottom: 60px;
 }
@@ -916,7 +922,7 @@
 }
 
 .stepper-item.completed .stepper-subtitle {
-  color: var(--status-aprobada-text);
+  color: var(--gold);
   font-weight: 500;
 }
 
@@ -951,7 +957,7 @@
 
 /* Paso Bloqueado / Pendiente */
 .stepper-item.locked .stepper-link {
-  opacity: 0.6;
+  opacity: 1;
   cursor: not-allowed;
 }
 
@@ -967,6 +973,7 @@
 
 .stepper-item.locked .stepper-subtitle {
   color: var(--text-soft);
+  font-weight: 500;
 }
 
 /* Icono del paso */
@@ -997,12 +1004,13 @@
   font-size: 0.88rem;
   line-height: 1.2;
   margin-bottom: 2px;
+  color: var(--navy);
 }
 
 .stepper-subtitle {
   font-family: var(--sans);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--gold);
   line-height: 1.2;
 }
 
