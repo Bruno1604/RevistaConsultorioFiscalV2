@@ -77,11 +77,11 @@
 
     <!-- ESTADO 3.B: EN REVISIÓN -->
     <div id="credStateRevision" style="display: none;">
-        <div class="notification-banner alert-warning" style="padding: 25px; text-align: center;">
-            <h4 style="font-family: var(--serif); color: #075985; font-size: 1.5rem; margin-bottom: 8px;">
+        <div class="notification-banner alert-warning" style="padding: 20px 24px; text-align: left;">
+            <h4 style="font-family: var(--serif); color: #075985; font-size: 1.4rem; margin-bottom: 6px;">
                 <span id="credTituloRevision">Credencial UNAM en Revisión</span>
             </h4>
-            <p style="font-size: 0.92rem; max-width: 600px; margin: 0 auto; color: var(--text-md);">
+            <p style="font-size: 0.92rem; margin: 0; color: var(--text-md);">
                 <span id="credTextoRevision">Podrás continuar con el proceso una vez que se valide tu pertenencia a la Comunidad UNAM.</span>
             </p>
         </div>
@@ -99,7 +99,7 @@
 
     <!-- ESTADO 3.C: RECHAZADA -->
     <div id="credStateRechazada" style="display: none;">
-        <div class="notification-banner alert-danger" style="padding: 25px;">
+        <div class="notification-banner alert-danger" style="padding: 20px 24px;">
             <div style="display: flex; gap: 15px; align-items: flex-start;">
                 <div>
                     <h4 style="font-family: var(--serif); color: #721c24; font-size: 1.4rem; margin-bottom: 6px;">
@@ -120,11 +120,11 @@
 
     <!-- ESTADO 3.D: APROBADA -->
     <div id="credStateAprobada" style="display: none;">
-        <div class="notification-banner alert-success" style="padding: 25px; text-align: center;">
-            <h4 style="font-family: var(--serif); color: #155724; font-size: 1.6rem; margin-bottom: 8px;">
+        <div class="notification-banner alert-success" style="padding: 20px 24px; text-align: left;">
+            <h4 style="font-family: var(--serif); color: #155724; font-size: 1.4rem; margin-bottom: 6px;">
                 <span id="credTituloAprobada">Credencial UNAM Validada</span>
             </h4>
-            <p style="font-size: 0.95rem; max-width: 600px; margin: 0 auto; color: #155724;">
+            <p style="font-size: 0.95rem; margin: 0; color: #155724;">
                 <span id="credTextoAprobada">Se validó tu pertenencia a la Comunidad UNAM. Ya puedes continuar con el proceso de pago.</span>
             </p>
         </div>

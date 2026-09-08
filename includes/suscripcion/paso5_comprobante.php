@@ -154,11 +154,11 @@
 
     <!-- ESTADO 5.B: EN REVISIÓN -->
     <div id="compStateRevision" style="display: none;">
-        <div class="notification-banner alert-warning" style="padding: 25px; text-align: center;">
-            <h4 style="font-family: var(--serif); color: #075985; font-size: 1.5rem; margin-bottom: 8px;">
+        <div class="notification-banner alert-warning" style="padding: 20px 24px; text-align: left;">
+            <h4 style="font-family: var(--serif); color: #075985; font-size: 1.4rem; margin-bottom: 6px;">
                 Comprobante de Pago En Revisión
             </h4>
-            <p style="font-size: 0.92rem; max-width: 600px; margin: 0 auto; color: var(--text-md);">
+            <p style="font-size: 0.92rem; margin: 0; color: var(--text-md);">
                 Tu Comprobante de Pago fue enviado correctamente y está siendo revisado. Te notificaremos cuando exista una resolución.
             </p>
         </div>
