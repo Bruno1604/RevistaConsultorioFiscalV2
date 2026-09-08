@@ -46,13 +46,30 @@
             </h4>
 
             <div class="login-form" style="margin-top: 0;">
-                <div class="registro-apellidos">
+                <div class="registro-apellidos comprobante-fields">
+                    <div class="form-group">
+                        <label for="compFormaPago" class="form-label">
+                            Forma de pago <span style="color: #c0392b;">*</span>
+                        </label>
+                        <select
+                            id="compFormaPago"
+                            name="compFormaPago"
+                            class="form-control-custom"
+                            onchange="validarFormularioComprobante()"
+                            required
+                        >
+                            <option value="">Selecciona una opción</option>
+                            <option value="TRANSFERENCIA">Transferencia</option>
+                            <option value="DEPOSITO">Depósito</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="compFechaPago" class="form-label">
-                            Fecha del pago <span style="color: #c0392b;">*</span>
+                            Fecha y hora del pago <span style="color: #c0392b;">*</span>
                         </label>
                         <input
-                            type="date"
+                            type="datetime-local"
                             id="compFechaPago"
                             name="compFechaPago"
                             class="form-control-custom"
@@ -79,32 +96,17 @@
                     </div>
                 </div>
 
-                <div class="registro-apellidos" style="margin-top: 10px;">
+                <div class="registro-apellidos comprobante-fields comprobante-fields--reference" style="margin-top: 10px;">
                     <div class="form-group">
-                        <label for="compClaveRastreo" class="form-label">
-                            Clave de rastreo <span style="color: #c0392b;">*</span>
+                        <label for="compReferencia" class="form-label">
+                            Referencia <span style="color: #c0392b;">*</span>
                         </label>
                         <input
                             type="text"
-                            id="compClaveRastreo"
-                            name="compClaveRastreo"
+                            id="compReferencia"
+                            name="compReferencia"
                             class="form-control-custom"
-                            placeholder="Ej. 202608274001478291"
-                            oninput="validarFormularioComprobante()"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="compNumOperacion" class="form-label">
-                            Número de operación <span style="color: #c0392b;">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            id="compNumOperacion"
-                            name="compNumOperacion"
-                            class="form-control-custom"
-                            placeholder="Ej. 00849312"
+                            placeholder="Ingresa la referencia de tu comprobante"
                             oninput="validarFormularioComprobante()"
                             required
                         />
@@ -165,10 +167,10 @@
         <div class="detail-card" style="margin-top: 20px;">
             <div class="validation-row"><span class="validation-label">Comprobante enviado:</span> <span class="validation-value" id="dispCompFile">comprobante_pago_2026.pdf</span></div>
             <div class="validation-row"><span class="validation-label">Fecha de recepción:</span> <span class="validation-value"><?php echo date('d/m/Y H:i'); ?></span></div>
-            <div class="validation-row"><span class="validation-label">Fecha del pago:</span> <span class="validation-value" id="dispCompFechaPago">-</span></div>
+            <div class="validation-row"><span class="validation-label">Forma de pago:</span> <span class="validation-value" id="dispCompFormaPago">-</span></div>
+            <div class="validation-row"><span class="validation-label">Fecha y hora del pago:</span> <span class="validation-value" id="dispCompFechaPago">-</span></div>
             <div class="validation-row"><span class="validation-label">Importe capturado:</span> <span class="validation-value" id="dispCompImporteCapturado">-</span></div>
-            <div class="validation-row"><span class="validation-label">Clave de rastreo:</span> <span class="validation-value" id="dispCompClaveRastreo">-</span></div>
-            <div class="validation-row"><span class="validation-label">Número de operación:</span> <span class="validation-value" id="dispCompNumOperacion">-</span></div>
+            <div class="validation-row"><span class="validation-label">Referencia:</span> <span class="validation-value" id="dispCompReferencia">-</span></div>
             <div class="validation-row"><span class="validation-label">Estado de pago:</span> <span class="validation-value">Validación en proceso</span></div>
         </div>
         <div style="display: flex; justify-content: flex-start; margin-top: 20px;">

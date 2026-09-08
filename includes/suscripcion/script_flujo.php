@@ -29,11 +29,11 @@ let state = {
     compSubido: !!estadoInicial.comprobante_subido,
     compEstado: estadoInicial.comprobante_estado, // 'sin_enviar', 'en_revision', 'aprobado', 'rechazado'
     compFileName: estadoInicial.comprobante_nombre_archivo || 'comprobante_pago.pdf',
+    compFormaPago: estadoInicial.comprobante_forma_pago || '',
     compMotivoRechazo: estadoInicial.comprobante_motivo_rechazo || '',
     compFechaPago: estadoInicial.comprobante_fecha_pago || '',
     compImporte: estadoInicial.comprobante_importe ? `$${estadoInicial.comprobante_importe} MXN` : '',
-    compClaveRastreo: estadoInicial.comprobante_clave_rastreo || '',
-    compNumOperacion: estadoInicial.comprobante_num_operacion || ''
+    compReferencia: estadoInicial.comprobante_referencia || estadoInicial.comprobante_num_operacion || ''
 };
 
 let pollTimer = null;
@@ -78,11 +78,11 @@ function sincronizarEstadoDesdeServidor(e) {
     state.compSubido = !!e.comprobante_subido;
     state.compEstado = e.comprobante_estado;
     state.compFileName = e.comprobante_nombre_archivo || state.compFileName;
+    state.compFormaPago = e.comprobante_forma_pago || '';
     state.compMotivoRechazo = e.comprobante_motivo_rechazo || '';
     state.compFechaPago = e.comprobante_fecha_pago || '';
     state.compImporte = e.comprobante_importe ? `$${e.comprobante_importe} MXN` : '';
-    state.compClaveRastreo = e.comprobante_clave_rastreo || '';
-    state.compNumOperacion = e.comprobante_num_operacion || '';
+    state.compReferencia = e.comprobante_referencia || e.comprobante_num_operacion || '';
 
     aplicarSeleccionVisualTarifa(state.tarifa);
 }
@@ -577,6 +577,8 @@ function renderSubTimelineComprobante() {
 
     if (state.compEstado === 'sin_enviar') {
         stateSinEnviar.style.display = 'block';
+        const formaPago = document.getElementById('compFormaPago');
+        if (formaPago) formaPago.value = state.compFormaPago || '';
         if (pane5Badge) pane5Badge.innerHTML = '<span class="status-badge status-assigned">Pendiente de pago</span>';
     } else if (state.compEstado === 'en_revision') {
         valStep1.classList.add('done'); valNode1.innerHTML = '✓';
@@ -585,15 +587,15 @@ function renderSubTimelineComprobante() {
         if (pane5Badge) pane5Badge.innerHTML = '<span class="status-badge status-review">En Revisión</span>';
 
         const dispCompFile = document.getElementById('dispCompFile');
+        const dispFormaPago = document.getElementById('dispCompFormaPago');
         const dispFecha = document.getElementById('dispCompFechaPago');
         const dispImporte = document.getElementById('dispCompImporteCapturado');
-        const dispClave = document.getElementById('dispCompClaveRastreo');
-        const dispOp = document.getElementById('dispCompNumOperacion');
+        const dispReferencia = document.getElementById('dispCompReferencia');
         if (dispCompFile) dispCompFile.textContent = state.compFileName;
+        if (dispFormaPago) dispFormaPago.textContent = state.compFormaPago || '-';
         if (dispFecha) dispFecha.textContent = state.compFechaPago || '-';
         if (dispImporte) dispImporte.textContent = state.compImporte || '-';
-        if (dispClave) dispClave.textContent = state.compClaveRastreo || '-';
-        if (dispOp) dispOp.textContent = state.compNumOperacion || '-';
+        if (dispReferencia) dispReferencia.textContent = state.compReferencia || '-';
     } else if (state.compEstado === 'rechazado') {
         valStep1.classList.add('done'); valNode1.innerHTML = '✓';
         valStep2.classList.add('done'); valNode2.innerHTML = '✓';
@@ -614,14 +616,14 @@ function renderSubTimelineComprobante() {
 // Validación de campos del comprobante y archivo
 function validarFormularioComprobante() {
     const fileInput = document.getElementById('fileCompInput');
+    const formaPago = document.getElementById('compFormaPago')?.value.trim();
     const fecha = document.getElementById('compFechaPago')?.value.trim();
     const importe = document.getElementById('compImporte')?.value.trim();
-    const clave = document.getElementById('compClaveRastreo')?.value.trim();
-    const operacion = document.getElementById('compNumOperacion')?.value.trim();
+    const referencia = document.getElementById('compReferencia')?.value.trim();
     const btn = document.getElementById('btnEnviarComp');
 
     const tieneArchivo = (fileInput && fileInput.files && fileInput.files[0]) || state.compSubido;
-    const tieneCampos = !!(fecha && importe && clave && operacion);
+    const tieneCampos = !!(formaPago && fecha && importe && referencia);
 
     if (btn) btn.disabled = false;
 
@@ -656,12 +658,12 @@ function cancelarCompFile() {
 
 function enviarComprobante() {
     const fileInput = document.getElementById('fileCompInput');
+    const formaPago = document.getElementById('compFormaPago')?.value.trim();
     const fecha = document.getElementById('compFechaPago')?.value.trim();
     const importe = document.getElementById('compImporte')?.value.trim();
-    const clave = document.getElementById('compClaveRastreo')?.value.trim();
-    const operacion = document.getElementById('compNumOperacion')?.value.trim();
+    const referencia = document.getElementById('compReferencia')?.value.trim();
 
-    if (!fecha || !importe || !clave || !operacion) {
+    if (!formaPago || !fecha || !importe || !referencia) {
         mostrarAvisoComprobante('Hay uno o más campos vacíos. Ingresa todos los datos del Comprobante de Pago para continuar.');
         validarFormularioComprobante();
         return;
@@ -675,10 +677,10 @@ function enviarComprobante() {
 
     const fd = new FormData();
     fd.append('archivo', fileInput.files[0]);
+    fd.append('forma_pago', formaPago);
     fd.append('fecha_pago', fecha);
     fd.append('importe', importe);
-    fd.append('clave_rastreo', clave);
-    fd.append('num_operacion', operacion);
+    fd.append('referencia', referencia);
 
     const btn = document.getElementById('btnEnviarComp');
     if (btn) btn.disabled = true;

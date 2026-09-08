@@ -147,11 +147,12 @@ switch ($accion) {
         if (!$ruta) {
             proceso_error('Debes adjuntar tu comprobante en formato PDF.');
         }
+        $formaPago = $_POST['forma_pago'] ?? '';
         $fecha     = $_POST['fecha_pago'] ?? '';
         $importe   = $_POST['importe'] ?? '';
-        $clave     = trim($_POST['clave_rastreo'] ?? '');
-        $operacion = trim($_POST['num_operacion'] ?? '');
-        if ($fecha === '' || $importe === '' || $clave === '' || $operacion === '') {
+        $referencia = trim($_POST['referencia'] ?? '');
+        if (!in_array($formaPago, ['TRANSFERENCIA', 'DEPOSITO'], true)
+            || $fecha === '' || $importe === '' || $referencia === '') {
             proceso_error('Faltan datos del comprobante de pago.');
         }
         proceso_responder(proceso_actualizar($correo, [
@@ -159,10 +160,12 @@ switch ($accion) {
             'comprobante_nombre_archivo' => $nombreArchivo,
             'comprobante_ruta_archivo'   => $ruta,
             'comprobante_fecha_envio'    => date('d/m/Y H:i'),
+            'comprobante_forma_pago'     => $formaPago,
             'comprobante_fecha_pago'     => $fecha,
             'comprobante_importe'        => number_format((float) $importe, 2, '.', ''),
-            'comprobante_clave_rastreo'  => $clave,
-            'comprobante_num_operacion'  => $operacion,
+            'comprobante_referencia'     => $referencia,
+            'comprobante_clave_rastreo'  => null,
+            'comprobante_num_operacion'  => null,
             'comprobante_estado'         => 'en_revision',
             'comprobante_motivo_rechazo' => '',
         ], $nombre));

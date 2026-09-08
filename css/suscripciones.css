@@ -283,6 +283,11 @@
   transition: border-color 0.2s;
 }
 
+/* Add vertical spacing between form groups */
+.form-group {
+  margin-bottom: 20px;
+}
+
 .form-control-custom:focus {
   outline: none;
   border-color: var(--accent-navy);
@@ -1027,6 +1032,19 @@
   padding: 32px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   min-height: 520px;
+}
+
+.step-pane#stepPane5 .comprobante-fields {
+  column-gap: 28px;
+  row-gap: 18px;
+}
+
+.step-pane#stepPane5 .comprobante-fields:not(.comprobante-fields--reference) {
+  column-gap: 64px;
+}
+
+.step-pane#stepPane5 .comprobante-fields--reference {
+  margin-top: 24px !important;
 }
 
 .step-header {

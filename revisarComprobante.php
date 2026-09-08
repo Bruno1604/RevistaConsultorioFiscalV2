@@ -65,8 +65,9 @@ foreach ($solicitudesRaw as $correo => $sol) {
         'credencial_pdf'   => $sol['credencial_ruta_archivo'],
         'comprobante_pdf'  => $sol['comprobante_ruta_archivo'],
         'monto_pago'       => $sol['comprobante_importe'],
-        'referencia'       => $sol['comprobante_num_operacion'],
-        'clave_rastreo'    => $sol['comprobante_clave_rastreo'],
+        'referencia'       => $sol['comprobante_referencia'] ?? $sol['comprobante_num_operacion'],
+        'forma_pago'       => $sol['comprobante_forma_pago'] ?? null,
+        'fecha_pago'       => $sol['comprobante_fecha_pago'] ?? null,
         'estado'           => $sol['comprobante_estado'],
         'motivo'           => $sol['comprobante_motivo_rechazo'],
     ];
@@ -246,8 +247,9 @@ $estadoBadges = [
                                                     <h4 style="font-size: 0.9rem; margin: 0 0 8px 0; color: #1a2a3a;">Datos del comprobante de pago ingresados por el usuario</h4>
                                                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; font-size: 0.85rem; background: #fff; padding: 12px; border-radius: 6px; border: 1px solid #e8e0d8;">
                                                         <div><strong>Monto:</strong> $<?= number_format((float) ($sol['monto_pago'] ?? 0), 2) ?></div>
-                                                        <div><strong>Número de operación:</strong> <?= htmlspecialchars($sol['referencia'] ?? 'N/A') ?></div>
-                                                        <div style="grid-column: span 2;"><strong>Clave rastreo:</strong> <?= htmlspecialchars($sol['clave_rastreo'] ?? 'N/A') ?></div>
+                                                        <div><strong>Forma de pago:</strong> <?= htmlspecialchars($sol['forma_pago'] ?? 'N/A') ?></div>
+                                                        <div><strong>Fecha y hora:</strong> <?= htmlspecialchars($sol['fecha_pago'] ?? 'N/A') ?></div>
+                                                        <div style="grid-column: span 2;"><strong>Referencia:</strong> <?= htmlspecialchars($sol['referencia'] ?? 'N/A') ?></div>
                                                     </div>
                                                 </div>
 

@@ -45,8 +45,10 @@ function proceso_estado_default($correo, $nombre) {
         'comprobante_nombre_archivo' => null,
         'comprobante_ruta_archivo'   => null,
         'comprobante_fecha_envio'    => null,
+        'comprobante_forma_pago'     => null,
         'comprobante_fecha_pago'     => null,
         'comprobante_importe'        => null,
+        'comprobante_referencia'     => null,
         'comprobante_clave_rastreo'  => null,
         'comprobante_num_operacion'  => null,
         'comprobante_estado'         => 'sin_enviar', // sin_enviar | en_revision | aprobado | rechazado
