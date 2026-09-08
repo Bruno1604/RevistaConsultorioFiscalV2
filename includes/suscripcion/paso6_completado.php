@@ -3,7 +3,7 @@
      ══════════════════════════════════════════════ -->
 <div class="step-pane" id="stepPane6" style="display: none;">
     <!-- Card de Éxito / Celebración -->
-    <div style="background: linear-gradient(135deg, rgba(40,167,69,0.08) 0%, rgba(184,150,85,0.08) 100%); border: 2px solid #28a745; border-radius: 8px; padding: 28px 24px; text-align: left; margin-bottom: 25px;">
+    <div style="background: linear-gradient(135deg, rgba(40,167,69,0.08) 0%, rgba(184,150,85,0.08) 100%); border: 2px solid #28a745; border-radius: 8px; padding: 28px 24px; text-align: center; margin-bottom: 25px;">
         <h3 style="font-family: var(--serif); color: var(--navy); font-size: 2rem; margin-bottom: 8px;">
             Te damos la bienvenida a la Revista Consultorio Fiscal
         </h3>

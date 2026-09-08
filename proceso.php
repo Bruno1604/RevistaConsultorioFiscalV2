@@ -52,6 +52,9 @@ include 'template/header.php';
                 <!-- Paso 2: Elegir tipo de suscripción (Selección de tarifa) -->
                 <?php include 'includes/suscripcion/paso2_tarifa.php'; ?>
 
+                <!-- Paso 2.5: Selección de Categoría Comunidad FCA -->
+                <?php include 'includes/suscripcion/paso2_5_modalidad_fca.php'; ?>
+
                 <!-- Paso 3: Documentación / Credencial UNAM -->
                 <?php include 'includes/suscripcion/paso3_credencial.php'; ?>
 

@@ -100,8 +100,8 @@ switch ($accion) {
 
     case 'seleccionar_modalidad_fca':
         $modalidad = $_POST['modalidad_fca'] ?? '';
-        if (!in_array($modalidad, ['SUAYED', 'ESCOLARIZADO', 'POSGRADO'], true)) {
-            proceso_error('Modalidad inválida.');
+        if (!in_array($modalidad, ['SUAYED', 'ESCOLARIZADO', 'POSGRADO', 'DOCENTE'], true)) {
+            proceso_error('Modalidad o categoría inválida.');
         }
         proceso_responder(proceso_actualizar($correo, [
             'modalidad_fca' => $modalidad,

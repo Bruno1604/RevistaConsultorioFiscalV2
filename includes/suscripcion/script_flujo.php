@@ -153,14 +153,57 @@ function seleccionarTarifa(tipo) {
     llamarProceso('seleccionar_tarifa', { tarifa: tipo });
 }
 
-function seleccionarModalidadFCA(valor) {
+function seleccionarCardModalidadFCA(valor) {
     state.modalidadFCA = valor;
+    ['ESCOLARIZADO', 'SUAYED', 'POSGRADO', 'DOCENTE'].forEach(m => {
+        const card = document.getElementById(`fcaCard${m}`);
+        if (card) {
+            if (m === valor) card.classList.add('selected');
+            else card.classList.remove('selected');
+        }
+    });
+    const btn = document.getElementById('btnContinuarFCA');
+    if (btn) btn.disabled = false;
+
     llamarProceso('seleccionar_modalidad_fca', { modalidad_fca: valor });
 }
 
+function irAPasoFCA() {
+    ocultarPanelesDePaso();
+    const paneFCA = document.getElementById('stepPaneFCA');
+    if (paneFCA) paneFCA.style.display = 'block';
+
+    if (state.modalidadFCA) {
+        seleccionarCardModalidadFCA(state.modalidadFCA);
+    } else {
+        ['ESCOLARIZADO', 'SUAYED', 'POSGRADO', 'DOCENTE'].forEach(m => {
+            const card = document.getElementById(`fcaCard${m}`);
+            if (card) card.classList.remove('selected');
+        });
+        const btn = document.getElementById('btnContinuarFCA');
+        if (btn) btn.disabled = true;
+    }
+}
+
+function regresarAPaso2DesdeFCA() {
+    ocultarPanelesDePaso();
+    const pane2 = document.getElementById('stepPane2');
+    if (pane2) pane2.style.display = 'block';
+}
+
+function confirmarModalidadFCAYContinuar() {
+    if (!state.modalidadFCA) {
+        alert('Selecciona una categoría antes de continuar.');
+        return;
+    }
+    llamarProceso('confirmar_tarifa', {}).then(resp => {
+        if (resp) irAPaso(3);
+    });
+}
+
 function confirmarPasoTarifa() {
-    if (state.tarifa === 'FCA' && !state.modalidadFCA) {
-        alert('Selecciona tu modalidad (SUAyED, Escolarizado o Posgrado) antes de continuar.');
+    if (state.tarifa === 'FCA') {
+        irAPasoFCA();
         return;
     }
 
@@ -170,7 +213,7 @@ function confirmarPasoTarifa() {
             // Al seleccionar Público General, se omite el Paso 3 (Credencial) y se salta al Paso 4
             irAPaso(4);
         } else {
-            // UNAM y FCA pasan por el Paso 3 de validación (credencial UNAM o de alumno FCA)
+            // UNAM pasa por el Paso 3 de validación de credencial
             irAPaso(3);
         }
     });
@@ -258,13 +301,20 @@ function esPasoPermitido(paso) {
 }
 
 // Renderizado reactivo de la UI
+function ocultarPanelesDePaso() {
+    document.querySelectorAll('.step-pane').forEach(pane => {
+        pane.style.display = 'none';
+    });
+}
+
 function renderUI() {
     const paso = state.pasoActual;
 
-    // 1. Mostrar/ocultar paneles (del 1 al 6)
+    // 1. Mostrar un solo panel, incluido el panel intermedio de FCA
+    ocultarPanelesDePaso();
     for (let i = 1; i <= 6; i++) {
         const pane = document.getElementById(`stepPane${i}`);
-        if (pane) pane.style.display = (i === paso) ? 'block' : 'none';
+        if (i === paso && pane) pane.style.display = 'block';
     }
 
     // 2. Control de estado en Paso 4 (Ficha Generada vs No Generada)
@@ -306,9 +356,14 @@ function renderUI() {
             if (tit) tit.textContent = 'Cargar Credencial UNAM';
         } else if (i === 3 && state.tarifa === 'FCA') {
             const sub = document.getElementById('stepSub3');
-            if (sub) sub.textContent = 'Validar alumno FCA';
             const tit = document.getElementById('stepTitle3');
-            if (tit) tit.textContent = 'Cargar Credencial de Alumno FCA';
+            if (state.modalidadFCA === 'DOCENTE') {
+                if (sub) sub.textContent = 'Validar docente FCA';
+                if (tit) tit.textContent = 'Cargar Credencial / Talón Docente FCA';
+            } else {
+                if (sub) sub.textContent = 'Validar alumno FCA';
+                if (tit) tit.textContent = 'Cargar Credencial de Alumno FCA';
+            }
         }
 
         const estaPermitido = esPasoPermitido(i);
@@ -353,15 +408,15 @@ function renderUI() {
                if (modalFichaTarifa) modalFichaTarifa.textContent = 'Ficha de Pago de Público General';
         if (modalFichaMonto) modalFichaMonto.textContent = '$600.00 MXN';
     } else if (state.tarifa === 'FCA') {
-        const modalidadTexto = { SUAYED: 'SUAyED', ESCOLARIZADO: 'Escolarizado', POSGRADO: 'Posgrado' }[state.modalidadFCA] || '';
-        if (tarifaNombre) tarifaNombre.textContent = 'Alumnos FCA';
-        if (tarifaDesc) tarifaDesc.textContent = 'Gratuita por validación de alumno activo de la FCA' + (modalidadTexto ? ` (${modalidadTexto})` : '');
+        const modalidadTexto = { SUAYED: 'Alumno SUAyED', ESCOLARIZADO: 'Alumno escolarizado', POSGRADO: 'Alumno Posgrado', DOCENTE: 'Docente FCA' }[state.modalidadFCA] || '';
+        if (tarifaNombre) tarifaNombre.textContent = 'Comunidad FCA';
+        if (tarifaDesc) tarifaDesc.textContent = 'Gratuita por validación de acreditación FCA' + (modalidadTexto ? ` (${modalidadTexto})` : '');
         if (montoTotal) montoTotal.innerHTML = '$0.00 <span style="font-size: 0.9rem; font-family: var(--sans); color: var(--text-soft); font-weight: normal;">MXN</span>';
         if (dispImporteFicha) dispImporteFicha.textContent = '$0.00 MXN';
-        if (dispConceptoFicha) dispConceptoFicha.textContent = 'Suscripción Anual Revista Consultorio Fiscal - Alumnos FCA';
+        if (dispConceptoFicha) dispConceptoFicha.textContent = 'Suscripción Anual Revista Consultorio Fiscal - Comunidad FCA' + (modalidadTexto ? ` (${modalidadTexto})` : '');
         if (dispMontoComprobar) dispMontoComprobar.textContent = '$0.00 MXN';
-        if (pane6ModalidadText) pane6ModalidadText.textContent = 'Alumnos FCA' + (modalidadTexto ? ` - ${modalidadTexto}` : '') + ' ($0.00 MXN)';
-        if (modalFichaTarifa) modalFichaTarifa.textContent = 'Ficha de Pago de Alumnos FCA';
+        if (pane6ModalidadText) pane6ModalidadText.textContent = 'Comunidad FCA' + (modalidadTexto ? ` - ${modalidadTexto}` : '') + ' ($0.00 MXN)';
+        if (modalFichaTarifa) modalFichaTarifa.textContent = 'Ficha de Pago de Comunidad FCA';
         if (modalFichaMonto) modalFichaMonto.textContent = '$0.00 MXN';
     } else {
         if (tarifaNombre) tarifaNombre.textContent = 'Comunidad UNAM';
@@ -403,10 +458,15 @@ function renderSubTimelineCredencial() {
 
     if (!valStep1) return;
 
-    // Textos dinámicos: "Credencial UNAM" vs "Credencial de Alumno FCA"
+    // Textos dinámicos: "Credencial UNAM" vs "Credencial de Alumno FCA" / "Credencial o Talón Docente FCA"
     const esFCA = state.tarifa === 'FCA';
-    const nombreCred = esFCA ? 'Credencial de Alumno FCA' : 'Credencial UNAM';
-    const perteneceA = esFCA ? 'tu calidad de alumno activo de la FCA' : 'tu pertenencia a la Comunidad UNAM';
+    const esDocente = esFCA && state.modalidadFCA === 'DOCENTE';
+    const nombreCred = esFCA
+        ? (esDocente ? 'Credencial / Talón de Pago de Docente FCA' : 'Credencial de Alumno FCA')
+        : 'Credencial UNAM';
+    const perteneceA = esFCA
+        ? (esDocente ? 'tu adscripción docente a la FCA' : 'tu calidad de alumno activo de la FCA')
+        : 'tu pertenencia a la Comunidad UNAM';
     const setText = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
     setText('credTituloPrincipal', 'Cargar ' + nombreCred);
     setText('credAvisoTexto', `Tu ${nombreCred.toLowerCase()} será revisada y validada. El proceso de suscripción continuará una vez haya sido aprobada.`);

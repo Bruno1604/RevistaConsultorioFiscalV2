@@ -12,7 +12,7 @@
     <!-- AVISO PREVIO OBLIGATORIO A LA CARGA DE CREDENCIAL -->
     <div class="notification-banner alert-warning" id="credencialAvisoInicial" style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 25px;">
         <div>
-            <strong style="display: block; margin-bottom: 4px; font-size: 0.95rem; color: #075985;">
+            <strong style="display: block; margin-bottom: 4px; font-size: 0.95rem; color: var(--gold);">
                 ¡Importante!
             </strong>
                 <span id="credAvisoTexto">Tu credencial UNAM será revisada y validada. El proceso de suscripción continuará una vez haya sido aprobada.</span>

@@ -48,30 +48,33 @@
         </div>
 
         <div class="detail-card">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                <div class="validation-box">
-                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase;">Fecha de creación</span>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 20px;" class="ficha-info-grid">
+                <!-- Fila 1: Datos de pago principales -->
+                <div class="validation-box" style="padding: 16px; background: rgba(184, 150, 85, 0.08); border: 1px solid rgba(184, 150, 85, 0.3);">
+                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; margin-bottom: 4px;">Importe a pagar</span>
+                    <strong style="font-size: 1.3rem; font-family: var(--serif); color: var(--gold); font-weight: bold;" id="dispImporteFicha">$600.00 MXN</strong>
+                </div>
+                <div class="validation-box" style="padding: 16px;">
+                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px;">Número de convenio</span>
+                    <strong style="font-size: 1.05rem; color: var(--navy);" id="dispNumConvenioFicha">-</strong>
+                </div>
+                <div class="validation-box" style="padding: 16px;">
+                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px;">Referencia bancaria</span>
+                    <strong style="font-size: 1.05rem; color: var(--navy);" id="dispReferenciaFicha">-</strong>
+                </div>
+
+                <!-- Fila 2: Fechas y concepto -->
+                <div class="validation-box" style="padding: 16px;">
+                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px;">Fecha de creación</span>
                     <strong style="font-size: 0.95rem; color: var(--navy);" id="dispFechaCreacionFicha">-</strong>
                 </div>
-                <div class="validation-box">
-                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase;">Fecha de vencimiento</span>
+                <div class="validation-box" style="padding: 16px;">
+                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px;">Fecha de vencimiento</span>
                     <strong style="font-size: 0.95rem; color: #c0392b;" id="dispFechaVencimientoFicha"><?php echo date('d/m/Y', strtotime('+30 days')); ?></strong>
                 </div>
-                <div class="validation-box">
-                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase;">Número de convenio</span>
-                    <strong style="font-size: 0.95rem; color: var(--navy);" id="dispNumConvenioFicha">-</strong>
-                </div>
-                <div class="validation-box">
-                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase;">Referencia</span>
-                    <strong style="font-size: 0.95rem; color: var(--navy);" id="dispReferenciaFicha">-</strong>
-                </div>
-                <div class="validation-box">
-                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase;">Importe</span>
-                    <strong style="font-size: 1.1rem; color: var(--gold);" id="dispImporteFicha">$600.00 MXN</strong>
-                </div>
-                <div class="validation-box">
-                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase;">Concepto</span>
-                    <strong style="font-size: 0.9rem; color: var(--navy);" id="dispConceptoFicha">Suscripción Revista Consultorio Fiscal</strong>
+                <div class="validation-box" style="padding: 16px;">
+                    <span class="validation-label" style="display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px;">Concepto oficial</span>
+                    <strong style="font-size: 0.88rem; color: var(--navy); line-height: 1.3; display: block;" id="dispConceptoFicha">Suscripción Revista Consultorio Fiscal</strong>
                 </div>
             </div>
 
