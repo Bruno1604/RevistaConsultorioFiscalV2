@@ -5,6 +5,15 @@
   include 'template/header.php'; 
 ?>
 
+<style>
+  .hero-static {
+    padding: 60px 0;
+  }
+  .hero-static__title {
+    margin-bottom: 22px;
+  }
+</style>
+
 <!-- Hero interno -->
 <section class="hero-static">
   <div class="cs">
@@ -12,20 +21,12 @@
       <div class="hero-static__content reveal reveal--left in">
         <span class="c-ph__tag">Hemeroteca</span>
         <h1 class="hero-static__title">Histórico de revistas</h1>
-        <div class="gold-line gold-l"></div>
+        <!-- <div class="gold-line gold-l"></div> -->
         <p class="hero-static__excerpt reveal reveal--left">
           Consulta los ejemplares publicados por el Consultorio Fiscal. Encuentra análisis,
           doctrina y jurisprudencia actualizada.
         </p>
       </div>
-      <div class="hero-static__visual reveal reveal--right in">
-        <div class="hero-static__img-box">
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-            <path d="M4 4h16v16H4zM8 8h8M8 12h6M8 16h4" />
-          </svg>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 

@@ -5,6 +5,15 @@
   include 'template/header.php'; 
 ?>
 
+<style>
+  .hero-static {
+    padding: 60px 0;
+  }
+  .hero-static__title {
+    margin-bottom: 22px;
+  }
+</style>
+
 <!-- Hero interno -->
 <section class="hero-static">
   <div class="cs">
@@ -12,22 +21,10 @@
       <div class="hero-static__content reveal reveal--left in">
         <span class="c-ph__tag">Hemeroteca</span>
         <h1 class="hero-static__title">Buscador de artículos</h1>
-        <div class="gold-line gold-l"></div>
         <p class="hero-static__excerpt reveal reveal--left">
           Encuentra artículos publicados en el Consultorio Fiscal. Busca por título,
           palabras clave o filtra por año de publicación.
         </p>
-      </div>
-      <div class="hero-static__visual reveal reveal--right in">
-        <div class="hero-static__img-box">
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-            <polyline points="14 2 14 8 20 8" />
-            <line x1="16" y1="13" x2="8" y2="13" />
-            <line x1="16" y1="17" x2="8" y2="17" />
-            <polyline points="10 9 9 9 8 9" />
-          </svg>
-        </div>
       </div>
     </div>
   </div>
@@ -146,6 +143,17 @@
     color: var(--ink-3);
   }
 
+  .articulo-card__section {
+    margin-left: auto;
+    font-family: var(--sans);
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: right;
+  }
+
   .articulo-card__title {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.25rem;
@@ -248,7 +256,7 @@
 </style>
 
 <script>
-  // ===== DATOS ESTÁTICOS DE ARTÍCULOS =====
+  // ===== DATOS DE ARTÍCULOS =====
   const articulos = [
     {
       id: 1,
@@ -470,11 +478,11 @@
       descripcion: 'Todo sobre el RESICO para personas físicas: requisitos, obligaciones, tasas aplicables y puntos de atención.',
       palabrasClave: ['RESICO', 'régimen simplificado', 'personas físicas', 'tasas', 'obligaciones']
     }
-  ];
+  ].slice(0, 7);
 
   // Variables de paginación
   let paginaActual = 1;
-  const articulosPorPagina = 8;
+  const articulosPorPagina = 5;
   let articulosFiltrados = [...articulos];
 
   // Elementos DOM
@@ -512,8 +520,9 @@
         <div class="articulo-card__accent"></div>
         <div class="articulo-card__body">
           <div class="articulo-card__meta">
-            <span class="articulo-card__tag">${escapeHtml(art.seccion)}</span>
+            <span class="articulo-card__tag">${escapeHtml(art.ejemplar || 'Revista Consultorio Fiscal')}</span>
             <span class="articulo-card__num">· Ejemplar No. ${escapeHtml(art.numero)}</span>
+            ${art.seccion ? `<span class="articulo-card__section">${escapeHtml(art.seccion)}</span>` : ''}
           </div>
           <h3 class="articulo-card__title">${escapeHtml(art.titulo)}</h3>
           <p class="articulo-card__autor">Por <strong>${escapeHtml(art.autor)}</strong> · ${escapeHtml(art.fecha)}</p>

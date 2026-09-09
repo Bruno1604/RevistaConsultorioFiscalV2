@@ -110,8 +110,8 @@ include 'template/header.php';
                 <!-- Columna izquierda: Información y contenido -->
                 <div class="col-lg-8 pe-lg-5 editorial-col-main">
                     <article class="article-summary">
-                        <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--navy); font-weight: 700; font-size: 1.6rem; margin-bottom: 16px;">Descripción</h4>
-                        <p style="font-size: 1.05rem; line-height: 1.7; color: #333;"><?php echo htmlspecialchars($articulo['descripcion']); ?></p>
+                        <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--navy); font-weight: 700; font-size: 1.35rem; margin-bottom: 14px;">Descripción</h4>
+                        <p style="font-size: 1rem; line-height: 1.65; color: #333;"><?php echo htmlspecialchars($articulo['descripcion']); ?></p>
                     </article>
                 </div>
 
@@ -148,11 +148,13 @@ include 'template/header.php';
                             </button>
                         </div>
 
+                        <?php if ($puede_favoritos): ?>
                         <div class="action-buttons-footer">
                             <a href="favoritos.php" class="btn-ghost">
                                 <span>Mis favoritos</span>
                             </a>
                         </div>
+                        <?php endif; ?>
                     </aside>
                 </div>
             </div>
