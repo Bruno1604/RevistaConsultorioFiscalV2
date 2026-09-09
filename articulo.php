@@ -343,7 +343,7 @@ include 'template/header.php';
 }
 
 .related-card-original-style .article-card-mini__meta {
-    font-size: 0.85rem;
+    font-size: 0.72rem;
     color: #777;
 }
 
