@@ -27,7 +27,7 @@ if (isset($_SESSION['usuario_id'])) {
     } elseif ($_SESSION['rol'] === 'usuario') {
         header("Location: proceso.php");
     } else {
-        header("Location: buscar.php");
+        header("Location: buscarRevista.php");
     }
     exit();
 }
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($_SESSION['rol'] === 'usuario') {
             header("Location: proceso.php");
         } else {
-            header("Location: buscar.php");
+            header("Location: buscarRevista.php");
         }
         exit();
     } else {

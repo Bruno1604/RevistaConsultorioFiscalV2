@@ -86,7 +86,7 @@ include 'template/header.php';
           <i class="fa-regular fa-star"></i>
           <h4>Aún no tienes revistas en favoritos</h4>
           <p>Cuando encuentres una edición que te interese, guárdala desde su vista previa para volver a ella fácilmente.</p>
-          <a href="buscar.php" class="btn-ghost" style="border-color: var(--navy);"><span>Explorar el histórico →</span></a>
+          <a href="buscarRevista.php" class="btn-ghost" style="border-color: var(--navy);"><span>Explorar el histórico →</span></a>
         </div>
       <?php else: ?>
         <div class="row g-4">
@@ -171,7 +171,7 @@ include 'template/header.php';
           <i class="fa-regular fa-star"></i>
           <h4>Aún no tienes páginas en favoritos</h4>
           <p>Desde una edición puedes guardar el número de página exacto al que quieras volver dentro del libro en línea.</p>
-          <a href="buscar.php" class="btn-ghost" style="border-color: var(--navy);"><span>Explorar el histórico →</span></a>
+          <a href="buscarRevista.php" class="btn-ghost" style="border-color: var(--navy);"><span>Explorar el histórico →</span></a>
         </div>
       <?php else: ?>
         <div class="fav-rows">

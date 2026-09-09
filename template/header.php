@@ -71,7 +71,11 @@ function nav_a($id, $current, $label, $url, $external = false) {
         <li>
           <a href="#" class="<?php echo ($page == 'historico') ? 'active' : ''; ?>">Histórico <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
           <div class="cfnav__drop">
-            <a href="buscar.php">Buscador de revistas</a>
+            <div class="cfnav__drop-group">
+              <span class="cfnav__drop-label">Buscador</span>
+              <a href="buscarRevista.php">Buscar Revista</a>
+              <a href="buscarArticulo.php">Buscar Artículo</a>
+            </div>
             <a href="secciones.php">Secciones</a>
             <a href="tendencias.php">Artículos más leídos</a>
           </div>
@@ -126,7 +130,10 @@ function nav_a($id, $current, $label, $url, $external = false) {
   <a href="cuadrosPermanentes.php">Indicadores y cuadros</a>
 
   <span class="mobile-label">Histórico</span>
-  <a href="buscar.php">Buscador de revistas</a>
+  <span class="mobile-label" style="font-size:.52rem; padding-top:10px; color: var(--ink-3);">— Buscador</span>
+  <a href="buscarRevista.php">Buscar Revista</a>
+  <a href="buscarArticulo.php">Buscar Artículo</a>
+  <a href="secciones.php">Secciones</a>
   <a href="tendencias.php">Artículos más leídos</a>
 
   <?php if ($is_admin): ?>

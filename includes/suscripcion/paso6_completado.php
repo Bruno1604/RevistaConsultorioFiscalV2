@@ -55,7 +55,7 @@
         <hr style="margin: 20px 0; border-color: rgba(184,150,85,0.15);">
 
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="buscar.php" class="btn-navy-fill" style="padding: 12px 26px;">
+            <a href="buscarRevista.php" class="btn-navy-fill" style="padding: 12px 26px;">
                 <i class="fa fa-search me-2"></i> Ir al Buscador de Revistas
             </a>
         </div>

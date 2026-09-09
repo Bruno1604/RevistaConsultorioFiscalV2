@@ -153,6 +153,11 @@ img{max-width:100%;display:block}
   color:var(--navy);transition:all .22s}
 .cfnav__drop a:hover{background:var(--paper-2);color:var(--gold);padding-left:22px}
 
+/* Submenú — grupo agrupado (Buscador) */
+.cfnav__drop-group{padding:0 0 6px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.cfnav__drop-label{display:block;padding:8px 16px 4px;font-family:var(--sans);font-size:.58rem;
+  font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);pointer-events:none}
+
 .cfnav__burger{display:none;flex-direction:column;gap:5px;background:none;border:none;
   cursor:pointer;padding:10px;margin:0}
 .cfnav__burger span{display:block;width:24px;height:1.5px;background:#fff;transition:all .3s var(--e)}
