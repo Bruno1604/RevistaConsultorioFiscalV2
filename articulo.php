@@ -87,16 +87,14 @@ include 'template/header.php';
 ?>
 
 <main class="article-preview">
-    <header class="article-header" style="background: var(--navy); padding: 80px 0 50px 0;">
+    <header class="article-header" style="background: var(--navy); padding: 48px 0 38px 0;">
         <div class="cs">
             <div class="row">
                 <div class="col-lg-12 text-start">
-                    <h1 style="color: white; font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin: 0 0 20px 0; line-height: 1.2;">
+                    <h1 style="color: white; font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin: 0 0 14px 0; line-height: 1.2;">
                         <?php echo htmlspecialchars($articulo['titulo']); ?>
                     </h1>
-                    <div class="gold-line" style="width: 50px; height: 2px; background: var(--gold); margin-bottom: 25px; margin-left: 0; margin-right: auto;"></div>
-
-                    <div class="article-meta" style="color: white; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.95rem;">
+                    <div class="article-meta" style="color: white; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.95rem; margin-top: 0;">
                         <span>Por <strong><?php echo htmlspecialchars($articulo['autor']); ?></strong></span>
                         <span style="margin: 0 10px; opacity:.5;">&middot;</span>
                         <span><?php echo htmlspecialchars($articulo['seccion']); ?></span>
@@ -106,9 +104,9 @@ include 'template/header.php';
         </div>
     </header>
 
-    <section class="article-body-section" style="padding: 60px 0 50px; background: #fff;">
+    <section class="article-body-section" style="padding: 34px 0 42px; background: #fff;">
         <div class="cs">
-            <div class="row g-5">
+            <div class="row g-4">
                 <!-- Columna izquierda: Información y contenido -->
                 <div class="col-lg-8 pe-lg-5 editorial-col-main">
                     <article class="article-summary">
@@ -120,7 +118,7 @@ include 'template/header.php';
                 <!-- Columna derecha: Panel de Acciones -->
                 <div class="col-lg-4 ps-lg-4 editorial-col-side">
                     <aside class="article-actions-panel d-flex flex-column h-100 justify-content-between">
-                        <div class="action-buttons-primary d-flex flex-column gap-3">
+                        <div class="action-buttons-primary d-flex flex-column">
                             <?php if ($puede_favoritos): ?>
                             <button type="button"
                                     class="fav-btn<?php echo $es_fav ? ' is-activo' : ''; ?>"
@@ -138,11 +136,11 @@ include 'template/header.php';
                             <?php endif; ?>
 
                             <a href="contenido.php" class="btn-ghost btn-navy-filled">
-                                <span>Ver Artículo →</span>
+                                <span>Ver artículo</span>
                             </a>
 
                             <a href="contenido.php" class="btn-ghost" style="border-color: var(--navy);">
-                                <span>Ver Revista Completa →</span>
+                                <span>Revista completa</span>
                             </a>
 
                             <button type="button" id="btnDescargar" class="btn-ghost" style="border-color: var(--navy);">
@@ -150,9 +148,9 @@ include 'template/header.php';
                             </button>
                         </div>
 
-                        <div class="action-buttons-footer" style="margin-top: 20px; padding-top: 14px; border-top: 1px solid #f0f0f0;">
+                        <div class="action-buttons-footer">
                             <a href="favoritos.php" class="btn-ghost">
-                                <span>← Mis Favoritos</span>
+                                <span>Mis favoritos</span>
                             </a>
                         </div>
                     </aside>
@@ -162,10 +160,12 @@ include 'template/header.php';
     </section>
 
     <?php if (!empty($relacionados)): ?>
-    <section class="related-section" style="padding: 40px 0 70px; background: #fff; border-top: 1px solid #eee;">
+    <section class="related-section" style="padding: 20px 0 50px; background: #fff; border-top: 1px solid #eee;">
         <div class="cs">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h4 class="related-title" style="font-family: 'Cormorant Garamond', serif; color: var(--navy); font-weight: 700; font-size: 1.5rem; margin: 0;">Artículos relacionados</h4>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div>
+                    <h4 class="related-title" style="font-family: 'Cormorant Garamond', serif; color: var(--navy); font-weight: 700; font-size: 1.5rem; margin: 0;">Artículos relacionados</h4>
+                </div>
                 <div class="related-nav-controls d-flex gap-2">
                     <button type="button" id="relPrevBtn" class="rel-arrow-btn" aria-label="Anterior">
                         <i class="fa fa-chevron-left"></i>
@@ -199,6 +199,18 @@ include 'template/header.php';
 /* Estilos para el panel de acciones lateral */
 .article-actions-panel {
     min-height: 100%;
+    padding-top: 0;
+    gap: 0.5rem;
+}
+
+.article-actions-panel .action-buttons-primary {
+    gap: 0.5rem !important;
+}
+
+.article-actions-panel .action-buttons-footer {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
 }
 
 .article-actions-panel .fav-btn,
@@ -209,6 +221,16 @@ include 'template/header.php';
     justify-content: center;
     text-align: center;
     box-sizing: border-box;
+    padding: 8px 10px;
+    min-height: 34px;
+    border-radius: 6px;
+    line-height: 1.15;
+    font-size: 0.68rem;
+}
+
+.article-actions-panel .fav-btn i {
+    font-size: 0.75rem;
+    margin-right: 5px;
 }
 
 .btn-navy-filled {
@@ -225,7 +247,7 @@ include 'template/header.php';
 
 .btn-ghost {
     display: inline-block;
-    padding: 12px 25px;
+    padding: 8px 10px;
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -239,8 +261,8 @@ include 'template/header.php';
 .btn-ghost span {
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.7rem;
-    letter-spacing: 1px;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
 }
 
 @media (min-width: 992px) {
