@@ -88,6 +88,18 @@ include 'template/header.php';
       </div>
     </div>
 
+    <!-- Por tipo de persona -->
+    <div class="detail-card" style="margin-bottom: 25px; padding: 20px;">
+      <h3 style="font-size: 1rem; margin-bottom: 12px;">Descargas por tipo de persona <em style="font-weight: normal; font-size: 0.75rem; color: var(--text-soft);">(dato de ejemplo)</em></h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <?php foreach (get_ejemplo_por_tipo_usuario()['descargas'] as $tipo => $cantidad): ?>
+          <span style="background: rgba(0,0,0,0.04); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;">
+            <?php echo htmlspecialchars($tipo); ?>: <strong><?php echo number_format($cantidad); ?></strong>
+          </span>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
     <!-- Filtros -->
     <form method="get" class="detail-card" style="padding: 20px; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
       <div>
@@ -191,6 +203,46 @@ include 'template/header.php';
                   <td><?php echo htmlspecialchars($a['anio']); ?></td>
                   <td><?php echo nombre_mes($a['mes']); ?></td>
                   <td><strong><?php echo number_format($a['descargas']); ?></strong></td>
+                </tr>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Todas las revistas del catálogo (no solo las más descargadas) -->
+    <div class="detail-card" style="margin-top: 25px;">
+      <div style="padding: 18px 18px 0;">
+        <h3 style="font-size: 1rem;">Todas las revistas del catálogo</h3>
+        <p style="font-size: 0.8rem; color: var(--text-soft); margin-top: 4px;">Listado completo, sin importar cuántas descargas tengan.</p>
+      </div>
+      <?php
+        $todasLasRevistas = get_revistas_ejemplo_stats();
+        usort($todasLasRevistas, fn($a, $b) => (int) $a['numero'] <=> (int) $b['numero']);
+      ?>
+      <div class="admin-table-container" style="overflow-x: auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Ejemplar</th>
+              <th>Título</th>
+              <th>Año</th>
+              <th>Mes</th>
+              <th>Descargas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (empty($todasLasRevistas)): ?>
+              <tr><td colspan="5" style="text-align:center; padding:30px; color: var(--text-soft);">No hay revistas registradas en el catálogo.</td></tr>
+            <?php else: ?>
+              <?php foreach ($todasLasRevistas as $r): ?>
+                <tr>
+                  <td>No. <?php echo htmlspecialchars($r['numero']); ?></td>
+                  <td><?php echo htmlspecialchars($r['titulo']); ?></td>
+                  <td><?php echo htmlspecialchars($r['anio']); ?></td>
+                  <td><?php echo nombre_mes($r['mes']); ?></td>
+                  <td><?php echo number_format($r['descargas']); ?></td>
                 </tr>
               <?php endforeach; ?>
             <?php endif; ?>

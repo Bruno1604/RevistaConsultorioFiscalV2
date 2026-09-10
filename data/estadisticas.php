@@ -1,18 +1,24 @@
 <?php
 require_once __DIR__ . '/solicitudes.php';
-
+require_once __DIR__ . '/../includes/proceso_store.php';
 /*
-Para Visualizaciones y Descargas usamos datos de ejemplo, con los títulos y números de
-revista reales del catálogo (los mismos de admin_revistas.php),
-
-Suscripciones viene de data/solicitudes.php.
-
-Cuando se decida instrumentar vistas/descargas,
-solo hay que reemplazar get_revistas_ejemplo_stats() y
-get_articulos_ejemplo_stats() por funciones que lean de un
-contador real sin tener que tocar las pantallas que ya están armadas.
-*/
-
+ NOTA IMPORTANTE
+ ══════════════════════════════════════════════════════════════
+ El sistema todavía no cuenta vistas ni descargas de verdad
+ no hay ningún código en articulo.php / contenido.php que registre
+ cuando alguien ve o descarga algo. Por eso, para Visualizaciones y
+ Descargas usamos datos de ejemplo, con los títulos y números de
+ revista reales del catálogo (los mismos de admin_revistas.php),
+ pero con cifras de vistas/descargas inventadas.
+ 
+ Suscripciones SÍ es real: viene de data/solicitudes.php.
+ 
+ Cuando se decida instrumentar vistas/descargas de verdad,
+ solo hay que reemplazar get_revistas_ejemplo_stats() y
+ get_articulos_ejemplo_stats() por funciones que lean de un
+ contador real (por ejemplo, un data/vistas.php nuevo), sin tener
+ que tocar las pantallas que ya están armadas.
+  */
 function get_revistas_ejemplo_stats() {
     return [
         ['numero' => '878', 'titulo' => 'Deducciones personales en la declaración anual', 'anio' => '2026', 'mes' => 3, 'vistas' => 512, 'descargas' => 214],
@@ -40,7 +46,7 @@ function get_articulos_ejemplo_stats() {
 }
 
 /* 
-De data/solicitudes.php 
+Suscripciones: EStadisticas reales, basadas en data/solicitudes.php.
 */
 function get_stats_suscripciones() {
     $todas = get_solicitudes();
@@ -75,6 +81,77 @@ function get_stats_suscripciones() {
     }
 
     return $stats;
+}
+
+/* 
+Suscripciones basado en eltramite de suscripcion. Se hizo el camnbio para que no se vea el nomre y correo de nadie. 
+Solo sumas y desglosa
+*/
+
+function get_status_suscripciones_tramite(){
+    $todos = proceso_cargar_todos();
+
+    $stats = [
+        'total_tramites' => count($todos),
+        'completadas'    => 0, // paso_actual === 6 (Suscripción Completada)
+        'por_tarifa'     => ['GENERAL' => 0, 'UNAM' => 0, 'FCA' => 0],
+        'por_modalidad_fca' => ['SUAYED' => 0, 'ESCOLARIZADO' => 0, 'POSGRADO' => 0],
+    ];
+
+    foreach ($todos as $correo => $p) {
+        $tarifa = $p['tarifa_seleccionada'] ?? 'GENERAL';
+        if (!isset($stats['por_tarifa'][$tarifa])) {
+            $stats['por_tarifa'][$tarifa] = 0;
+        }
+        $stats['por_tarifa'][$tarifa]++;
+
+        if ((int) ($p['paso_actual'] ?? 1) === 6) {
+            $stats['completadas']++;
+        }
+
+        if ($tarifa === 'FCA' && !empty($p['modalidad_fca'])) {
+            $mod = $p['modalidad_fca'];
+            if (!isset($stats['por_modalidad_fca'][$mod])) {
+                $stats['por_modalidad_fca'][$mod] = 0;
+            }
+            $stats['por_modalidad_fca'][$mod]++;
+        }
+    }
+
+    return $stats;
+
+}
+
+/* Nombre para mostrar cada tarifa/modalidad en pantalla. */
+function etiqueta_tarifa($clave) {
+    $mapa = ['GENERAL' => 'Público General', 'UNAM' => 'Comunidad UNAM', 'FCA' => 'Alumnos FCA'];
+    return $mapa[$clave] ?? $clave;
+}
+function etiqueta_modalidad($clave) {
+    $mapa = ['SUAYED' => 'SUAyED', 'ESCOLARIZADO' => 'Escolarizado', 'POSGRADO' => 'Posgrado'];
+    return $mapa[$clave] ?? $clave;
+}
+
+/*
+Desglose por tipo de persona para Visualizaciones/Descargas.
+También es dato de EJEMPLO (igual que las revistas/artículos de arriba),
+porque el sistema no sabe todavía qué tipo de persona ve o descarga algo.
+*/
+function get_ejemplo_por_tipo_usuario() {
+    return [
+        'vistas' => [
+            'Alumno'           => 1820,
+            'Docente'         => 640,
+            'Público general'  => 950,
+            'Comunidad UNAM'   => 710,
+        ],
+        'descargas' => [
+            'Alumno'           => 780,
+            'Docente'         => 310,
+            'Público general'  => 420,
+            'Comunidad UNAM'   => 295,
+        ],
+    ];
 }
 
 /* Nombre del mes en español, para mostrar en filtros y tablas. */
