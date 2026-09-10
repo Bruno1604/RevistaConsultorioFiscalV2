@@ -88,7 +88,18 @@ include 'template/header.php';
         </div>
       </div>
     </div>
-
+    
+        <!-- Por tipo de persona -->
+    <div class="detail-card" style="margin-bottom: 25px; padding: 20px;">
+      <h3 style="font-size: 1rem; margin-bottom: 12px;">Vistas por tipo de persona <em style="font-weight: normal; font-size: 0.75rem; color: var(--text-soft);">(dato de ejemplo)</em></h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <?php foreach (get_ejemplo_por_tipo_usuario()['vistas'] as $tipo => $cantidad): ?>
+          <span style="background: rgba(0,0,0,0.04); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;">
+            <?php echo htmlspecialchars($tipo); ?>: <strong><?php echo number_format($cantidad); ?></strong>
+          </span>
+        <?php endforeach; ?>
+      </div>
+    </div>
     <!-- Filtros -->
     <form method="get" class="detail-card" style="padding: 20px; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
       <div>
