@@ -20,7 +20,7 @@
     <div class="hero-static__grid">
       <div class="hero-static__content reveal reveal--left in">
         <span class="c-ph__tag">Hemeroteca</span>
-        <h1 class="hero-static__title">Buscador de artículos</h1>
+        <h1 class="hero-static__title">Artículos</h1>
         <p class="hero-static__excerpt reveal reveal--left">
           Encuentra artículos publicados en el Consultorio Fiscal. Busca por título,
           palabras clave o filtra por año de publicación.
@@ -42,8 +42,8 @@
         <label for="palabrasClave" class="lbl mb-2">Palabras clave</label>
         <input type="text" id="palabrasClave" class="form-control" placeholder="Ej. ISR, PTU, salarios">
       </div>
-      <div class="col-md-3">
-        <label for="anio" class="lbl mb-2">Filtrar por año</label>
+      <div class="col-md-2">
+        <label for="anio" class="lbl mb-2">Año</label>
         <select id="anio" class="form-select">
           <option value="">Todos los años</option>
           <option value="2026">2026</option>
@@ -52,7 +52,13 @@
           <option value="2023">2023</option>
         </select>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 d-flex align-items-end pb-1">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gratuitos">
+          <label class="form-check-label lbl" for="gratuitos">Gratuitos</label>
+        </div>
+      </div>
+      <div class="col-md-1">
         <button id="filtrarBtn" class="btn-ghost w-100" style="border-color: var(--navy);">
           <span>Filtrar</span>
         </button>
@@ -141,6 +147,15 @@
     font-family: var(--sans);
     font-size: .7rem;
     color: var(--ink-3);
+  }
+
+  .articulo-card__free {
+    font-family: var(--sans);
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #2f6f4e;
   }
 
   .articulo-card__section {
@@ -256,10 +271,13 @@
 </style>
 
 <script>
+  const tieneRol = <?php echo isset($_SESSION['rol']) ? 'true' : 'false'; ?>;
+
   // ===== DATOS DE ARTÍCULOS =====
   const articulos = [
     {
       id: 1,
+      gratuito: false,
       titulo: 'Declaración anual de personas físicas',
       autor: 'Georgina Ivonne Ramírez Esquivel',
       seccion: 'Declaración Anual',
@@ -271,6 +289,7 @@
     },
     {
       id: 2,
+      gratuito: false,
       titulo: 'Paso a paso para la declaración de personas físicas',
       autor: 'José Julio Solís García',
       seccion: 'Declaración Anual',
@@ -282,6 +301,7 @@
     },
     {
       id: 3,
+      gratuito: false,
       titulo: 'Deducciones personales',
       autor: 'Ignacio Jaramillo Bermúdez',
       seccion: 'Declaración Anual',
@@ -293,6 +313,7 @@
     },
     {
       id: 4,
+      gratuito: false,
       titulo: 'Alcance de la no deducibilidad de salarios en la disminución de la PTU',
       autor: 'Lucía Muñoz',
       seccion: 'Estrategias Fiscales e Investigación Académica',
@@ -304,6 +325,7 @@
     },
     {
       id: 5,
+      gratuito: false,
       titulo: 'Nuevo régimen aplicable a los pagos de previsión social',
       autor: 'Diana Valerio Pino',
       seccion: 'Estrategias Fiscales e Investigación Académica',
@@ -315,6 +337,7 @@
     },
     {
       id: 6,
+      gratuito: false,
       titulo: 'Ajuste anual de ISR a salarios 2023. Casos prácticos',
       autor: 'L.C., E.F. y PC.FI. Arturo Morales',
       seccion: 'Régimen Fiscal de Personas Físicas',
@@ -326,6 +349,7 @@
     },
     {
       id: 7,
+      gratuito: false,
       titulo: 'Reformas fiscales federales 2026',
       autor: 'Equipo Editorial Consultorio Fiscal',
       seccion: 'Reformas Fiscales',
@@ -337,6 +361,7 @@
     },
     {
       id: 8,
+      gratuito: false,
       titulo: 'Reglas Generales de Comercio Exterior 2026',
       autor: 'Mtro. Roberto Álvarez del Juncal',
       seccion: 'Comercio Exterior',
@@ -348,6 +373,7 @@
     },
     {
       id: 9,
+      gratuito: false,
       titulo: 'Declaración informativa múltiple',
       autor: 'Dra. Patricia Fuentes Garza',
       seccion: 'Obligaciones Fiscales',
@@ -359,6 +385,7 @@
     },
     {
       id: 10,
+      gratuito: false,
       titulo: 'Nulidad de juicio concluido. Adiós cosa juzgada',
       autor: 'Lic. Fernando Carrasco Medina',
       seccion: 'Derecho Procesal Fiscal',
@@ -370,6 +397,7 @@
     },
     {
       id: 11,
+      gratuito: false,
       titulo: 'Seguridad social en personas trabajadoras de plataformas digitales',
       autor: 'Mtra. Carmen Soledad Reyes',
       seccion: 'Seguridad Social',
@@ -381,6 +409,7 @@
     },
     {
       id: 12,
+      gratuito: false,
       titulo: 'Aguinaldo 2025',
       autor: 'C.P. Andrés Montalvo Reyes',
       seccion: 'Régimen Fiscal de Personas Físicas',
@@ -392,6 +421,7 @@
     },
     {
       id: 13,
+      gratuito: false,
       titulo: 'Reforma a la Ley de Amparo. Una reforma dedicada',
       autor: 'Dr. Miguel Ángel Pérez Vega',
       seccion: 'Derecho Constitucional',
@@ -403,6 +433,7 @@
     },
     {
       id: 14,
+      gratuito: false,
       titulo: 'Ingresos por intereses en personas físicas',
       autor: 'C.P. y M.I. Laura Estrada Núñez',
       seccion: 'Régimen Fiscal de Personas Físicas',
@@ -414,6 +445,7 @@
     },
     {
       id: 15,
+      gratuito: false,
       titulo: 'Iniciativa de reforma a la Ley de Amparo',
       autor: 'Lic. Francisco Javier Domínguez',
       seccion: 'Derecho Constitucional',
@@ -425,6 +457,7 @@
     },
     {
       id: 16,
+      gratuito: false,
       titulo: 'Propuesta de reforma fiscal 2026',
       autor: 'Equipo Editorial Consultorio Fiscal',
       seccion: 'Reformas Fiscales',
@@ -436,6 +469,7 @@
     },
     {
       id: 17,
+      gratuito: false,
       titulo: 'Pago de dividendos',
       autor: 'C.P. Marcos Reséndiz Lara',
       seccion: 'Régimen Fiscal de Personas Morales',
@@ -447,6 +481,7 @@
     },
     {
       id: 18,
+      gratuito: false,
       titulo: 'Plan Nacional de Desarrollo 2025-2030',
       autor: 'Mtra. Sofía del Carmen Yáñez',
       seccion: 'Política Fiscal',
@@ -458,6 +493,7 @@
     },
     {
       id: 19,
+      gratuito: false,
       titulo: 'Disminución del coeficiente de utilidad para determinar pagos provisionales del ISR',
       autor: 'Dr. Enrique Gaona Sánchez',
       seccion: 'Régimen Fiscal de Personas Morales',
@@ -469,6 +505,7 @@
     },
     {
       id: 20,
+      gratuito: false,
       titulo: 'Régimen Simplificado de Confianza. Personas físicas',
       autor: 'Mtro. Javier Mendoza Ortiz',
       seccion: 'Régimen Fiscal de Personas Físicas',
@@ -477,8 +514,32 @@
       anio: 2025,
       descripcion: 'Todo sobre el RESICO para personas físicas: requisitos, obligaciones, tasas aplicables y puntos de atención.',
       palabrasClave: ['RESICO', 'régimen simplificado', 'personas físicas', 'tasas', 'obligaciones']
+    },
+    {
+      id: 21,
+      gratuito: true,
+      titulo: 'El fideicomiso empresarial',
+      autor: 'Dr. Benjamín Hernández',
+      seccion: 'Estrategias Fiscales e Investigación Académica',
+      numero: '—',
+      fecha: 'Disponible en línea',
+      anio: 2026,
+      descripcion: 'Con la decadencia del imperio romano, en cuanto a la influencia directa en el derecho de la época posterior en los aspectos de los derechos de las personas, es preciso señalar la importancia que tenía el concepto de fideicomiso como una forma de legar bienes.',
+      palabrasClave: ['fideicomiso', 'fideicomiso empresarial', 'derecho mercantil']
+    },
+    {
+      id: 22,
+      gratuito: true,
+      titulo: 'Capitales constitutivos en mat',
+      autor: 'L.C. Judith Karen Cárdenas',
+      seccion: 'Seguridad Social',
+      numero: '—',
+      fecha: 'Disponible en línea',
+      anio: 2026,
+      descripcion: 'Es probable que algunos lectores hayan tenido la no muy grata experiencia de recibir una cédula de liquidación de capitales constitutivos emitida por el Instituto Mexicano del Seguro Social (IMSS), por lo que se habrán hecho preguntas como estas: ¿qué pasa?',
+      palabrasClave: ['capitales constitutivos', 'IMSS', 'seguridad social']
     }
-  ].slice(0, 7);
+  ];
 
   // Variables de paginación
   let paginaActual = 1;
@@ -520,9 +581,8 @@
         <div class="articulo-card__accent"></div>
         <div class="articulo-card__body">
           <div class="articulo-card__meta">
-            <span class="articulo-card__tag">${escapeHtml(art.ejemplar || 'Revista Consultorio Fiscal')}</span>
-            <span class="articulo-card__num">· Ejemplar No. ${escapeHtml(art.numero)}</span>
-            ${art.seccion ? `<span class="articulo-card__section">${escapeHtml(art.seccion)}</span>` : ''}
+            <span class="articulo-card__num">· Ejemplar No. ${escapeHtml(art.numero)}${art.seccion ? ` - ${escapeHtml(art.seccion)}` : ''}</span>
+            ${art.gratuito ? '<span class="articulo-card__free">Gratuito</span>' : ''}
           </div>
           <h3 class="articulo-card__title">${escapeHtml(art.titulo)}</h3>
           <p class="articulo-card__autor">Por <strong>${escapeHtml(art.autor)}</strong> · ${escapeHtml(art.fecha)}</p>
@@ -531,7 +591,7 @@
             ${art.palabrasClave.map(kw => `<span class="kw-tag">${escapeHtml(kw)}</span>`).join('')}
           </div>
           <div class="articulo-card__footer">
-            <a href="articulo.php?id=${art.id}" class="articulo-card__link">Ver artículo →</a>
+            <a href="articulo.php?id=${art.id}" class="articulo-card__link">${tieneRol ? 'Ver artículo →' : '<i class="fa fa-lock" aria-hidden="true"></i> Ver artículo'}</a>
           </div>
         </div>
       </div>
@@ -547,6 +607,7 @@
     const busqueda = document.getElementById('busqueda').value.trim().toLowerCase();
     const palabrasClave = document.getElementById('palabrasClave').value.trim().toLowerCase();
     const anio = document.getElementById('anio').value;
+    const soloGratuitos = document.getElementById('gratuitos').checked;
 
     articulosFiltrados = articulos.filter(art => {
       // Filtro por título
@@ -566,8 +627,9 @@
 
       // Filtro por año
       const coincideAnio = anio === '' || art.anio == anio;
+      const coincideGratuito = !soloGratuitos || art.gratuito === true;
 
-      return coincideTitulo && coincidePalabrasClave && coincideAnio;
+      return coincideTitulo && coincidePalabrasClave && coincideAnio && coincideGratuito;
     });
 
     // Reiniciar a página 1 y renderizar
@@ -588,6 +650,7 @@
     document.getElementById('busqueda').value = '';
     document.getElementById('palabrasClave').value = '';
     document.getElementById('anio').value = '';
+    document.getElementById('gratuitos').checked = false;
     actualizarResultados();
   }
 

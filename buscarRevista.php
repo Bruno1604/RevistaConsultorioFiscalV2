@@ -20,7 +20,7 @@
     <div class="hero-static__grid">
       <div class="hero-static__content reveal reveal--left in">
         <span class="c-ph__tag">Hemeroteca</span>
-        <h1 class="hero-static__title">Histórico de revistas</h1>
+        <h1 class="hero-static__title">Histórico de Revistas</h1>
         <!-- <div class="gold-line gold-l"></div> -->
         <p class="hero-static__excerpt reveal reveal--left">
           Consulta los ejemplares publicados por el Consultorio Fiscal. Encuentra análisis,

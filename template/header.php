@@ -73,8 +73,8 @@ function nav_a($id, $current, $label, $url, $external = false) {
           <div class="cfnav__drop">
             <div class="cfnav__drop-group">
               <span class="cfnav__drop-label">Buscador</span>
-              <a href="buscarRevista.php">Buscar Revista</a>
-              <a href="buscarArticulo.php">Buscar Artículo</a>
+              <a href="buscarRevista.php">Revistas</a>
+              <a href="buscarArticulo.php">Artículos</a>
             </div>
             <a href="secciones.php">Secciones</a>
             <a href="tendencias.php">Artículos más leídos</a>
