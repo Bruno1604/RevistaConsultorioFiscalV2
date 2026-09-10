@@ -33,36 +33,44 @@
 <!-- Formulario de búsqueda y filtro -->
 <section class="about" style="padding: 40px 0 20px 0;">
   <div class="cs">
-    <div class="row g-3 align-items-end">
-      <div class="col-md-4">
+    <div class="d-grid align-items-end" style="grid-template-columns: 2fr 1.5fr 0.65fr auto 1fr; gap: 1rem;">
+      
+      <div>
         <label for="busqueda" class="lbl mb-2">Buscar por título</label>
         <input type="text" id="busqueda" class="form-control" placeholder="Ej. declaración anual">
       </div>
-      <div class="col-md-3">
+
+      <div>
         <label for="palabrasClave" class="lbl mb-2">Palabras clave</label>
         <input type="text" id="palabrasClave" class="form-control" placeholder="Ej. ISR, PTU, salarios">
       </div>
-      <div class="col-md-2">
+
+      <div>
         <label for="anio" class="lbl mb-2">Año</label>
-        <select id="anio" class="form-select">
-          <option value="">Todos los años</option>
+        <select id="anio" class="form-select year-select">
+          <option value=""></option>
           <option value="2026">2026</option>
           <option value="2025">2025</option>
           <option value="2024">2024</option>
           <option value="2023">2023</option>
         </select>
       </div>
-      <div class="col-md-2 d-flex align-items-end pb-1">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gratuitos">
-          <label class="form-check-label lbl" for="gratuitos">Gratuitos</label>
-        </div>
-      </div>
-      <div class="col-md-1">
-        <button id="filtrarBtn" class="btn-ghost w-100" style="border-color: var(--navy);">
-          <span>Filtrar</span>
+
+      <div>
+        <button type="button" id="gratuitos" class="filter-toggle" aria-pressed="false">
+          <span>Gratis</span>
         </button>
       </div>
+
+      <div class="filter-actions">
+        <button id="filtrarBtn" class="btn-ghost filter-submit" style="border-color: var(--navy);">
+          <span>Filtrar</span>
+        </button>
+        <button type="button" id="limpiarFiltrosBtn" class="filter-clear" aria-label="Limpiar filtros" title="Limpiar filtros">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -96,6 +104,7 @@
   .articulo-card {
     display: flex;
     flex-direction: row;
+    position: relative;
     background: #fff;
     border: 1px solid rgba(11,30,61,.10);
     border-radius: 6px;
@@ -134,6 +143,7 @@
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+    padding-right: 90px;
   }
   .articulo-card__tag {
     font-family: var(--sans);
@@ -150,12 +160,104 @@
   }
 
   .articulo-card__free {
+    position: absolute;
+    top: 22px;
+    right: 28px;
     font-family: var(--sans);
     font-size: .58rem;
     font-weight: 700;
     letter-spacing: .12em;
     text-transform: uppercase;
     color: #2f6f4e;
+  }
+
+  .filter-toggle {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 16px;
+    border: 1px solid #ced4da;
+    border-radius: .375rem;
+    background: #fff;
+    color: #6c757d;
+    font-family: var(--sans);
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: all .3s ease;
+  }
+
+  .filter-toggle.is-active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+  }
+
+  .filter-clear {
+    width: 30px;
+    height: 38px;
+    flex: 0 0 30px;
+    padding: 0;
+    border: 0;
+    background: transparent !important;
+    color: #6c757d !important;
+    font-family: var(--sans);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: all .3s ease;
+  }
+
+  .filter-clear:hover {
+    border: 0;
+    background: transparent !important;
+    color: #6c757d !important;
+    box-shadow: none !important;
+  }
+
+  .filter-clear:focus,
+  .filter-clear:active {
+    border: 0;
+    background: transparent !important;
+    color: #6c757d !important;
+    box-shadow: none !important;
+  }
+
+  .gratis-col {
+    padding-left: 0;
+  }
+
+  .limpiar-col {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .filter-actions {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  .filter-submit {
+    flex: 1;
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 12px;
+    background: transparent !important;
+    border-color: var(--gold) !important;
+    color: var(--gold) !important;
+  }
+
+  .filter-submit:hover,
+  .filter-submit:focus,
+  .filter-submit:active {
+    background: var(--gold) !important;
+    border-color: var(--gold) !important;
+    color: #fff !important;
+  }
+
+  .year-select {
+    width: 100%;
   }
 
   .articulo-card__section {
@@ -176,6 +278,11 @@
     color: var(--navy);
     line-height: 1.25;
     margin: 4px 0 2px;
+    display: block;
+    max-height: none;
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
     transition: color .25s;
   }
   .articulo-card:hover .articulo-card__title {
@@ -249,6 +356,11 @@
 
   /* ═══ Responsive ═══ */
   @media (max-width: 768px) {
+    .year-select,
+    .filter-toggle {
+      width: 100%;
+    }
+
     .articulo-card {
       padding: 20px 18px;
     }
@@ -554,6 +666,7 @@
   const btnSiguiente = document.getElementById('btnSiguiente');
   const paginaInfo = document.getElementById('paginaInfo');
   const limpiarBtn = document.getElementById('limpiarBtn');
+  const gratuitosBtn = document.getElementById('gratuitos');
 
   function renderizarPagina() {
     const totalPaginas = Math.ceil(articulosFiltrados.length / articulosPorPagina);
@@ -582,7 +695,7 @@
         <div class="articulo-card__body">
           <div class="articulo-card__meta">
             <span class="articulo-card__num">· Ejemplar No. ${escapeHtml(art.numero)}${art.seccion ? ` - ${escapeHtml(art.seccion)}` : ''}</span>
-            ${art.gratuito ? '<span class="articulo-card__free">Gratuito</span>' : ''}
+            ${art.gratuito ? '<span class="articulo-card__free">Gratis</span>' : ''}
           </div>
           <h3 class="articulo-card__title">${escapeHtml(art.titulo)}</h3>
           <p class="articulo-card__autor">Por <strong>${escapeHtml(art.autor)}</strong> · ${escapeHtml(art.fecha)}</p>
@@ -591,7 +704,7 @@
             ${art.palabrasClave.map(kw => `<span class="kw-tag">${escapeHtml(kw)}</span>`).join('')}
           </div>
           <div class="articulo-card__footer">
-            <a href="articulo.php?id=${art.id}" class="articulo-card__link">${tieneRol ? 'Ver artículo →' : '<i class="fa fa-lock" aria-hidden="true"></i> Ver artículo'}</a>
+            <a href="${art.gratuito ? 'articuloGratis.php' : 'articulo.php'}?id=${art.id}" class="articulo-card__link">${art.gratuito || tieneRol ? 'Ver artículo →' : '<i class="fa fa-lock" aria-hidden="true"></i> Ver artículo'}</a>
           </div>
         </div>
       </div>
@@ -607,7 +720,7 @@
     const busqueda = document.getElementById('busqueda').value.trim().toLowerCase();
     const palabrasClave = document.getElementById('palabrasClave').value.trim().toLowerCase();
     const anio = document.getElementById('anio').value;
-    const soloGratuitos = document.getElementById('gratuitos').checked;
+    const soloGratuitos = gratuitosBtn.classList.contains('is-active');
 
     articulosFiltrados = articulos.filter(art => {
       // Filtro por título
@@ -650,7 +763,8 @@
     document.getElementById('busqueda').value = '';
     document.getElementById('palabrasClave').value = '';
     document.getElementById('anio').value = '';
-    document.getElementById('gratuitos').checked = false;
+    gratuitosBtn.classList.remove('is-active');
+    gratuitosBtn.setAttribute('aria-pressed', 'false');
     actualizarResultados();
   }
 
@@ -672,6 +786,12 @@
 
   // Eventos de búsqueda/filtro
   document.getElementById('filtrarBtn').addEventListener('click', actualizarResultados);
+  document.getElementById('limpiarFiltrosBtn').addEventListener('click', limpiarFiltros);
+  gratuitosBtn.addEventListener('click', function() {
+    const estaActivo = gratuitosBtn.classList.toggle('is-active');
+    gratuitosBtn.setAttribute('aria-pressed', estaActivo ? 'true' : 'false');
+    actualizarResultados();
+  });
   document.getElementById('limpiarBtn').addEventListener('click', limpiarFiltros);
   document.getElementById('busqueda').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') actualizarResultados();
