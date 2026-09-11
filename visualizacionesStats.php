@@ -143,8 +143,11 @@ include 'template/header.php';
 
     <!-- Revistas más vistas -->
     <div class="detail-card" style="margin-bottom: 25px;">
-      <div style="padding: 18px 18px 0;">
+      <div style="padding: 18px 18px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <h3 style="font-size: 1rem;">Revistas más vistas</h3>
+        <a href="exportar_estadisticas.php?tipo=revistas_vistas&anio=<?php echo urlencode($filtroAnio); ?>&mes=<?php echo urlencode($filtroMes); ?>&revista=<?php echo urlencode($filtroRevista); ?>" class="btn-filter-navy-small" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+          <i class="fa fa-file-excel-o"></i> Descargar Excel
+        </a>
       </div>
       <div class="admin-table-container" style="overflow-x: auto;">
         <table class="admin-table">
@@ -178,8 +181,11 @@ include 'template/header.php';
 
     <!-- Artículos más vistos -->
     <div class="detail-card">
-      <div style="padding: 18px 18px 0;">
+      <div style="padding: 18px 18px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <h3 style="font-size: 1rem;">Artículos más vistos</h3>
+        <a href="exportar_estadisticas.php?tipo=articulos_vistos&anio=<?php echo urlencode($filtroAnio); ?>&mes=<?php echo urlencode($filtroMes); ?>&revista=<?php echo urlencode($filtroRevista); ?>" class="btn-filter-navy-small" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+          <i class="fa fa-file-excel-o"></i> Descargar Excel
+        </a>
       </div>
       <div class="admin-table-container" style="overflow-x: auto;">
         <table class="admin-table">

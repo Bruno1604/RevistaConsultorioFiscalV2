@@ -88,7 +88,7 @@ Suscripciones basado en eltramite de suscripcion. Se hizo el camnbio para que no
 Solo sumas y desglosa
 */
 
-function get_status_suscripciones_tramite(){
+function get_stats_suscripciones_tramite(){
     $todos = proceso_cargar_todos();
 
     $stats = [
@@ -122,7 +122,7 @@ function get_status_suscripciones_tramite(){
 
 }
 
-/* Nombre para mostrar cada tarifa/modalidad en pantalla. */
+/** Nombre para mostrar cada tarifa/modalidad en pantalla. */
 function etiqueta_tarifa($clave) {
     $mapa = ['GENERAL' => 'Público General', 'UNAM' => 'Comunidad UNAM', 'FCA' => 'Alumnos FCA'];
     return $mapa[$clave] ?? $clave;
@@ -133,23 +133,49 @@ function etiqueta_modalidad($clave) {
 }
 
 /*
-Desglose por tipo de persona para Visualizaciones/Descargas.
-También es dato de EJEMPLO (igual que las revistas/artículos de arriba),
-porque el sistema no sabe todavía qué tipo de persona ve o descarga algo.
-*/
+ * Suscripciones en una sola tabla combinada, con las 6 categorías
+ * Las primeras 5 son datos REALES (vienen del Trámite de Suscripción,
+ * data/proceso_estado.json). "Docentes" es un dato de EJEMPLO, porque
+ * todavía no existe como tipo de tarifa real en el sistema (el
+ * Trámite de Suscripción solo acepta Público General / Comunidad UNAM /
+ * Alumnos FCA) -- por eso se marca aparte con 'ejemplo' => true.
+ */
+function get_stats_suscripciones_combinado() {
+    $real = get_stats_suscripciones_tramite();
+
+    return [
+        ['categoria' => 'Público en general', 'cantidad' => $real['por_tarifa']['GENERAL'],          'ejemplo' => false],
+        ['categoria' => 'Comunidad UNAM',      'cantidad' => $real['por_tarifa']['UNAM'],             'ejemplo' => false],
+        ['categoria' => 'SUAyED',              'cantidad' => $real['por_modalidad_fca']['SUAYED'],       'ejemplo' => false],
+        ['categoria' => 'Escolarizado',        'cantidad' => $real['por_modalidad_fca']['ESCOLARIZADO'], 'ejemplo' => false],
+        ['categoria' => 'Posgrado',            'cantidad' => $real['por_modalidad_fca']['POSGRADO'],     'ejemplo' => false],
+        ['categoria' => 'Docentes',            'cantidad' => 9,                                       'ejemplo' => true],
+    ];
+}
+
+/**
+ * Desglose por tipo de persona para Visualizaciones/Descargas.
+ * Dato de EJEMPLO (igual que las revistas/artículos de arriba), con las
+ * mismas 6 categorías que la tabla de Suscripciones, para que todo el
+ * panel de Estadísticas hable el mismo lenguaje.
+ */
 function get_ejemplo_por_tipo_usuario() {
     return [
         'vistas' => [
-            'Alumno'           => 1820,
-            'Docente'         => 640,
-            'Público general'  => 950,
-            'Comunidad UNAM'   => 710,
+            'Público en general' => 950,
+            'Comunidad UNAM'     => 710,
+            'SUAyED'             => 480,
+            'Escolarizado'       => 690,
+            'Posgrado'           => 320,
+            'Docentes'           => 640,
         ],
         'descargas' => [
-            'Alumno'           => 780,
-            'Docente'         => 310,
-            'Público general'  => 420,
-            'Comunidad UNAM'   => 295,
+            'Público en general' => 420,
+            'Comunidad UNAM'     => 295,
+            'SUAyED'             => 210,
+            'Escolarizado'       => 305,
+            'Posgrado'           => 140,
+            'Docentes'           => 310,
         ],
     ];
 }
