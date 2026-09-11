@@ -7,8 +7,8 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'admin') {
 }
 
 require_once 'data/estadisticas.php';
-
-$stats = get_status_suscripciones_tramite();
+$stats = get_stats_suscripciones_tramite();
+$combinado = get_stats_suscripciones_combinado();
 
 $page_title = "Estadísticas de Suscripciones - Consultorio Fiscal";
 $page = "suscriptoresStats";
@@ -58,62 +58,39 @@ include 'template/header.php';
       </div>
     </div>
 
-    <!-- Desglose por tipo de tarifa -->
-    <div class="detail-card" style="margin-bottom: 25px;">
-      <div style="padding: 18px 18px 0;">
-        <h3 style="font-size: 1rem;">Suscriptores por tipo de tarifa</h3>
+    <!-- Tabla única combinada -->
+    <div class="detail-card">
+      <div style="padding: 18px 18px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h3 style="font-size: 1rem;">Suscriptores por categoría</h3>
+          <p style="font-size: 0.75rem; color: var(--text-soft); margin-top: 4px;">
+            * "Docentes" es un dato de ejemplo -- todavía no existe como tipo de tarifa real en el sistema.
+          </p>
+        </div>
+        <a href="exportar_estadisticas.php?tipo=suscripciones" class="btn-filter-navy-small" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+          <i class="fa fa-file-excel-o"></i> Descargar Excel
+        </a>
       </div>
       <div class="admin-table-container" style="overflow-x: auto;">
         <table class="admin-table">
           <thead>
             <tr>
-              <th>Tipo de tarifa</th>
+              <th>Categoría</th>
               <th>Cantidad de suscriptores</th>
             </tr>
           </thead>
           <tbody>
-            <?php if (empty($stats['total_tramites'])): ?>
-              <tr><td colspan="2" style="text-align:center; padding:30px; color: var(--text-soft);">Aún no hay ningún trámite de suscripción registrado.</td></tr>
-            <?php else: ?>
-              <?php foreach ($stats['por_tarifa'] as $tarifaClave => $cantidad): ?>
-                <tr>
-                  <td><?php echo htmlspecialchars(etiqueta_tarifa($tarifaClave)); ?></td>
-                  <td><strong><?php echo $cantidad; ?></strong></td>
-                </tr>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Desglose por modalidad (solo Alumnos FCA) -->
-    <div class="detail-card">
-      <div style="padding: 18px 18px 0;">
-        <h3 style="font-size: 1rem;">Alumnos FCA por modalidad</h3>
-        <p style="font-size: 0.8rem; color: var(--text-soft); margin-top: 4px;">
-          De los <?php echo $stats['por_tarifa']['FCA']; ?> suscriptores de Alumnos FCA, cuántos son de cada modalidad.
-        </p>
-      </div>
-      <div class="admin-table-container" style="overflow-x: auto;">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Modalidad</th>
-              <th>Cantidad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php if (empty($stats['por_tarifa']['FCA'])): ?>
-              <tr><td colspan="2" style="text-align:center; padding:30px; color: var(--text-soft);">Aún no hay suscriptores de Alumnos FCA registrados.</td></tr>
-            <?php else: ?>
-              <?php foreach ($stats['por_modalidad_fca'] as $modClave => $cantidad): ?>
-                <tr>
-                  <td><?php echo htmlspecialchars(etiqueta_modalidad($modClave)); ?></td>
-                  <td><strong><?php echo $cantidad; ?></strong></td>
-                </tr>
-              <?php endforeach; ?>
-            <?php endif; ?>
+            <?php foreach ($combinado as $fila): ?>
+              <tr>
+                <td>
+                  <?php echo htmlspecialchars($fila['categoria']); ?>
+                  <?php if ($fila['ejemplo']): ?>
+                    <span style="font-size: 0.7rem; color: var(--text-soft);">(ejemplo)*</span>
+                  <?php endif; ?>
+                </td>
+                <td><strong><?php echo $fila['cantidad']; ?></strong></td>
+              </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
       </div>
