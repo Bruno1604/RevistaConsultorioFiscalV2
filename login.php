@@ -111,7 +111,7 @@ include 'template/header.php';
 
                         <div style="margin-top: 25px; text-align: center;">
                             <span class="register-text">¿Aún no eres suscriptor?</span>
-                            <a href="registro.php" class="register-link"><strong>Regístrate aquí</strong></a>
+                            <a href="registro.php" class="register-link"><strong>Suscríbete aquí</strong></a>
                         </div>
 
                         <a href="#" class="forgot-link">

@@ -30,11 +30,7 @@
             </div>
 
             <div class="error-footer">
-                <p>¿Aún no eres suscriptor? Suscríbete a nuestra revista enviando un correo a:
-                    <a href="mailto:publishing_ti@fca.unam.mx" class="contact-mail">
-                        <i class="fa fa-envelope"></i> publishing_ti@fca.unam.mx
-                    </a>
-                </p>
+                <p>¿Aún no eres suscriptor? <a href="registro.php" class="contact-mail">Suscríbete aquí</a>.</p>
             </div>
         </div>
     </div>

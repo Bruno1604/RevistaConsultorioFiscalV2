@@ -757,14 +757,16 @@ section{padding:0}
 .error-page{background:var(--paper-2);padding:88px 0 110px;text-align:center;min-height:60vh;
   display:flex;align-items:center}
 .error-container{max-width:600px;margin:0 auto;background:#fff;padding:56px 40px;
-  border-radius:var(--r);box-shadow:var(--shadow);border-top:3px solid var(--gold)}
+  border-radius:var(--r);box-shadow:var(--shadow);border-top:3px solid var(--gold);text-align:center}
 .error-icon{font-size:2.5rem;color:var(--gold);margin-bottom:18px}
-.error-title{font-family:var(--serif);font-size:2.2rem;color:var(--navy);margin:14px 0;font-weight:300}
-.error-text{font-size:1.02rem;color:var(--ink-2);line-height:1.7;margin-bottom:34px}
+.error-page .lbl,.error-page .error-title,.error-page .error-text,.error-page .error-footer p{ text-align:center !important; }
+.error-page .error-title{font-family:var(--serif);font-size:2.2rem;color:var(--navy);margin:14px 0;font-weight:300}
+.error-page .error-text{font-size:1.02rem;color:var(--ink-2);line-height:1.7;margin-bottom:34px}
 .error-actions{display:flex;gap:16px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
-.error-footer{border-top:1px solid var(--line);padding-top:22px;font-size:.88rem;color:var(--ink-3)}
+.error-footer{border-top:1px solid var(--line);padding-top:22px;font-size:.88rem;color:var(--ink-3);text-align:center}
+.error-footer p{margin:0}
 .error-footer a{color:var(--navy);font-weight:600}
-@media(max-width:600px){.error-actions{flex-direction:column}.error-title{font-size:1.8rem}}
+@media(max-width:600px){.error-actions{flex-direction:column}.error-page .error-title{font-size:1.8rem}}
 
 .preview-page{background:#fff;padding-top:0!important}
 .rev-header{background:var(--navy-deep);padding:78px 0;color:#fff}
