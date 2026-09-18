@@ -3,14 +3,15 @@
      ══════════════════════════════════════════════ -->
 <div class="step-pane" id="stepPane6" style="display: none;">
     <!-- Card de Éxito / Celebración -->
-    <div style="background: linear-gradient(135deg, rgba(40,167,69,0.08) 0%, rgba(184,150,85,0.08) 100%); border: 2px solid #28a745; border-radius: 8px; padding: 28px 24px; text-align: center; margin-bottom: 25px;">
-        <h3 style="font-family: var(--serif); color: var(--navy); font-size: 2rem; margin-bottom: 8px;">
-            Te damos la bienvenida a la Revista Consultorio Fiscal
+    <div style="background: linear-gradient(135deg, rgba(40,167,69,0.08) 0%, rgba(184,150,85,0.08) 100%); border: 2px solid #28a745; border-radius: 8px; padding: 32px 24px; text-align: center; margin: 0 auto 30px; max-width: 760px; line-height: 1.7;">
+        <h3 style="font-family: var(--serif); color: var(--navy); font-size: 2rem; margin: 0 0 18px; line-height: 1.3; letter-spacing: 0.2px; text-align: center;">
+            Te damos la bienvenida a<br>
+            Revista Consultorio Fiscal
         </h3>
-        <p style="font-size: 0.98rem; color: var(--text-md); margin-bottom: 16px;">
+        <p style="font-size: 1rem; color: var(--text-md); margin: 0 auto 18px; max-width: 620px; line-height: 1.8; text-align: center;">
             A partir de este momento cuentas con acceso digital completo a todas las revistas, indicadores y cuadros permanentes.
         </p>
-        <span class="badge" style="background: var(--navy); color: #fff; font-size: 0.85rem; padding: 8px 18px; font-family: var(--sans);">
+        <span class="badge" style="display: inline-block; background: var(--navy); color: #fff; font-size: 0.85rem; padding: 10px 22px; font-family: var(--sans); margin-top: 8px; border-radius: 999px;">
             Número de Suscriptor: <?php echo $p['numero_suscriptor']; ?>
         </span>
     </div>
