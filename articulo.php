@@ -110,7 +110,12 @@ include 'template/header.php';
                 <!-- Columna izquierda: Información y contenido -->
                 <div class="col-lg-8 pe-lg-5 editorial-col-main">
                     <article class="article-summary">
-                        <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--navy); font-weight: 700; font-size: 1.35rem; margin-bottom: 14px;">Descripción</h4>
+                        <div class="article-content-heading">
+                            <h4>Contenido del artículo</h4>
+                            <?php if (!empty($articulo['gratuito'])): ?>
+                            <span class="article-free-label">Gratis</span>
+                            <?php endif; ?>
+                        </div>
                         <p style="font-size: 1rem; line-height: 1.65; color: #333;"><?php echo htmlspecialchars($articulo['descripcion']); ?></p>
                     </article>
                 </div>
@@ -203,6 +208,38 @@ include 'template/header.php';
     min-height: 100%;
     padding-top: 0;
     gap: 0.5rem;
+}
+
+.article-content-heading {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: 14px;
+}
+
+.article-content-heading h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin: 0;
+}
+
+.article-free-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border: 1px solid rgba(176, 141, 76, .55);
+    border-radius: 3px;
+    background: #f1f2f3;
+    color: var(--navy);
+    font-family: var(--sans);
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .article-actions-panel .action-buttons-primary {

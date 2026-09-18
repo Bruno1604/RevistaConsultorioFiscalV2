@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+$id = isset($_GET['id']) ? (string) $_GET['id'] : '21';
+if (isset($_SESSION['usuario_id'])) {
+    header('Location: articulo.php?id=' . urlencode($id));
+    exit();
+}
+
 $articulos_gratuitos = [
     '21' => [
         'titulo' => 'El fideicomiso empresarial',
@@ -16,7 +24,6 @@ $articulos_gratuitos = [
     ]
 ];
 
-$id = isset($_GET['id']) ? (string) $_GET['id'] : '21';
 if (!isset($articulos_gratuitos[$id])) {
     header('Location: accesoRestringido.php');
     exit();
@@ -64,8 +71,10 @@ include 'template/header.php';
             <div class="row g-4">
                 <div class="col-lg-8 pe-lg-5 editorial-col-main">
                     <article class="article-summary">
-                        <span class="article-card__free">Artículo gratuito</span>
-                        <h4 style="font-family: 'Cormorant Garamond', serif; color: var(--navy); font-weight: 700; font-size: 1.35rem; margin: 14px 0;">Contenido del artículo</h4>
+                        <div class="article-content-heading">
+                            <h4>Contenido del artículo</h4>
+                            <span class="article-free-label">Gratis</span>
+                        </div>
                         <p style="font-size: 1rem; line-height: 1.65; color: #333;">
                             <?php echo htmlspecialchars($articulo['descripcion']); ?>
                         </p>
@@ -118,6 +127,41 @@ include 'template/header.php';
 
 <style>
 .article-actions-panel .action-buttons-primary { gap: .5rem; }
+.article-free-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border: 1px solid rgba(176, 141, 76, .55);
+    border-radius: 3px;
+    background: #f1f2f3;
+    color: var(--navy);
+    font-family: var(--sans);
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.article-content-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 14px;
+}
+.article-content-heading h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin: 0;
+}
+.article-content-heading .article-card__free {
+    position: static;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
 .article-actions-panel .btn-ghost {
     width: 100%; display: flex; align-items: center; justify-content: center;
     text-align: center; box-sizing: border-box; padding: 8px 10px;

@@ -14,7 +14,7 @@ include 'template/header.php';
 <!-- Contenido del panel admin -->
 <section class="hero-static" style="padding: 60px 0 40px;">
   <div class="cs">
-    <div class="hero-static__grid">
+    <div class="hero-static__grid" style="grid-template-columns: 1fr;">
       <div class="hero-static__content">
         <span class="c-ph__tag">Panel de Administración</span>
         <h1 class="hero-static__title">Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre']); ?></h1>
@@ -23,10 +23,12 @@ include 'template/header.php';
           Aquí puedes gestionar el contenido de la revista, revisar credenciales y administrar suscripciones.
         </p>
       </div>
-      <div class="hero-static__visual">
+      <div class="hero-static__visual" style="display: none;">
+        <!--
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
         </svg>
+        -->
       </div>
     </div>
   </div>
