@@ -20,7 +20,7 @@
     <div class="hero-static__grid">
       <div class="hero-static__content reveal reveal--left in">
         <span class="c-ph__tag">Hemeroteca</span>
-        <h1 class="hero-static__title">Artículos</h1>
+        <h1 class="hero-static__title">Histórico de Artículos</h1>
         <p class="hero-static__excerpt reveal reveal--left">
           Encuentra artículos publicados en el Consultorio Fiscal. Busca por título,
           palabras clave o filtra por año de publicación.
@@ -33,7 +33,7 @@
 <!-- Formulario de búsqueda y filtro -->
 <section class="about" style="padding: 40px 0 20px 0;">
   <div class="cs">
-    <div class="d-grid align-items-end" style="grid-template-columns: 2fr 1.5fr 0.65fr auto 1fr; gap: 1rem;">
+    <div class="d-grid align-items-end filter-grid" style="grid-template-columns: 1.8fr 1.25fr 0.65fr 1.35fr 1fr; gap: 1rem;">
       
       <div>
         <label for="busqueda" class="lbl mb-2">Buscar por título</label>
@@ -57,18 +57,23 @@
       </div>
 
       <div>
-        <button type="button" id="gratuitos" class="filter-toggle" aria-pressed="false">
-          <span>Gratis</span>
-        </button>
+        <label for="categoria" class="lbl mb-2">Categoría</label>
+        <select id="categoria" class="form-select filter-category" aria-label="Categoría">
+          <option value=""></option>
+          <option value="gratuitos">Artículos gratuitos</option>
+          <option value="mas-leidos">Artículos más leídos</option>
+        </select>
       </div>
 
       <div class="filter-actions">
         <button id="filtrarBtn" class="btn-ghost filter-submit" style="border-color: var(--navy);">
           <span>Filtrar</span>
         </button>
+        <!--
         <button type="button" id="limpiarFiltrosBtn" class="filter-clear" aria-label="Limpiar filtros" title="Limpiar filtros">
           <span aria-hidden="true">×</span>
         </button>
+        -->
       </div>
 
     </div>
@@ -171,36 +176,62 @@
     color: #2f6f4e;
   }
 
-  .filter-toggle {
-    width: 100%;
-    min-height: 38px;
-    padding: 8px 16px;
-    border: 1px solid #ced4da;
-    border-radius: .375rem;
-    background: #fff;
-    color: #6c757d;
-    font-family: var(--sans);
-    font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    transition: all .3s ease;
+  .filter-grid {
+    position: relative;
   }
 
-  .filter-toggle.is-active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #fff;
+  .filter-grid .lbl,
+  .filter-grid .form-control,
+  .filter-grid .form-select,
+  .filter-grid .filter-submit {
+    font-family: var(--sans);
+    font-size: .68rem;
+  }
+
+  .filter-grid .lbl {
+    display: block;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+
+  .filter-grid .form-control,
+  .filter-grid .form-select,
+  .filter-submit {
+    width: 100%;
+    height: 38px;
+    min-height: 38px;
+    line-height: 1.25;
+  }
+
+  .filter-grid .form-select {
+    font-size: .8rem;
+  }
+
+  .filter-grid .form-control {
+    font-size: .8rem;
+  }
+
+  .filter-grid .form-control,
+  .filter-grid .form-select {
+    letter-spacing: 0;
+  }
+
+  .filter-category {
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .filter-clear {
+    position: absolute;
+    top: -8px;
+    right: 0;
     width: 30px;
-    height: 38px;
-    flex: 0 0 30px;
+    height: 30px;
+    z-index: 1;
     padding: 0;
     border: 0;
     background: transparent !important;
-    color: #6c757d !important;
+    color: var(--gold) !important;
     font-family: var(--sans);
     font-size: 1.25rem;
     font-weight: 700;
@@ -211,7 +242,7 @@
   .filter-clear:hover {
     border: 0;
     background: transparent !important;
-    color: #6c757d !important;
+    color: var(--gold) !important;
     box-shadow: none !important;
   }
 
@@ -219,7 +250,7 @@
   .filter-clear:active {
     border: 0;
     background: transparent !important;
-    color: #6c757d !important;
+    color: var(--gold) !important;
     box-shadow: none !important;
   }
 
@@ -235,7 +266,6 @@
   .filter-actions {
     display: flex;
     align-items: center;
-    gap: .5rem;
   }
 
   .filter-submit {
@@ -357,7 +387,7 @@
   /* ═══ Responsive ═══ */
   @media (max-width: 768px) {
     .year-select,
-    .filter-toggle {
+    .filter-category {
       width: 100%;
     }
 
@@ -390,6 +420,7 @@
     {
       id: 1,
       gratuito: false,
+      lecturas: 1352,
       titulo: 'Declaración anual de personas físicas',
       autor: 'Georgina Ivonne Ramírez Esquivel',
       seccion: 'Declaración Anual',
@@ -402,6 +433,7 @@
     {
       id: 2,
       gratuito: false,
+      lecturas: 1240,
       titulo: 'Paso a paso para la declaración de personas físicas',
       autor: 'José Julio Solís García',
       seccion: 'Declaración Anual',
@@ -414,6 +446,7 @@
     {
       id: 3,
       gratuito: false,
+      lecturas: 980,
       titulo: 'Deducciones personales',
       autor: 'Ignacio Jaramillo Bermúdez',
       seccion: 'Declaración Anual',
@@ -666,7 +699,7 @@
   const btnSiguiente = document.getElementById('btnSiguiente');
   const paginaInfo = document.getElementById('paginaInfo');
   const limpiarBtn = document.getElementById('limpiarBtn');
-  const gratuitosBtn = document.getElementById('gratuitos');
+  const categoriaSelect = document.getElementById('categoria');
 
   function renderizarPagina() {
     const totalPaginas = Math.ceil(articulosFiltrados.length / articulosPorPagina);
@@ -704,7 +737,7 @@
             ${art.palabrasClave.map(kw => `<span class="kw-tag">${escapeHtml(kw)}</span>`).join('')}
           </div>
           <div class="articulo-card__footer">
-            <a href="${art.gratuito ? 'articuloGratis.php' : 'articulo.php'}?id=${art.id}" class="articulo-card__link">${art.gratuito || tieneRol ? 'Ver artículo →' : '<i class="fa fa-lock" aria-hidden="true"></i> Ver artículo'}</a>
+            <a href="${art.gratuito && !tieneRol ? 'articuloGratis.php' : 'articulo.php'}?id=${art.id}" class="articulo-card__link">${art.gratuito || tieneRol ? 'Ver artículo →' : '<i class="fa fa-lock" aria-hidden="true"></i> Ver artículo'}</a>
           </div>
         </div>
       </div>
@@ -720,7 +753,7 @@
     const busqueda = document.getElementById('busqueda').value.trim().toLowerCase();
     const palabrasClave = document.getElementById('palabrasClave').value.trim().toLowerCase();
     const anio = document.getElementById('anio').value;
-    const soloGratuitos = gratuitosBtn.classList.contains('is-active');
+    const categoria = categoriaSelect.value;
 
     articulosFiltrados = articulos.filter(art => {
       // Filtro por título
@@ -740,10 +773,16 @@
 
       // Filtro por año
       const coincideAnio = anio === '' || art.anio == anio;
-      const coincideGratuito = !soloGratuitos || art.gratuito === true;
+      const coincideCategoria = categoria === ''
+        || (categoria === 'gratuitos' && art.gratuito === true)
+        || (categoria === 'mas-leidos' && art.lecturas);
 
-      return coincideTitulo && coincidePalabrasClave && coincideAnio && coincideGratuito;
+      return coincideTitulo && coincidePalabrasClave && coincideAnio && coincideCategoria;
     });
+
+    if (categoria === 'mas-leidos') {
+      articulosFiltrados.sort((a, b) => (b.lecturas || 0) - (a.lecturas || 0));
+    }
 
     // Reiniciar a página 1 y renderizar
     paginaActual = 1;
@@ -763,8 +802,7 @@
     document.getElementById('busqueda').value = '';
     document.getElementById('palabrasClave').value = '';
     document.getElementById('anio').value = '';
-    gratuitosBtn.classList.remove('is-active');
-    gratuitosBtn.setAttribute('aria-pressed', 'false');
+    categoriaSelect.value = '';
     actualizarResultados();
   }
 
@@ -786,12 +824,8 @@
 
   // Eventos de búsqueda/filtro
   document.getElementById('filtrarBtn').addEventListener('click', actualizarResultados);
-  document.getElementById('limpiarFiltrosBtn').addEventListener('click', limpiarFiltros);
-  gratuitosBtn.addEventListener('click', function() {
-    const estaActivo = gratuitosBtn.classList.toggle('is-active');
-    gratuitosBtn.setAttribute('aria-pressed', estaActivo ? 'true' : 'false');
-    actualizarResultados();
-  });
+  // document.getElementById('limpiarFiltrosBtn').addEventListener('click', limpiarFiltros);
+  categoriaSelect.addEventListener('change', actualizarResultados);
   document.getElementById('limpiarBtn').addEventListener('click', limpiarFiltros);
   document.getElementById('busqueda').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') actualizarResultados();
