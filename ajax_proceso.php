@@ -109,7 +109,14 @@ switch ($accion) {
         break;
 
     case 'confirmar_tarifa':
-        proceso_responder(proceso_actualizar($correo, ['tarifa_confirmada' => true], $nombre));
+        $actualConfirmar = proceso_obtener($correo, $nombre);
+        // Alumnos FCA: suscripción semestral (6 meses). Las demás tarifas
+        // (Público General, Comunidad UNAM) siguen siendo anuales.
+        $duracion = ($actualConfirmar['tarifa_seleccionada'] ?? '') === 'FCA' ? '+6 months' : '+1 year';
+        proceso_responder(proceso_actualizar($correo, [
+            'tarifa_confirmada' => true,
+            'vigencia_fin'      => date('d/m/Y', strtotime($duracion)),
+        ], $nombre));
         break;
 
     case 'enviar_credencial':

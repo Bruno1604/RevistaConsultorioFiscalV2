@@ -47,9 +47,9 @@
                     <h4 class="tariff-card__title">Comunidad FCA</h4>
                 </div>
                 <span class="tariff-card__badge" style="background: rgba(40,167,69,0.15); color: #155724;">Gratis</span>
-                <div class="tariff-card__price">$0.00 <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-soft);">MXN / año</span></div>
+                <div class="tariff-card__price">$0.00 <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-soft);">MXN / semestre</span></div>
                 <p class="tariff-card__desc">
-                    Para alumnos activos (SUAyED, escolarizado o posgrado) y docentes de la Facultad de Contaduría y Administración. Requiere validar tu acreditación FCA.
+                    Para alumnos activos (SUAyED, escolarizado o posgrado) y docentes de la Facultad de Contaduría y Administración. Requiere validar tu acreditación FCA. Suscripción semestral (se debe renovar cada 6 meses).
                 </p>
             </div>
         </div>
