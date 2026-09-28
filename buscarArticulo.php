@@ -33,8 +33,7 @@
 <!-- Formulario de búsqueda y filtro -->
 <section class="about" style="padding: 40px 0 20px 0;">
   <div class="cs">
-    <div class="d-grid align-items-end filter-grid" style="grid-template-columns: 1.8fr 1.25fr 0.65fr 1.35fr 1fr; gap: 1rem;">
-      
+    <div class="d-grid align-items-end filter-grid">       
       <div>
         <label for="busqueda" class="lbl mb-2">Buscar por título</label>
         <input type="text" id="busqueda" class="form-control" placeholder="Ej. declaración anual">
@@ -384,13 +383,57 @@
     margin-top: 4px;
   }
 
+  /* ═══ Grid del formulario de filtros ═══ */
+  .filter-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.8fr 1.25fr 0.65fr 1.35fr 1fr; /* Compu: 5 columnas */
+    gap: 1rem;
+    align-items: end;
+  }
+
   /* ═══ Responsive ═══ */
   @media (max-width: 768px) {
-    .year-select,
-    .filter-category {
+    /* En celular: filtros en 1 sola columna (apilados) */
+    .filter-grid {
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    .filter-actions {
       width: 100%;
     }
 
+    .filter-submit {
+      width: 100%;
+    }
+
+        /* Paginador en celular: en fila horizontal, compacto */
+    #paginacionControles {
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    #btnAnterior,
+    #btnSiguiente {
+      width: auto !important;
+      min-width: 0 !important;
+      padding: 8px 12px !important;
+      font-size: 0.65rem !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+    }
+
+    #paginaInfo {
+      font-size: 0.72rem !important;
+      white-space: nowrap !important;
+      flex: 1 1 auto !important;
+      text-align: center !important;
+    }
+    
     .articulo-card {
       padding: 20px 18px;
     }
