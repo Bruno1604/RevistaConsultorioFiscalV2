@@ -7,124 +7,10 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'admin') {
     exit();
 }
 
-// Inicializar el listado de revistas en sesión (si no existe)
-if (!isset($_SESSION['revistas']) || empty($_SESSION['revistas'])) {
-    // Datos de ejemplo
-    $_SESSION['revistas'] = [
-        [
-            'id' => 1,
-            'titulo' => 'Deducciones personales en la declaración anual',
-            'numero' => '878',
-            'anio' => '2026',
-            'fecha' => 'Segunda de marzo 2026',
-            'pdf' => 'revista878.pdf',
-            'imagenes' => ['pag1.jpg', 'pag2.jpg'],
-            'articulos' => [
-                ['titulo' => 'Artículo 1', 'inicio' => 1, 'fin' => 5],
-                ['titulo' => 'Artículo 2', 'inicio' => 6, 'fin' => 10]
-            ]
-        ],
-        [
-            'id' => 2,
-            'titulo' => 'Declaración anual de personas morales del régimen general',
-            'numero' => '877',
-            'anio' => '2026',
-            'fecha' => 'Primera de marzo 2026',
-            'pdf' => 'revista877.pdf',
-            'imagenes' => ['pag1.jpg'],
-            'articulos' => [
-                ['titulo' => 'Artículo A', 'inicio' => 1, 'fin' => 8]
-            ]
-        ],
-        [
-            'id' => 3,
-            'titulo' => 'Participación de utilidades para personas físicas',
-            'numero' => '884',
-            'anio' => '2026',
-            'fecha' => 'Segunda de junio 2026',
-            'pdf' => 'revista884.pdf',
-            'imagenes' => [],
-            'articulos' => [
-                ['titulo' => 'Artículo X', 'inicio' => 2, 'fin' => 7]
-            ]
-        ],
-        [
-            'id' => 4,
-            'titulo' => 'Intereses por pago indebido',
-            'numero' => '886',
-            'anio' => '2026',
-            'fecha' => 'Segunda de julio 2026',
-            'pdf' => 'revista886.pdf',
-            'imagenes' => ['pag1.jpg', 'pag2.jpg', 'pag3.jpg'],
-            'articulos' => [
-                ['titulo' => 'Artículo 1', 'inicio' => 1, 'fin' => 4],
-                ['titulo' => 'Artículo 2', 'inicio' => 5, 'fin' => 9]
-            ]
-        ],
-        [
-            'id' => 5,
-            'titulo' => 'Revisiones de las autoridades fiscales y de seguridad social',
-            'numero' => '885',
-            'anio' => '2026',
-            'fecha' => 'Primera de julio 2026',
-            'pdf' => 'revista885.pdf',
-            'imagenes' => ['pag1.jpg'],
-            'articulos' => [
-                ['titulo' => 'Artículo Único', 'inicio' => 1, 'fin' => 12]
-            ]
-        ],
-        [
-            'id' => 6,
-            'titulo' => 'Modalidades de dividendos en ISR',
-            'numero' => '887',
-            'anio' => '2026',
-            'fecha' => 'Primera de agosto 2026',
-            'pdf' => 'revista887.pdf',
-            'imagenes' => [],
-            'articulos' => [
-                ['titulo' => 'Artículo A', 'inicio' => 1, 'fin' => 6],
-                ['titulo' => 'Artículo B', 'inicio' => 7, 'fin' => 10]
-            ]
-        ],
-        [
-            'id' => 7,
-            'titulo' => 'Reforma a la LFT',
-            'numero' => '882',
-            'anio' => '2026',
-            'fecha' => 'Segunda de mayo 2026',
-            'pdf' => 'revista882.pdf',
-            'imagenes' => ['pag1.jpg', 'pag2.jpg'],
-            'articulos' => [
-                ['titulo' => 'Artículo 1', 'inicio' => 1, 'fin' => 3]
-            ]
-        ],
-        [
-            'id' => 8,
-            'titulo' => 'PTU: preguntas y respuestas',
-            'numero' => '881',
-            'anio' => '2026',
-            'fecha' => 'Primera de mayo 2026',
-            'pdf' => 'revista881.pdf',
-            'imagenes' => ['pag1.jpg'],
-            'articulos' => [
-                ['titulo' => 'Artículo Único', 'inicio' => 1, 'fin' => 15]
-            ]
-        ],
-        [
-            'id' => 9,
-            'titulo' => 'El nuevo régimen de confianza',
-            'numero' => '888',
-            'anio' => '2026',
-            'fecha' => 'Segunda de agosto 2026',
-            'pdf' => 'revista888.pdf',
-            'imagenes' => ['pag1.jpg', 'pag2.jpg', 'pag3.jpg'],
-            'articulos' => [
-                ['titulo' => 'Introducción', 'inicio' => 1, 'fin' => 2],
-                ['titulo' => 'Desarrollo', 'inicio' => 3, 'fin' => 10]
-            ]
-        ]
-    ];
-}
+// La lista de revistas vive en data/revistas.php, compartida con las
+// páginas de suscriptores (como el visor de la revista completa), así
+// que tanto el admin como los suscriptores ven la misma información.
+require_once 'data/revistas.php';
 
 // Función para obtener el siguiente ID disponible
 function getNextId($revistas) {
@@ -135,18 +21,72 @@ function getNextId($revistas) {
     return $max + 1;
 }
 
+/**
+ * Guarda el PDF subido y, si el servidor tiene Imagick + Ghostscript
+ * instalados, lo convierte automáticamente en una imagen JPG por
+ * página (así el admin ya no tiene que ir a convertirlo a mano en
+ * iLovePDF ni subir las imágenes una por una).
+ *
+ * Regresa ['pdf_ruta' => ..., 'imagenes' => [...]]. Si no se pudo
+ * convertir (por ejemplo, el servidor no tiene Imagick), regresa
+ * 'imagenes' => [] y 'conversion_fallo' => true, para poder avisarle
+ * al admin.
+ */
+function procesar_pdf_revista($numero) {
+    $resultado = ['pdf_ruta' => null, 'imagenes' => [], 'conversion_fallo' => false];
+
+    if (empty($_FILES['pdf']['name']) || $_FILES['pdf']['error'] !== UPLOAD_ERR_OK) {
+        return $resultado;
+    }
+
+    $extension = strtolower(pathinfo($_FILES['pdf']['name'], PATHINFO_EXTENSION));
+    if ($extension !== 'pdf') {
+        return $resultado; // Solo aceptamos PDF
+    }
+
+    $carpetaDestino = __DIR__ . '/uploads/revistas';
+    if (!is_dir($carpetaDestino)) {
+        mkdir($carpetaDestino, 0755, true);
+    }
+
+    $nombreSeguro = 'revista' . preg_replace('/[^a-zA-Z0-9]/', '', $numero) . '.pdf';
+    $rutaDestino = $carpetaDestino . '/' . $nombreSeguro;
+
+    if (!move_uploaded_file($_FILES['pdf']['tmp_name'], $rutaDestino)) {
+        return $resultado;
+    }
+
+    $resultado['pdf_ruta'] = 'uploads/revistas/' . $nombreSeguro;
+
+    $imagenes = convertir_pdf_a_imagenes($rutaDestino, $numero);
+    if ($imagenes === false) {
+        $resultado['conversion_fallo'] = true; // El PDF sí se guardó, pero no se pudo convertir a JPG
+    } else {
+        $resultado['imagenes'] = $imagenes;
+    }
+
+    return $resultado;
+}
+
 // Procesar acciones (agregar, editar, eliminar) - Simulación
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
     if ($_POST['accion'] === 'agregar') {
         // Simular agregar una nueva revista (datos del formulario)
+        $numeroNueva = $_POST['numero'] ?? '000';
+        $procesado = procesar_pdf_revista($numeroNueva);
+
         $nueva = [
             'id' => getNextId($_SESSION['revistas']),
             'titulo' => $_POST['titulo'] ?? 'Sin título',
-            'numero' => $_POST['numero'] ?? '000',
+            'numero' => $numeroNueva,
             'anio' => $_POST['anio'] ?? '2026',
             'fecha' => $_POST['fecha'] ?? date('d/m/Y'),
             'pdf' => $_FILES['pdf']['name'] ?? 'sin-pdf.pdf',
-            'imagenes' => $_FILES['imagenes']['name'] ?? [],
+            'pdf_ruta' => $procesado['pdf_ruta'],
+            // Si la conversión automática funcionó, usamos esas imágenes.
+            // Si no, dejamos la puerta abierta a que alguien las suba a
+            // mano como antes (mismo campo 'imagenes' de siempre).
+            'imagenes' => !empty($procesado['imagenes']) ? $procesado['imagenes'] : ($_FILES['imagenes']['name'] ?? []),
             'articulos' => []
         ];
         // Simular artículos (se envían como JSON en un campo oculto)
@@ -156,9 +96,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
             $nueva['articulos'] = [['titulo' => 'Artículo de ejemplo', 'inicio' => 1, 'fin' => 5]];
         }
         $_SESSION['revistas'][] = $nueva;
+
         // Redirigir para evitar reenvío del formulario
-        header("Location: admin_revistas.php?page=1&msg=agregado");
+        $msg = $procesado['conversion_fallo'] ? 'agregado_sin_conversion' : 'agregado';
+        header("Location: admin_revistas.php?page=1&msg=" . $msg);
         exit();
+
     } elseif ($_POST['accion'] === 'eliminar') {
         $id = intval($_POST['id']);
         $_SESSION['revistas'] = array_filter($_SESSION['revistas'], function($r) use ($id) {
@@ -281,13 +224,19 @@ include 'template/header.php';
           así como sus artículos e imágenes.
         </p>
         <?php if (isset($_GET['msg'])): ?>
-          <div class="mt-3 alert alert-success" style="background: #e8f5e9; color: #2e7d32; padding: 10px 20px; border-radius: 8px; border-left: 4px solid #2e7d32;">
-            <?php if ($_GET['msg'] === 'agregado'): ?>
-              ✅ Revista agregada correctamente.
-            <?php elseif ($_GET['msg'] === 'eliminado'): ?>
-              ✅ Revista eliminada correctamente.
-            <?php endif; ?>
-          </div>
+          <?php if ($_GET['msg'] === 'agregado_sin_conversion'): ?>
+            <div class="mt-3 alert" style="background: #fff8e1; color: #8a6d1a; padding: 10px 20px; border-radius: 8px; border-left: 4px solid #d9a520;">
+              ⚠️ Se guardó el PDF, pero no se pudo convertir a imágenes automáticamente (falta Imagick/Ghostscript en el servidor). Puedes subir las imágenes JPG a mano para esta revista, o instalar Imagick + Ghostscript y volver a subir el PDF.
+            </div>
+          <?php else: ?>
+            <div class="mt-3 alert alert-success" style="background: #e8f5e9; color: #2e7d32; padding: 10px 20px; border-radius: 8px; border-left: 4px solid #2e7d32;">
+              <?php if ($_GET['msg'] === 'agregado'): ?>
+                ✅ Revista agregada correctamente. Se convirtió el PDF a imágenes automáticamente.
+              <?php elseif ($_GET['msg'] === 'eliminado'): ?>
+                ✅ Revista eliminada correctamente.
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
         <?php endif; ?>
       </div>
       <div class="hero-static__visual">
@@ -474,13 +423,6 @@ include 'template/header.php';
 
         <!-- Campo oculto para enviar artículos como JSON -->
         <input type="hidden" name="articulos_json" id="articulos_json">
-
-        <!-- Imágenes de páginas (JPG) -->
-        <div class="col-12">
-          <label for="imagenes" class="form-label lbl">Imágenes de las páginas (JPG)</label>
-          <input type="file" id="imagenes" name="imagenes[]" class="form-control-custom" accept=".jpg,.jpeg" multiple>
-          <small class="text-muted">Selecciona múltiples imágenes (una por página).</small>
-        </div>
 
         <!-- Botones de acción -->
         <div class="col-12 d-flex gap-3 mt-4">
