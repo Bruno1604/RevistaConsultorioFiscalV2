@@ -105,7 +105,7 @@ include 'template/header.php';
                             </p>
                         <?php endif; ?>
 
-                        <button type="submit" class="btn-gold-fill w-100">
+                        <button type="submit" class="btn-gold-fill w-100" style="display: flex; justify-content: center; align-items: center;">
                             <span>Iniciar Sesión</span>
                         </button>
 
