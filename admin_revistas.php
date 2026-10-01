@@ -216,9 +216,8 @@ include 'template/header.php';
   <div class="cs">
     <div class="hero-static__grid">
       <div class="hero-static__content">
-        <span class="c-ph__tag">Administración</span>
         <h1 class="hero-static__title">Gestión de Revistas</h1>
-        <div class="gold-line gold-l"></div>
+        <div class="hero-static__divider"></div>
         <p class="hero-static__excerpt">
           Administra los ejemplares de la revista Consultorio Fiscal. Agrega, edita o elimina revistas,
           así como sus artículos e imágenes.
@@ -238,12 +237,6 @@ include 'template/header.php';
             </div>
           <?php endif; ?>
         <?php endif; ?>
-      </div>
-      <div class="hero-static__visual">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-          <path d="M4 4h16v16H4zM8 8h8M8 12h6M8 16h4"/>
-          <path d="M4 4l16 16M20 4L4 20" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
-        </svg>
       </div>
     </div>
   </div>

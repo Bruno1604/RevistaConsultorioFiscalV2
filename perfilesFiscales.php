@@ -126,21 +126,13 @@ include 'template/header.php';
 <section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
-      <div class="hero-static__content reveal reveal--left in">
-        <span class="c-ph__tag">Facturación</span>
+      <div class="hero-static__content">
         <h1 class="hero-static__title">Mis Perfiles Fiscales</h1>
-        <div class="gold-line gold-l"></div>
-        <p class="hero-static__excerpt reveal reveal--left">
+        <div class="hero-static__divider"></div>
+        <p class="hero-static__excerpt">
           Registra los datos fiscales que usarás para solicitar tus facturas.
           Puedes tener uno o más perfiles (por ejemplo, personal y de tu empresa).
         </p>
-      </div>
-      <div class="hero-static__visual reveal reveal--right in">
-        <div class="hero-static__img-box">
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-            <path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5" />
-          </svg>
-        </div>
       </div>
     </div>
   </div>

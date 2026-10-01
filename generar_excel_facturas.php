@@ -170,23 +170,15 @@ $page = "admin";
 include 'template/header.php';
 ?>
 
-<section class="hero-static" style="padding: 60px 0 40px;">
+<section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
       <div class="hero-static__content">
-        <span class="c-ph__tag">Administración</span>
         <h1 class="hero-static__title">Generar Excel para Facturas</h1>
-        <div class="gold-line gold-l"></div>
+        <div class="hero-static__divider"></div>
         <p class="hero-static__excerpt">
           Selecciona un mes para visualizar los solicitantes de factura y exporta sus datos fiscales a Excel.
         </p>
-      </div>
-      <div class="hero-static__visual">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-          <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-          <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z" />
-          <path d="M8 12l2 2 4-4" />
-        </svg>
       </div>
     </div>
   </div>

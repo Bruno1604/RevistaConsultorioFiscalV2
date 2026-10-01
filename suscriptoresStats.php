@@ -17,23 +17,15 @@ include 'template/header.php';
 
 <link rel="stylesheet" href="css/suscripciones.css">
 
-<section class="hero-static" style="padding: 60px 0 30px;">
+<section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
       <div class="hero-static__content">
-        <span class="c-ph__tag">Estadísticas</span>
         <h1 class="hero-static__title">Suscripciones</h1>
-        <div class="gold-line gold-l"></div>
+        <div class="hero-static__divider"></div>
         <p class="hero-static__excerpt">
           Total de personas que han hecho el Trámite de Suscripción, agrupado por tipo de tarifa y modalidad.
         </p>
-      </div>
-      <div class="hero-static__visual">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
       </div>
     </div>
   </div>

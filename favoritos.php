@@ -46,19 +46,13 @@ include 'template/header.php';
 <section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
-      <div class="hero-static__content reveal reveal--left in">
-        <span class="c-ph__tag">Mi cuenta</span>
+      <div class="hero-static__content">
         <h1 class="hero-static__title">Mis Favoritos</h1>
-        <div class="gold-line gold-l"></div>
-        <p class="hero-static__excerpt reveal reveal--left">
+        <div class="hero-static__divider"></div>
+        <p class="hero-static__excerpt">
           Guarda revistas, artículos y páginas para volver a ellos cuando quieras, sin tener
           que buscarlos de nuevo.
         </p>
-      </div>
-      <div class="hero-static__visual reveal reveal--right in">
-        <div class="hero-static__img-box">
-          <i class="fa-solid fa-star" style="font-size:2.6rem;color:var(--gold);"></i>
-        </div>
       </div>
     </div>
   </div>

@@ -8,20 +8,10 @@ $page_title = "Servicios - Consultorio Fiscal | FCA UNAM"; // Título de la pest
 <section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
-      <!-- Columna izquierda: título y botón -->
-      <div class="hero-static__content reveal reveal--left in">
-        <span class="c-ph__tag">Consultorio Fiscal UNAM</span>
+      <div class="hero-static__content">
         <h1 class="hero-static__title">Servicios de Asesoría Fiscal</h1>
-        <div class="gold-line gold-l"></div>
-        <div class="hero-static__actions">
-          <a href="https://asesoriafiscal.fca.unam.mx" class="btn-ghost btn-ghost--white" target="_blank" rel="noopener noreferrer">
-            <span>Contactar Asesoría</span>
-          </a>
-        </div>
-      </div>
-      <!-- Columna derecha: texto descriptivo -->
-      <div class="hero-static__excerpt-col reveal reveal--right in">
-        <p class="hero-static__excerpt reveal reveal--right">
+        <div class="hero-static__divider"></div>
+        <p class="hero-static__excerpt">
           Apoyo gratuito en materia fiscal, laboral y de seguridad social para personas de escasos recursos, 
           a través de estudiantes de la carrera de Contaduría que realizan su servicio social.
         </p>

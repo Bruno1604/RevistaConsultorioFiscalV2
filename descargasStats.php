@@ -47,21 +47,15 @@ include 'template/header.php';
 
 <link rel="stylesheet" href="css/suscripciones.css">
 
-<section class="hero-static" style="padding: 60px 0 30px;">
+<section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
       <div class="hero-static__content">
-        <span class="c-ph__tag">Estadísticas</span>
         <h1 class="hero-static__title">Descargas</h1>
-        <div class="gold-line gold-l"></div>
+        <div class="hero-static__divider"></div>
         <p class="hero-static__excerpt">
           Revistas y artículos más descargados. <em>(Datos de ejemplo -- aún no existe un conteo real de descargas en el sistema.)</em>
         </p>
-      </div>
-      <div class="hero-static__visual">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-          <path d="M12 3v12M7 10l5 5 5-5M4 21h16" />
-        </svg>
       </div>
     </div>
   </div>

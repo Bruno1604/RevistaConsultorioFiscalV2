@@ -5,28 +5,20 @@
   include 'template/header.php'; 
 ?>
 
-<style>
-  .hero-static {
-    padding: 60px 0;
-  }
-  .hero-static__title {
-    margin-bottom: 22px;
-  }
-</style>
 
 <!-- Hero interno -->
 <section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
-      <div class="hero-static__content reveal reveal--left in">
-        <span class="c-ph__tag">Hemeroteca</span>
+      <div class="hero-static__content">
         <h1 class="hero-static__title">Histórico de Revistas</h1>
-        <!-- <div class="gold-line gold-l"></div> -->
-        <p class="hero-static__excerpt reveal reveal--left">
+        <div class="hero-static__divider"></div>
+        <p class="hero-static__excerpt">
           Consulta los ejemplares publicados por el Consultorio Fiscal. Encuentra análisis,
           doctrina y jurisprudencia actualizada.
         </p>
       </div>
+    </div>
   </div>
 </section>
 

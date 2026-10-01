@@ -47,22 +47,15 @@ include 'template/header.php';
 
 <link rel="stylesheet" href="css/suscripciones.css">
 
-<section class="hero-static" style="padding: 60px 0 30px;">
+<section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
       <div class="hero-static__content">
-        <span class="c-ph__tag">Estadísticas</span>
         <h1 class="hero-static__title">Visualizaciones</h1>
-        <div class="gold-line gold-l"></div>
+        <div class="hero-static__divider"></div>
         <p class="hero-static__excerpt">
           Revistas y artículos más vistos. <em>(Datos de ejemplo -- aún no existe un conteo real de vistas en el sistema.)</em>
         </p>
-      </div>
-      <div class="hero-static__visual">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
-          <circle cx="12" cy="12" r="3" />
-        </svg>
       </div>
     </div>
   </div>

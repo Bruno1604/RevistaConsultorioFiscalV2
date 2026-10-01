@@ -94,24 +94,15 @@ $estadoBadges = [
 ?>
 
 <!-- Hero -->
-<section class="hero-static" style="padding: 60px 0 40px;">
+<section class="hero-static">
     <div class="cs">
         <div class="hero-static__grid">
             <div class="hero-static__content">
-                <span class="c-ph__tag">Administración</span>
                 <h1 class="hero-static__title">Revisar Comprobantes</h1>
-                <div class="gold-line gold-l"></div>
+                <div class="hero-static__divider"></div>
                 <p class="hero-static__excerpt">
                     Revisa los comprobantes enviados por los usuarios. Haz clic en una fila para ver los detalles.
                 </p>
-            </div>
-            <div class="hero-static__visual">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-                    <path d="M6 2h9l5 5v15H6z"></path>
-                    <path d="M15 2v6h5"></path>
-                    <circle cx="10.5" cy="13.5" r="3"></circle>
-                    <path d="M13 16l3 3"></path>
-                </svg>
             </div>
         </div>
     </div>

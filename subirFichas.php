@@ -32,23 +32,15 @@ include 'template/header.php';
 <link rel="stylesheet" href="css/suscripciones.css">
 
 <!-- Hero -->
-<section class="hero-static" style="padding: 60px 0 40px;">
+<section class="hero-static">
     <div class="cs">
         <div class="hero-static__grid">
             <div class="hero-static__content">
-                <span class="c-ph__tag">Administración</span>
                 <h1 class="hero-static__title">Subir Fichas</h1>
-                <div class="gold-line gold-l"></div>
+                <div class="hero-static__divider"></div>
                 <p class="hero-static__excerpt">
                     Sube el archivo ZIP con las fichas en PDF y el archivo Excel con el registro de fichas.
                 </p>
-            </div>
-            <div class="hero-static__visual">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-                    <path d="M12 3v12"></path>
-                    <path d="M8 7l4-4 4 4"></path>
-                    <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"></path>
-                </svg>
             </div>
         </div>
     </div>

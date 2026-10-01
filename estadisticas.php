@@ -11,22 +11,15 @@ $page = "estadisticas";
 include 'template/header.php';
 ?>
 
-<section class="hero-static" style="padding: 60px 0 40px;">
+<section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
       <div class="hero-static__content">
-        <span class="c-ph__tag">Panel de Administración</span>
         <h1 class="hero-static__title">Estadísticas</h1>
-        <div class="gold-line gold-l"></div>
+        <div class="hero-static__divider"></div>
         <p class="hero-static__excerpt">
           Consulta los principales indicadores de la Revista Consultorio Fiscal.
         </p>
-      </div>
-      <div class="hero-static__visual">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-          <path d="M4 19V5M4 19h16" />
-          <path d="M8 16v-5M12 16V8M16 16v-9" />
-        </svg>
       </div>
     </div>
   </div>

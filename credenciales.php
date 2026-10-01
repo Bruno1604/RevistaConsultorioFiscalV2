@@ -101,47 +101,21 @@ $estadoBadges = [
 ?>
 
 <!-- Hero -->
-<section class="hero-static" style="padding: 60px 0 40px;">
+<section class="hero-static">
     <div class="cs">
-
         <div class="hero-static__grid">
-
             <div class="hero-static__content">
-
-                <span class="c-ph__tag">
-                    Administración
-                </span>
-
                 <h1 class="hero-static__title">
                     Gestión de Credenciales
                 </h1>
-
-                <div class="gold-line gold-l"></div>
-
+                <div class="hero-static__divider"></div>
                 <p class="hero-static__excerpt">
                     Revisa las credenciales enviadas por los usuarios.
                 </p>
-
             </div>
-
-            <div class="hero-static__visual">
-
-                <svg width="80" height="80" viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="var(--gold)"
-                     stroke-width="1.5">
-
-                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                    <circle cx="8" cy="10" r="2"></circle>
-                    <path d="M13 9h5"></path>
-                    <path d="M13 13h5"></path>
-                    <path d="M6 16h12"></path>
-
-                </svg>
-
-            </div>
-
         </div>
+    </div>
+</section>
 
     </div>
 </section>

@@ -5,23 +5,14 @@
   include 'template/header.php'; 
 ?>
 
-<style>
-  .hero-static {
-    padding: 60px 0;
-  }
-  .hero-static__title {
-    margin-bottom: 22px;
-  }
-</style>
-
 <!-- Hero interno -->
 <section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
-      <div class="hero-static__content reveal reveal--left in">
-        <span class="c-ph__tag">Hemeroteca</span>
+      <div class="hero-static__content">
         <h1 class="hero-static__title">Histórico de Artículos</h1>
-        <p class="hero-static__excerpt reveal reveal--left">
+        <div class="hero-static__divider"></div>
+        <p class="hero-static__excerpt">
           Encuentra artículos publicados en el Consultorio Fiscal. Busca por título,
           palabras clave o filtra por año de publicación.
         </p>
@@ -29,7 +20,6 @@
     </div>
   </div>
 </section>
-
 <!-- Formulario de búsqueda y filtro -->
 <section class="about" style="padding: 40px 0 20px 0;">
   <div class="cs">

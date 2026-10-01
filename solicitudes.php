@@ -116,37 +116,16 @@ function obtener_clase_estado($estado) {
 ?>
 
 <!-- Hero de administración de suscriptores -->
-<section class="hero-static" style="padding: 60px 0 40px;">
+<section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
-      
       <div class="hero-static__content">
-        <span class="c-ph__tag">Administración</span>
-
         <h1 class="hero-static__title">Gestión de Solicitudes</h1>
-
-        <div class="gold-line gold-l"></div>
-
+        <div class="hero-static__divider"></div>
         <p class="hero-static__excerpt">
           Administra las solicitudes de suscripción y revisa los comprobantes de pago.
         </p>
       </div>
-
-      <div class="hero-static__visual">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none"
-             stroke="var(--gold)" stroke-width="1.5">
-
-          <!-- Usuario -->
-          <circle cx="12" cy="8" r="3"></circle>
-          <path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"></path>
-
-          <!-- Documento / gestión -->
-          <path d="M17 3h4v4"></path>
-          <path d="M21 3l-5 5"></path>
-
-        </svg>
-      </div>
-
     </div>
   </div>
 </section>

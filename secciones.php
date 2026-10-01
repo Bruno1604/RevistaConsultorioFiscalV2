@@ -304,13 +304,13 @@
   include 'template/header.php';
 ?>
 
-<section class="hero-static hero-static--blue">
+<section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
-      <div class="hero-static__content reveal reveal--left in">
+      <div class="hero-static__content">
         <h1 class="hero-static__title">Secciones</h1>
-        <div class="gold-line gold-l"></div>
-        <p class="hero-static__excerpt reveal reveal--left">
+        <div class="hero-static__divider"></div>
+        <p class="hero-static__excerpt">
           Navega por las secciones para encontrar artículos de tu interés.
         </p>
       </div>

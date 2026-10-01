@@ -90,21 +90,13 @@ include 'template/header.php';
 <section class="hero-static">
   <div class="cs">
     <div class="hero-static__grid">
-      <div class="hero-static__content reveal reveal--left in">
-        <span class="c-ph__tag">Facturación</span>
+      <div class="hero-static__content">
         <h1 class="hero-static__title">Solicitar Factura</h1>
-        <div class="gold-line gold-l"></div>
-        <p class="hero-static__excerpt reveal reveal--left">
+        <div class="hero-static__divider"></div>
+        <p class="hero-static__excerpt">
           Envía tu perfil fiscal al área de facturación para que se genere tu factura.
           Solo puedes solicitarla una vez por pago, dentro del mismo mes en que se aprobó.
         </p>
-      </div>
-      <div class="hero-static__visual reveal reveal--right in">
-        <div class="hero-static__img-box">
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-            <path d="M9 14l2 2 4-4M7 4h10a2 2 0 0 1 2 2v13l-3-2-3 2-3-2-3 2V6a2 2 0 0 1 2-2z" />
-          </svg>
-        </div>
       </div>
     </div>
   </div>
