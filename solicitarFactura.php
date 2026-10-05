@@ -205,9 +205,9 @@ include 'template/header.php';
             </div>
 
             <div class="login-actions" style="margin-top: 10px;">
-              <button type="submit" class="btn-gold-fill">
-                <span>Enviar a facturación</span>
-              </button>
+            <button type="submit" class="btn-gold-fill" style="display: flex; justify-content: center; align-items: center;">
+              <span>Enviar a facturación</span>
+            </button>
             </div>
 
           </form>
