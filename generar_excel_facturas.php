@@ -221,7 +221,7 @@ include 'template/header.php';
     <?php endif; ?>
 
     <!-- Tabla de resultados con id="tabla" para anclaje -->
-    <div id="tabla" class="table-responsive" style="background: #fff; border-radius: 12px; border: 1px solid #e0d6c8; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+    <div id="tabla" class="table-responsive" style="background: #fff; border-radius: 12px; border: 1px solid #e0d6c8; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
       <table class="table table-striped" style="width: 100%; border-collapse: collapse; margin: 0; font-size: 0.9rem;">
         <thead style="background: #1a2a3a; color: #fff;">
           <tr>
