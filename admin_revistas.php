@@ -513,7 +513,42 @@ include 'template/header.php';
       padding: 6px 12px;
       font-size: 0.8rem;
     }
+
+    /* ═══ Barra de filtros de revistas en celular ═══ */
+    /* El contenedor principal: apilado en columna */
+    section.about > .cs > div:first-child {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 12px !important;
+    }
+
+    /* El form: apilado en columna */
+    section.about > .cs > div:first-child form {
+      flex-direction: column !important;
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+    }
+
+    /* Input, selects y botones: ancho completo */
+    section.about > .cs > div:first-child input,
+    section.about > .cs > div:first-child select,
+    section.about > .cs > div:first-child button,
+    section.about > .cs > div:first-child a.btn-ghost {
+      width: 100% !important;
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
+    /* El botón "Nueva Revista" también al 100% */
+    section.about > .cs > div:first-child > div:first-child {
+      width: 100% !important;
+    }
+    section.about > .cs > div:first-child > div:first-child button {
+      width: 100% !important;
+    }
   }
+  
 </style>
 
 <script>

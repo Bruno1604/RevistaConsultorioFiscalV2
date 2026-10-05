@@ -104,8 +104,8 @@ include 'template/header.php';
   </div>
 </section>
 
-<section class="cs" style="padding: 0 0 80px;">
-  <a href="estadisticas.php" class="btn-navy" style="background: var(--navy-deep); border-radius: 2px; width: calc(100% - 37px); margin-left: 37px; padding: 16px 30px; text-align: center;">
+<section class="cs" style="padding: 0 20px 20px;">
+  <a href="estadisticas.php" class="btn-navy" style="background: var(--navy-deep); border-radius: 2px; width: 100%; padding: 16px 30px; text-align: center; display: block;">
     Ver estadísticas <i class="fa fa-arrow-right" style="font-size: .7rem; margin-left: 10px;"></i>
   </a>
 </section>
