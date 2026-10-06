@@ -105,6 +105,17 @@
 <script>
   // ===== DATOS ESTÁTICOS DE REVISTAS =====
   const revistas = [
+    { id: 306, numero: "890", titulo: "Paquete Económico 2027", fecha: "Segunda de septiembre 2026", anio: 2026 },
+    { id: 305, numero: "889", titulo: "Los salarios para el ISR", fecha: "Primera de septiembre 2026 ", anio: 2026 },
+    { id: 304, numero: "888", titulo: "Del NPIE a la e.firma: la nueva identidad digital patronal", fecha: "Segunda de agosto 2026", anio: 2026 },
+    { id: 303, numero: "887", titulo: "Modalidades de dividendos en ISR", fecha: "Primera de agosto 2026", anio: 2026 },
+    { id: 302, numero: "886", titulo: "Intereses por pago indebido", fecha: "Segunda de julio 2026", anio: 2026 },
+    { id: 301, numero: "885", titulo: "Revisiones de las autoridades fiscales y de seguridad social", fecha: "Primera de julio 2026", anio: 2026 },
+    { id: 300, numero: "884", titulo: "Participación de utilidades para personas físicas", fecha: "Segunda de junio 2026", anio: 2026 },
+    { id: 299, numero: "883", titulo: "Pago de dividendos a socios", fecha: "Primera de junio 2026", anio: 2026 },
+    { id: 298, numero: "882", titulo: "Reforma a la LFT", fecha: "Segunda de mayo 2026 ", anio: 2026 },
+    { id: 297, numero: "881", titulo: "PTU: preguntas y respuestas", fecha: "Primera de mayo 2026 ", anio: 2026 },
+    { id: 296, numero: "880", titulo: "Declaración anual de personas físicas. Preguntas y respuestas", fecha: "Segunda de abril 2026", anio: 2026 },
     { id: 295, numero: "879", titulo: "Declaración anual de personas físicas 2026", fecha: "Primera de abril 2026", anio: 2026 },
     { id: 294, numero: "878", titulo: "Deducciones personales en la declaración anual", fecha: "Segunda de marzo 2026", anio: 2026 },
     { id: 293, numero: "877", titulo: "Declaración anual de personas morales del régimen general", fecha: "Primera de marzo 2026", anio: 2026 },
