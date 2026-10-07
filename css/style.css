@@ -95,6 +95,19 @@ img{max-width:100%;display:block}
 .cfnav__links > li > a:hover,.cfnav__links > li > a.active{color:#fff}
 .cfnav__links > li > a:hover::after,.cfnav__links > li > a.active::after{transform:scaleX(1)}
 
+/* Campanita de notificaciones */
+.cfnav__bell{position:relative;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;color:rgba(255,255,255,.78);font-size:.95rem;
+  transition:color .3s var(--e2),background .3s var(--e2)}
+.cfnav__bell:hover,.cfnav__bell--active{color:#fff}
+.cfnav__bell-badge{position:absolute;top:1px;right:0;display:inline-flex;align-items:center;
+  justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:100px;
+  background:var(--gold);color:#fff;font-family:var(--sans);font-size:.6rem;font-weight:700;
+  line-height:16px;pointer-events:none}
+.cfnav--solid .cfnav__bell,.cfnav--static .cfnav__bell{color:var(--ink-2)}
+.cfnav--solid .cfnav__bell:hover,.cfnav--solid .cfnav__bell--active,
+.cfnav--static .cfnav__bell:hover,.cfnav--static .cfnav__bell--active{color:var(--navy)}
+
 .cfnav__actions{display:flex;align-items:center;gap:16px;flex-shrink:0}
 .cfnav__cta{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;
   padding:12px 30px;border-radius:100px;border:1px solid rgba(255,255,255,.34);

@@ -70,7 +70,7 @@ function nav_a($id, $current, $label, $url, $external = false) {
           <a href="#" class="<?php echo in_array($page, ['cuadros', 'calculadora']) ? 'active' : ''; ?>">Herramientas <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
           <div class="cfnav__drop">
             <a href="cuadrosPermanentes.php">Indicadores y cuadros</a>
-            <a href="calculadora.php">Calculadora</a>
+            <a href="calculadora.php">Calculadoras</a>
           </div>
         </li>
 
@@ -99,10 +99,9 @@ function nav_a($id, $current, $label, $url, $external = false) {
         <!-- Menú de usuario: solo suscriptores ven "Mi cuenta" con opciones -->
         <?php if ($is_suscriptor): ?>
         <li>
-          <a href="#" class="<?php echo ($page == 'perfil' || $page == 'perfiles_fiscales' || $page == 'solicitar_factura' || $page == 'favoritos' || $page == 'notificaciones') ? 'active' : ''; ?>">Mi cuenta <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
+          <a href="#" class="<?php echo ($page == 'perfil' || $page == 'perfiles_fiscales' || $page == 'solicitar_factura' || $page == 'favoritos') ? 'active' : ''; ?>">Mi cuenta <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
           <div class="cfnav__drop">
             <a href="perfil.php">Perfil</a>
-            <a href="notificaciones.php">Notificaciones<?php if ($notif_no_leidas > 0): ?> <span class="nav-badge"><?php echo $notif_no_leidas; ?></span><?php endif; ?></a>
             <a href="favoritos.php">Favoritos</a>
             <a href="perfilesFiscales.php">Perfiles fiscales</a>
             <a href="solicitarFactura.php">Solicitar factura</a>
@@ -112,6 +111,12 @@ function nav_a($id, $current, $label, $url, $external = false) {
       </ul>
     </nav>
 
+    <?php if ($is_suscriptor): ?>
+      <a href="notificaciones.php" class="cfnav__bell <?php echo ($page == 'notificaciones') ? 'cfnav__bell--active' : ''; ?>" aria-label="Notificaciones" title="Notificaciones">
+        <i class="fa-regular fa-bell"></i><?php if ($notif_no_leidas > 0): ?><span class="cfnav__bell-badge"><?php echo $notif_no_leidas; ?></span><?php endif; ?>
+      </a>
+    <?php endif; ?>
+
     <div class="cfnav__actions">
       <?php if ($is_logged_in): ?>
         <a href="logout.php" class="cfnav__cta">Cerrar sesión</a>
@@ -119,6 +124,7 @@ function nav_a($id, $current, $label, $url, $external = false) {
         <a href="login.php" class="cfnav__cta cfnav__cta--gold">Suscribirse</a>
       <?php endif; ?>
     </div>
+
 
     <button class="cfnav__burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -153,10 +159,10 @@ function nav_a($id, $current, $label, $url, $external = false) {
   <?php if ($is_suscriptor): ?>
   <span class="mobile-label">Mi cuenta</span>
   <a href="perfil.php">Perfil</a>
-  <a href="notificaciones.php">Notificaciones<?php if ($notif_no_leidas > 0): ?> <span class="nav-badge"><?php echo $notif_no_leidas; ?></span><?php endif; ?></a>
   <a href="favoritos.php">Favoritos</a>
   <a href="perfilesFiscales.php">Perfiles fiscales</a>
   <a href="solicitarFactura.php">Solicitar factura</a>
+  <a href="notificaciones.php"><i class="fa-regular fa-bell" style="margin-right:6px"></i>Notificaciones<?php if ($notif_no_leidas > 0): ?> <span class="nav-badge"><?php echo $notif_no_leidas; ?></span><?php endif; ?></a>
   <?php endif; ?>
 
   <span class="mobile-label">Cuenta</span>
