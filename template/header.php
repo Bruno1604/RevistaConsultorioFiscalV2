@@ -66,7 +66,13 @@ function nav_a($id, $current, $label, $url, $external = false) {
       <ul class="cfnav__links">
         <?php echo nav_a('inicio', $page, 'Inicio', 'index.php'); ?>
 
-        <?php echo nav_a('cuadros', $page, 'Indicadores y cuadros', 'cuadrosPermanentes.php'); ?>
+        <li>
+          <a href="#" class="<?php echo in_array($page, ['cuadros', 'calculadora']) ? 'active' : ''; ?>">Herramientas <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
+          <div class="cfnav__drop">
+            <a href="cuadrosPermanentes.php">Indicadores y cuadros</a>
+            <a href="calculadora.php">Calculadora</a>
+          </div>
+        </li>
 
         <li>
           <a href="#" class="<?php echo ($page == 'historico') ? 'active' : ''; ?>">Histórico <i class="fa fa-chevron-down" style="font-size:.5rem;"></i></a>
@@ -125,7 +131,10 @@ function nav_a($id, $current, $label, $url, $external = false) {
 <!-- Panel lateral (móvil) -->
 <nav class="cfnav__panel" id="navPanel" aria-hidden="true">
   <a href="index.php">Inicio</a>
+
+  <span class="mobile-label">Herramientas</span>
   <a href="cuadrosPermanentes.php">Indicadores y cuadros</a>
+  <a href="calculadora.php">Calculadora</a>
 
   <span class="mobile-label">Histórico</span>
   <span class="mobile-label" style="font-size:.52rem; padding-top:10px; color: var(--ink-3);">— Buscador</span>
