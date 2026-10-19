@@ -279,21 +279,31 @@ function esPasoPermitido(paso) {
     }
 
     if (paso === 4) {
-        // Paso 4 (Ficha de pago):
-        // Si es Público General, accesible directo desde Paso 2.
-        // Si es UNAM o FCA, accesible si la credencial fue aprobada.
+        // FCA nunca usa el paso 4 (no paga, es gratis)
+        if (state.tarifa === 'FCA') return false;
+        
+        // Público General: accesible desde paso 2 si confirmó tarifa
         if (state.tarifa === 'GENERAL' && state.tarifaConfirmada) return true;
-        if ((state.tarifa === 'UNAM' || state.tarifa === 'FCA') && state.credEstado === 'aprobada') return true;
+        
+        // UNAM: accesible si la credencial fue aprobada
+        if (state.tarifa === 'UNAM' && state.credEstado === 'aprobada') return true;
+        
         return false;
     }
 
     if (paso === 5) {
-        // Paso 5 (Comprobante): accesible ÚNICAMENTE tras generar la ficha de pago
+        // FCA nunca usa el paso 5 (no sube comprobante)
+        if (state.tarifa === 'FCA') return false;
+        
+        // Los demás: accesible solo si la ficha fue generada
         return state.fichaGenerada === true;
     }
 
     if (paso === 6) {
-        // Paso 6 (Suscripción completada): solo si el comprobante está Aprobado
+        // FCA: accesible si la credencial fue aprobada
+        if (state.tarifa === 'FCA' && state.credEstado === 'aprobada') return true;
+        
+        // Los demás: accesible si el comprobante está aprobado
         return state.compEstado === 'aprobado';
     }
 
