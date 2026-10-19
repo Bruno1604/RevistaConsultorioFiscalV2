@@ -161,15 +161,23 @@ function proceso_listar_comprobantes() {
     });
 }
 
-/** Calcula un paso_actual "sensato" a partir del estado guardado (útil al recargar la página). */
 function proceso_calcular_paso_actual(array $p) {
+    $es_unam_o_fca = in_array($p['tarifa_seleccionada'] ?? '', ['UNAM', 'FCA'], true);
+    $es_fca = ($p['tarifa_seleccionada'] ?? '') === 'FCA';
+
+    // FCA + credencial aprobada → flujo terminado (paso 6, salta 4 y 5)
+    if ($es_fca && ($p['credencial_estado'] ?? '') === 'aprobada') {
+        return 6;
+    }
+
+    // Flujo general: comprobante aprobado → terminado
     if (($p['comprobante_estado'] ?? '') === 'aprobado') {
         return 6;
     }
     if (!empty($p['comprobante_subido']) || !empty($p['ficha_generada'])) {
         return 5;
     }
-    if (in_array($p['tarifa_seleccionada'] ?? '', ['UNAM', 'FCA'], true)) {
+    if ($es_unam_o_fca) {
         if (($p['credencial_estado'] ?? '') === 'aprobada') {
             return 4;
         }
